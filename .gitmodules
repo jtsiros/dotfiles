@@ -1,0 +1,7 @@
+[submodule "clearance-fish"]
+	path = clearance-fish
+	url = git@github.com:sebdah/clearance-fish.git
+[submodule "dotbot"]
+	path = dotbot
+	url = https://github.com/anishathalye/dotbot
+	ignore = dirty

@@ -360,7 +360,7 @@ background_opacity: 0.95
 #   - (Linux/BSD) user login shell
 #   - (Windows) powershell
 shell:
-  program: /usr/local/bin/fish
+  program: /usr/bin/fish
   args:
     - --login
 

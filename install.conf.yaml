@@ -7,41 +7,39 @@
     - '~'
     - '~/.config'
     - '~/.config/fish'
-    - '~/.config/fish/functions'
     - '~/.config/nvim'
     - '~/.config/git'
     - '~/.config/htop'
+    - '~/.config/xmobar'
+    - '~/.config/alacritty'
+    - '~/.xmonad'
     - '~/.local/bin'
 
 - link:
-    ~/.config/git/config: git/config
-    ~/.config/git/ignore_global: git/ignore_global
-    ~/.config/fish/config.fish: fish/config.fish
-    ~/.config/fish/completions/fisher.fish: fish/completions/fisher.fish
-    ~/.config/fish/conf.d/fish-ssh-agent_init.fish: fish/conf.d/fish-ssh-agent_init.fish
-    ~/.config/fish/conf.d/fzf_init.fish: fish/conf.d/fzf_init.fish
-    ~/.config/fish/conf.d/fzf_key_bindings.fish: fish/conf.d/fzf_key_bindings.fish
-    ~/.config/fish/functions/__fzf_cd.fish: fish/functions/__fzf_cd.fish
-    ~/.config/fish/functions/__fzf_complete_preview.fish: fish/functions/__fzf_complete_preview.fish
-    ~/.config/fish/functions/__fzf_complete.fish: fish/functions/__fzf_complete.fish
-    ~/.config/fish/functions/__fzf_find_file.fish: fish/functions/__fzf_find_file.fish
-    ~/.config/fish/functions/__fzf_get_dir.fish: fish/functions/__fzf_get_dir.fish
-    ~/.config/fish/functions/__fzf_open.fish: fish/functions/__fzf_open.fish
-    ~/.config/fish/functions/__fzf_parse_commandline.fish: fish/functions/__fzf_parse_commandline.fish
-    ~/.config/fish/functions/__fzf_reverse_isearch.fish: fish/functions/__fzf_reverse_isearch.fish
-    ~/.config/fish/functions/__fzfcmd.fish: fish/functions/__fzfcmd.fish
-    ~/.config/fish/functions/__ssh_agent_is_started.fish: fish/functions/__ssh_agent_is_started.fish
-    ~/.config/fish/functions/__ssh_agent_start.fish: fish/functions/__ssh_agent_start.fish
-    ~/.config/fish/functions/fisher.fish: fish/functions/fisher.fish
-    ~/.config/fish/functions/nvm.fish: fish/functions/nvm.fish
-    ~/.config/nvim/snippet: nvim/snippets/
-    ~/.config/nvim/spell: nvim/spell/
-    ~/.config/nvim/coc-settings.json: nvim/coc-settings.json
-    ~/.config/nvim/init.vim: nvim/init.vim
+    ~/.config/git:
+        glob: true
+        path: git/*
+    ~/.config/fish:
+        glob: true
+        path: fish/*
+        force: true
+    ~/.config/nvim:
+        glob: true
+        path: nvim/*
     ~/.config/htop/htoprc: htop/htoprc
-    ~/.local/bin/neovim-update.sh: bin/neovim-update.sh
+    ~/.config/xmobar:
+        glob: true
+        path: xmobar/*
+    ~/.config/alacritty/alacritty.yml: alacritty/alacritty.yml
+    ~/.local/bin:
+        glob: true
+        path: bin/*
+    ~/.xmonad:
+        glob: true
+        path: xmonad/*
 
 - shell:
     # Update git submodules
     - git submodule update --init --recursive
+    - ~/.local/bin/install-plug.sh
     - ~/.local/bin/neovim-update.sh

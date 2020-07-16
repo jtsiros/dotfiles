@@ -22,6 +22,7 @@ if test -d "$HOME/.local/bin"; set PATH "$HOME/.local/bin" $PATH; end
 if test -d "$GOPATH/bin"; set PATH "$GOPATH/bin" $PATH; end
 if test -d "/snap/bin"; set PATH "/snap/bin" $PATH; end
 if test -d "$GO/bin"; set PATH "$GO/bin" $PATH; end
+if test -d "$HOME/.cabal/bin"; set PATH "$HOME/.cabal/bin" $PATH; end
 
 # Disable the fish greeting
 set fish_greeting ""

@@ -12,7 +12,6 @@
     - '~/.config/xmobar'
     - '~/.config/alacritty'
     - '~/.xmonad'
-    - '~/.local/bin'
 
 - link:
     ~/.config/git:
@@ -40,6 +39,6 @@
 - shell:
     # Update git submodules
     - git submodule update --init --recursive
-    - ~/.local/bin/install-plug.sh
+    - ~/.local/bin/setup.sh
     - ~/.local/bin/neovim-update.sh
     - [chsh -s $(which fish), Making fish the default shell]

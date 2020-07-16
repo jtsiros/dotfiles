@@ -1,7 +1,6 @@
 - defaults:
     link:
         create: true
-        relink: true
 
 - clean:
     - '~'
@@ -43,3 +42,4 @@
     - git submodule update --init --recursive
     - ~/.local/bin/install-plug.sh
     - ~/.local/bin/neovim-update.sh
+    - [chsh -s $(which fish), Making fish the default shell]

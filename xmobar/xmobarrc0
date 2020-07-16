@@ -2,7 +2,7 @@
 -- install xmobar with these flags: --flags="with_alsa" --flags="with_mpd" --flags="with_xft"  OR --flags="all_extensions"
 -- you can find weather location codes here: http://weather.noaa.gov/index.html
 
-Config { font    = "xft:Ubuntu:weight=bold:pixelsize=11:antialias=true:hinting=true"
+Config { font    = "xft:Ubuntu:weight=bold:pixelsize=12:antialias=true:hinting=true"
        , additionalFonts = [ "xft:Mononoki Nerd Font:pixelsize=11:antialias=true:hinting=true"
                            , "xft:Mononoki Nerd Font:pixelsize=16:antialias=true:hinting=true"
                            , "xft:FontAwesome:pixelsize=13"
@@ -19,7 +19,7 @@ Config { font    = "xft:Ubuntu:weight=bold:pixelsize=11:antialias=true:hinting=t
                       -- Time and date
                       Run Date "<fn=1>\xf133</fn> %b %d %Y (%H:%M)" "date" 50
                       -- Network up and down
-                    , Run Network "enp6s0" ["-t", "<fn=1>\xf0aa</fn> <rx>kb  <fn=1>\xf0ab</fn> <tx>kb"] 20
+                    , Run Network "enp0s31f6" ["-t", "<fn=1>\xf0aa</fn> <rx>kb  <fn=1>\xf0ab</fn> <tx>kb"] 20
                       -- Cpu usage in percent
                     , Run Cpu ["-t", "<fn=1>\xf108</fn> cpu: (<total>%)","-H","50","--high","red"] 20
                       -- Ram used number and percent

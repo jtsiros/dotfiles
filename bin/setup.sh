@@ -13,3 +13,10 @@ if ! [ -d $HOME/.local/share/omf ]; then
 	sh -c 'curl -L https://get.oh-my.fish > install-fish && fish install-fish --noninteractive --yes --path=~/.local/share/omf --config=~/.config/omf'
 	sh -c 'rm -f install-fish'
 fi
+
+if ! [ -d $HOME/.emacs.d ]; then
+	echo 'emacs installation not detected. Installing...'
+	sh -c 'git clone --depth 1 https://github.com/hlissner/doom-emacs ~/.emacs.d'
+	sh -c '$HOME/.emacs.d/bin/doom install --yes'
+	sh -c '$HOME/.emacs.d/bin/doom sync'
+fi

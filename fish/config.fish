@@ -8,8 +8,8 @@ set -gx GOPATH $HOME/dev/go
 
 set -gx LESS '-F -g -i -M -R -S -w -X -z-4'
 set -gx BROWSER open
-set -gx EDITOR nvim
-set -gx VISUAL nvim
+set -gx EDITOR emacs
+set -gx VISUAL emacs
 set -gx PAGER less
 set -gx LANG en_US.UTF-8
 set -gx LANGUAGE en_US.utf-8
@@ -19,6 +19,7 @@ set -gx LSCOLORS 'Exfxcxdxbxegedabagacad'
 
 # Set PATH so it includes user's private bin directories (if they exist)
 if test -d "$HOME/.local/bin"; set PATH "$HOME/.local/bin" $PATH; end
+if test -d "$HOME/.emacs.d/bin"; set PATH "$HOME/.emacs.d/bin" $PATH; end
 if test -d "$GOPATH/bin"; set PATH "$GOPATH/bin" $PATH; end
 if test -d "/snap/bin"; set PATH "/snap/bin" $PATH; end
 if test -d "$GO/bin"; set PATH "$GO/bin" $PATH; end

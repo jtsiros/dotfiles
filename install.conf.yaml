@@ -12,6 +12,8 @@
     - '~/.config/xmobar'
     - '~/.config/alacritty'
     - '~/.xmonad'
+    - '~/.doom.d'
+    - '~/.emacs.d'
 
 - link:
     ~/.config/git:
@@ -35,6 +37,9 @@
     ~/.xmonad:
         glob: true
         path: xmonad/*
+    ~/.doom.d:
+        glob: true
+        path: .doom.d/*
 
 - shell:
     # Update git submodules

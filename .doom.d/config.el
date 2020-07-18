@@ -7,7 +7,7 @@
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets.
 (setq user-full-name "Jon Tsiros"
-      user-mail-address "jon.tsiros@gmail.com")
+      user-mail-address "jon.tsiros@intel.com")
 
 ;; Doom exposes five (optional) variables for controlling fonts in Doom. Here
 ;; are the three important ones:
@@ -19,8 +19,8 @@
 ;;
 ;; They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
 ;; font string. You generally only need these two:
-(setq doom-font (font-spec :family "BlexMono Nerd Font" :size 16)
-      doom-variable-pitch-font (font-spec :family "BlexMono Nerd Font" :size 16))
+(setq doom-font (font-spec :family "BlexMono Nerd Font" :size 13)
+      doom-variable-pitch-font (font-spec :family "BlexMono Nerd Font" :size 13))
 
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
@@ -33,9 +33,9 @@
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
-(setq display-line-numbers-type t)
+(setq display-line-numbers-type 'relative)
 
-
+(add-to-list 'default-frame-alist '(fullscreen . maximized))
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
 ;; - `load!' for loading external *.el files relative to this one

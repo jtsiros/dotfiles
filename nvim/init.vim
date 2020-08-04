@@ -1,3 +1,6 @@
+if exists('g:vscode')
+" vscode specific configuration
+else
 "----------------------------------------------
 " Plugin management
 "
@@ -652,3 +655,4 @@ au FileType yaml set expandtab
 au FileType yaml set shiftwidth=4
 au FileType yaml set softtabstop=4
 au FileType yaml set tabstop=4
+endif

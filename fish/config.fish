@@ -38,3 +38,4 @@ if test -f "$HOME/.cargo/env"; eval (source $HOME/.cargo/env); end
 if test -f ~/.config/fish/config_local.fish
 	source ~/.config/fish/config_local.fish
 end
+set -g fish_user_paths "/usr/local/sbin" $fish_user_paths

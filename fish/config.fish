@@ -3,13 +3,18 @@ set -g theme_color_scheme chain
 set -g theme_display_date no
 set -g theme_display_cmd_duration no
 
+# homebrew asdf installation
+if test -f /usr/local/opt/asdf/asdf.fish
+    source /usr/local/opt/asdf/asdf.fish
+end
+
 set GO (which go)
 set -gx GOPATH $HOME/dev/go
 
 set -gx LESS '-F -g -i -M -R -S -w -X -z-4'
 set -gx BROWSER open
-set -gx EDITOR emacs
-set -gx VISUAL emacs
+set -gx EDITOR emacsclient
+set -gx VISUAL emacsclient
 set -gx PAGER less
 set -gx LANG en_US.UTF-8
 set -gx LANGUAGE en_US.utf-8

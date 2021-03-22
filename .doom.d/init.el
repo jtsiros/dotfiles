@@ -165,6 +165,7 @@
 
        :os
        macos             ; MacOS-specific commands
+       tty
 
        :email
        ;;(mu4e +gmail)

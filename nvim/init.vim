@@ -228,8 +228,8 @@ nnoremap <leader>m :MaximizerToggle<CR>
 " Plugin: w0rp/ale
 "----------------------------------------------
 " Error and warning signs.
-let g:ale_sign_error = '🧯'
-let g:ale_sign_warning = '💡'
+let g:ale_sign_error = '❗'
+let g:ale_sign_warning = '⚠️ '
 " Enable integration with airline.
 let g:airline#extensions#ale#enabled = 1
 

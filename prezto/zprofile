@@ -3,11 +3,15 @@
 #
 # Authors:
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
-#   Jon Tsiros	  <jon.tsiros@gmail.com>
 #
 
 #
-# Golang 
+# Homebrew
+#
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
+#
+# Golang
 #
 export GOPATH=/Users/jtsiros/dev/go
 export GOBIN=$GOPATH/bin
@@ -24,8 +28,8 @@ fi
 # Editors
 #
 
-export EDITOR='emacs'
-export VISUAL='emacs'
+export EDITOR='emacs -nw'
+export VISUAL='emacs -nw'
 export PAGER='less'
 
 #
@@ -51,9 +55,12 @@ typeset -gU cdpath fpath mailpath path
 # Set the list of directories that Zsh searches for programs.
 path=(
   /usr/local/{bin,sbin}
+  /opt/homebrew/opt/make/libexec/gnubin
   $GOBIN
-  /Users/jtsiros/.emacs.d/bin
-  /Users/jtsiros/.local/bin
+  $HOME/.emacs.d/bin
+  $HOME/.local/bin
+  $HOME/.cargo/bin
+  $HOME/Library/Python/3.8/bin
   $path
 )
 

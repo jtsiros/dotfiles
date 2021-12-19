@@ -20,6 +20,7 @@ vim.opt.expandtab = true
 vim.opt.smartindent = true
 vim.opt.autoindent = true
 vim.opt.number = true
+vim.opt.relativenumber = true
 vim.opt.cursorline = true
 vim.opt.background = "dark"
 vim.opt.showtabline = 4
@@ -29,8 +30,8 @@ vim.opt.formatoptions:remove("cro")
 vim.opt.clipboard = "unnamedplus"
 vim.opt.autochdir = true
 vim.opt.termguicolors = true
-vim.opt.textwidth = 80
-vim.opt.colorcolumn = "80"
+vim.opt.textwidth = 90
+vim.opt.colorcolumn = "90"
 
 vim.opt.completeopt = "menuone,noinsert,noselect"
 

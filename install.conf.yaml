@@ -3,34 +3,18 @@
         create: true
 
 - clean:
-    - '~'
     - '~/.config'
-    - '~/.config/fish'
-    - '~/.config/nvim'
-    - '~/.config/git'
-    - '~/.config/htop'
-    - '~/.config/xmobar'
-    - '~/.config/alacritty'
     - '~/.xmonad'
     - '~/.doom.d'
-    - '~/.emacs.d'
 
 - link:
     ~/.config/git:
         glob: true
         path: git/*
-    ~/.config/fish:
-        glob: true
-        path: fish/*
-        force: true
-    ~/.config/nvim:
-        glob: true
-        path: nvim/*
     ~/.config/htop/htoprc: htop/htoprc
     ~/.config/xmobar:
         glob: true
         path: xmobar/*
-    ~/.config/alacritty/alacritty.yml: alacritty/alacritty.yml
     ~/.local/bin:
         glob: true
         path: bin/*
@@ -45,5 +29,3 @@
     # Update git submodules
     - git submodule update --init --recursive
     - ~/.local/bin/setup.sh
-    - ~/.local/bin/neovim-update.sh
-    - [chsh -s $(which fish), Making fish the default shell]

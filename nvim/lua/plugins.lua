@@ -49,6 +49,9 @@ require("packer").startup(function(use)
   -- =====================
   -- Coding stuff
   -- =====================
+  -- note/organization stuff
+  use("nvim-lua/plenary.nvim")
+  use("nvim-neorg/neorg")
   -- lsp stuff
   use("neovim/nvim-lspconfig")
 
@@ -74,7 +77,7 @@ require("packer").startup(function(use)
   -- flutter
   use("akinsho/flutter-tools.nvim")
   -- snippets
- use("hrsh7th/vim-vsnip")
+  use("hrsh7th/vim-vsnip")
   -- dart snippets
   use("Nash0x7E2/awesome-flutter-snippets")
   -- Ranger

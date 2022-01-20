@@ -21,6 +21,7 @@ require("config/symbols-outline")
 require("config/telescope")
 require("config/tree-sitter")
 require("config/gopls")
+require("config/neorg")
 
 vim.cmd("colorscheme gruvbox")
 -- vim.opt.guifont='FiraCodeNerdFont'

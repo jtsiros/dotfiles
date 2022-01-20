@@ -88,9 +88,6 @@ require("packer").startup(function(use)
   use("airblade/vim-rooter")
   -- Show a popup with signature info
   use("ray-x/lsp_signature.nvim")
-  -- Debugging
-  use("mfussenegger/nvim-dap")
-  use({ "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } })
   -- idk
   use("jose-elias-alvarez/null-ls.nvim")
   use("jose-elias-alvarez/nvim-lsp-ts-utils")

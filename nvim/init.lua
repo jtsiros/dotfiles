@@ -20,6 +20,7 @@ require("config/telescope")
 require("config/tree-sitter")
 require("config/gopls")
 require("config/neorg")
+require("config/github_scheme")
 
-vim.cmd("colorscheme uwu")
+vim.cmd("colorscheme github_*")
 -- vim.opt.guifont='FiraCodeNerdFont'

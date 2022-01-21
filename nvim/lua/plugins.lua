@@ -13,6 +13,8 @@ require("packer").startup(function(use)
   use({ "darker-dracula/vim", as = "dracula" })
   -- use("~/dev/darker-dracula/vim")
   use("mangeshrex/uwu.vim")
+  -- github theme
+  use("projekt0n/github-nvim-theme")
   -- Git in the gutter
   use("lewis6991/gitsigns.nvim")
   -- dev-icons

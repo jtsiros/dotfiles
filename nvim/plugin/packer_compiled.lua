@@ -79,11 +79,6 @@ _G.packer_plugins = {
     path = "/Users/tsiros/.local/share/nvim/site/pack/packer/start/LuaSnip",
     url = "https://github.com/L3MON4D3/LuaSnip"
   },
-  ["awesome-flutter-snippets"] = {
-    loaded = true,
-    path = "/Users/tsiros/.local/share/nvim/site/pack/packer/start/awesome-flutter-snippets",
-    url = "https://github.com/Nash0x7E2/awesome-flutter-snippets"
-  },
   ["cmp-buffer"] = {
     loaded = true,
     path = "/Users/tsiros/.local/share/nvim/site/pack/packer/start/cmp-buffer",
@@ -113,11 +108,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/tsiros/.local/share/nvim/site/pack/packer/start/feline.nvim",
     url = "https://github.com/famiu/feline.nvim"
-  },
-  ["flutter-tools.nvim"] = {
-    loaded = true,
-    path = "/Users/tsiros/.local/share/nvim/site/pack/packer/start/flutter-tools.nvim",
-    url = "https://github.com/akinsho/flutter-tools.nvim"
   },
   ["fzy-lua-native"] = {
     loaded = true,
@@ -178,16 +168,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/tsiros/.local/share/nvim/site/pack/packer/start/nvim-colorizer.lua",
     url = "https://github.com/norcalli/nvim-colorizer.lua"
-  },
-  ["nvim-dap"] = {
-    loaded = true,
-    path = "/Users/tsiros/.local/share/nvim/site/pack/packer/start/nvim-dap",
-    url = "https://github.com/mfussenegger/nvim-dap"
-  },
-  ["nvim-dap-ui"] = {
-    loaded = true,
-    path = "/Users/tsiros/.local/share/nvim/site/pack/packer/start/nvim-dap-ui",
-    url = "https://github.com/rcarriga/nvim-dap-ui"
   },
   ["nvim-lsp-installer"] = {
     loaded = true,
@@ -259,11 +239,6 @@ _G.packer_plugins = {
     path = "/Users/tsiros/.local/share/nvim/site/pack/packer/start/popup.nvim",
     url = "https://github.com/nvim-lua/popup.nvim"
   },
-  ["presence.nvim"] = {
-    loaded = true,
-    path = "/Users/tsiros/.local/share/nvim/site/pack/packer/start/presence.nvim",
-    url = "https://github.com/andweeb/presence.nvim"
-  },
   rnvimr = {
     loaded = true,
     path = "/Users/tsiros/.local/share/nvim/site/pack/packer/start/rnvimr",
@@ -279,6 +254,11 @@ _G.packer_plugins = {
     path = "/Users/tsiros/.local/share/nvim/site/pack/packer/start/stylua-nvim",
     url = "https://github.com/ckipp01/stylua-nvim"
   },
+  ["symbols-outline.nvim"] = {
+    loaded = true,
+    path = "/Users/tsiros/.local/share/nvim/site/pack/packer/start/symbols-outline.nvim",
+    url = "https://github.com/simrat39/symbols-outline.nvim"
+  },
   ["telescope-fzy-native.nvim"] = {
     loaded = true,
     path = "/Users/tsiros/.local/share/nvim/site/pack/packer/start/telescope-fzy-native.nvim",
@@ -293,6 +273,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/tsiros/.local/share/nvim/site/pack/packer/start/trouble.nvim",
     url = "https://github.com/folke/trouble.nvim"
+  },
+  ["uwu.vim"] = {
+    loaded = true,
+    path = "/Users/tsiros/.local/share/nvim/site/pack/packer/start/uwu.vim",
+    url = "https://github.com/mangeshrex/uwu.vim"
   },
   ["vim-commentary"] = {
     loaded = true,

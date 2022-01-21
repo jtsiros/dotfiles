@@ -12,6 +12,7 @@ require("packer").startup(function(use)
   -- Dracula
   use({ "darker-dracula/vim", as = "dracula" })
   -- use("~/dev/darker-dracula/vim")
+  use("mangeshrex/uwu.vim")
   -- Git in the gutter
   use("lewis6991/gitsigns.nvim")
   -- dev-icons
@@ -29,7 +30,8 @@ require("packer").startup(function(use)
   use({ "famiu/feline.nvim", branch = "develop" })
 
   use("tpope/vim-scriptease")
-
+  -- symbols outline for viewing symbols in a tree like view
+  use("simrat39/symbols-outline.nvim")
   -- =====================
   -- TELESCOPE
   -- =====================
@@ -74,12 +76,8 @@ require("packer").startup(function(use)
   -- Lua dev
   use("folke/lua-dev.nvim")
   use("ckipp01/stylua-nvim")
-  -- flutter
-  use("akinsho/flutter-tools.nvim")
   -- snippets
   use("hrsh7th/vim-vsnip")
-  -- dart snippets
-  use("Nash0x7E2/awesome-flutter-snippets")
   -- Ranger
   use({ "kevinhwang91/rnvimr", run = ":make sync" })
   -- Comment stuff out
@@ -97,8 +95,6 @@ require("packer").startup(function(use)
   -- =====================
   -- OTHERS
   -- =====================
-  -- Discord
-  use("andweeb/presence.nvim")
   -- Pairs ()
   use("windwp/nvim-autopairs")
   -- Startify

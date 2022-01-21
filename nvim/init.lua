@@ -23,4 +23,6 @@ require("config/neorg")
 require("config/github_scheme")
 
 vim.cmd("colorscheme github_*")
+vim.cmd("highlight Normal guibg=none")
+vim.cmd("highlight NonText guibg=none")
 -- vim.opt.guifont='FiraCodeNerdFont'

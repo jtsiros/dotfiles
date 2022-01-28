@@ -55,7 +55,6 @@ require("packer").startup(function(use)
   -- =====================
   -- note/organization stuff
   use("nvim-lua/plenary.nvim")
-  use("nvim-neorg/neorg")
   -- lsp stuff
   use("neovim/nvim-lspconfig")
 

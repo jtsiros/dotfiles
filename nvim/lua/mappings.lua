@@ -64,12 +64,13 @@ nnoremap("<leader>r", ":NvimTreeRefresh<CR>")
 nnoremap("<leader>n", ":NvimTreeFindFile<CR>")
 
 -- LSP
-nnoremap("gd", "<cmd>lua vim.lsp.buf.definition()<CR>", true)
 nnoremap("gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", true)
-nnoremap("gr", "<cmd>LspTrouble lsp_references<CR>", true)
+nnoremap("gd", "<cmd>lua vim.lsp.buf.definition()<CR>", true)
+nnoremap("gr", "<cmd>lua vim.lsp.buf.references()<CR>", true)
 nnoremap("gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", true)
+nnoremap("<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<CR>", true)
 nnoremap("<C-space>", "<cmd>lua vim.lsp.buf.hover()<CR>", true)
-vnoremap("<C-space>", "<cmd>RustHoverRange<CR>")
+-- vnoremap("<C-space>", "<cmd>RustHoverRange<CR>")
 
 nnoremap("ge", "<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>", true)
 nnoremap("gE", "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>", true)
@@ -77,14 +78,21 @@ nnoremap("<silent><leader>a", "<cmd>lua vim.lsp.buf.code_action()<CR>", true)
 nnoremap("<Leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", true)
 nnoremap("<Leader>a", "<cmd>lua vim.lsp.buf.code_action()<CR>", true)
 vnoremap("<Leader>a", "<cmd>lua vim.lsp.buf.range_code_action()<CR>")
+nnoremap("<Leader>f", "<cmd>lua vim.lsp.buf.formatting()<CR>")
 
-nnoremap("<Leader>ld", "<cmd>LspTrouble lsp_definitions<CR>", true)
+nnoremap("<Leader>ld", "<cmd>TroubleToggle lsp_definitions<CR>", true)
+nnoremap("<Leader>gR", "<cmd>TroubleToggle lsp_references<CR>", true)
 nnoremap(
-  "<Leader>le",
-  "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>",
+  "<Leader>ww",
+  "<cmd>TroubleToggle workspace_diagnostics<CR>",
   true
 )
-nnoremap("<Leader>lE", "<cmd>LspTroubleWorkspaceToggle<CR>", true)
+nnoremap(
+  "<Leader>wd",
+  "<cmd>TroubleToggle document_diagnostics<CR>",
+  true
+)
+nnoremap("<Leader>lt", "<cmd>TroubleToggle<CR>", true)
 
 -- Telescope
 nnoremap("<C-f>", ':lua require("utils/telescope").search_files()<CR>')

@@ -78,7 +78,7 @@ nnoremap("<silent><leader>a", "<cmd>lua vim.lsp.buf.code_action()<CR>", true)
 nnoremap("<Leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", true)
 nnoremap("<Leader>a", "<cmd>lua vim.lsp.buf.code_action()<CR>", true)
 vnoremap("<Leader>a", "<cmd>lua vim.lsp.buf.range_code_action()<CR>")
-nnoremap("<Leader>f", "<cmd>lua vim.lsp.buf.formatting()<CR>")
+nnoremap("<Leader>gf", "<cmd>lua vim.lsp.buf.formatting()<CR>")
 
 nnoremap("<Leader>ld", "<cmd>TroubleToggle lsp_definitions<CR>", true)
 nnoremap("<Leader>gR", "<cmd>TroubleToggle lsp_references<CR>", true)

@@ -52,11 +52,7 @@ nnoremap("<Leader>s", ":SymbolsOutline<CR>")
 nnoremap("<C-s>", ":RnvimrToggle<CR>")
 
 -- WhichKey
-nnoremap("<leader>", ":WhichKey '<Space>'<CR>", true)
-
--- Comentary
-nnoremap("<space>/", '<cmd>lua require("utils/comment")()<CR>')
-vnoremap("<space>/", '<cmd>lua require("utils/comment")()<CR>')
+-- nnoremap("<leader>", ":WhichKey '<Space>'<CR>", true)
 
 -- Nvim-Tree
 nnoremap("<C-n>", ":NvimTreeToggle<CR>")
@@ -76,35 +72,11 @@ nnoremap("ge", "<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>", true)
 nnoremap("gE", "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>", true)
 nnoremap("<silent><leader>a", "<cmd>lua vim.lsp.buf.code_action()<CR>", true)
 nnoremap("<Leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", true)
-nnoremap("<Leader>a", "<cmd>lua vim.lsp.buf.code_action()<CR>", true)
-vnoremap("<Leader>a", "<cmd>lua vim.lsp.buf.range_code_action()<CR>")
-nnoremap("<Leader>gf", "<cmd>lua vim.lsp.buf.formatting()<CR>")
 
-nnoremap("<Leader>ld", "<cmd>TroubleToggle lsp_definitions<CR>", true)
-nnoremap("<Leader>gR", "<cmd>TroubleToggle lsp_references<CR>", true)
-nnoremap(
-  "<Leader>ww",
-  "<cmd>TroubleToggle workspace_diagnostics<CR>",
-  true
-)
-nnoremap(
-  "<Leader>wd",
-  "<cmd>TroubleToggle document_diagnostics<CR>",
-  true
-)
-nnoremap("<Leader>lt", "<cmd>TroubleToggle<CR>", true)
+-- Comment Toggling
+nnoremap("/", "<cmd>lua require('utils/comment')()<CR>", true)
+vnoremap("/", "<cmd>lua require('utils/comment')()<CR>")
 
--- Telescope
-nnoremap("<C-f>", ':lua require("utils/telescope").search_files()<CR>')
-nnoremap("/", ':lua require("utils/telescope").search_in_buffer()<CR>')
-inoremap(
-  "<C-f>",
-  '<Esc> :lua require("utils/telescope").search_in_buffer()<CR>'
-)
-nnoremap(
-  "<Leader>fg",
-  '<Esc> :lua require("telescope.builtin").live_grep()<CR>'
-)
 nnoremap(
   "<Leader>fd",
   '<Esc> :lua require("utils/telescope").search_dotfiles()<CR>'

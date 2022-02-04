@@ -1,31 +1,36 @@
 - defaults:
     link:
-        create: true
+      relink: true
+      create: true
+      force: true
 
-- clean:
-    - '~/.config'
-    - '~/.xmonad'
-    - '~/.doom.d'
+- clean: ['~']
 
 - link:
+    ~/.zshrc: zshrc
+    ~/.tmux.conf: tmux.conf 
+    ~/.zpreztorc: prezto/zpreztorc 
+    ~/.zprofile: prezto/zprofile
     ~/.config/git:
-        glob: true
-        path: git/*
+      glob: true
+      path: git/*
+    ~/.config/nvim: nvim
+    ~/.config/kitty:
+      glob: true
+      path: kitty/*
     ~/.config/htop/htoprc: htop/htoprc
-    ~/.config/xmobar:
-        glob: true
-        path: xmobar/*
     ~/.local/bin:
-        glob: true
-        path: bin/*
+      if: '[ `uname` =  Linux ]'
+      glob: true
+      path: bin/linux/*
     ~/.xmonad:
-        glob: true
-        path: xmonad/*
-    ~/.doom.d:
-        glob: true
-        path: .doom.d/*
+      if: '[ `uname` =  Linux ]'
+      glob: true
+      path: xmonad/*
+    ~/.config/xmobar:
+      if: '[ `uname` =  Linux ]'
+      glob: true
+      path: xmobar/*
 
 - shell:
-    # Update git submodules
-    - git submodule update --init --recursive
-    - ~/.local/bin/setup.sh
+    - [git submodule update --init --recursive, Installing submodules]

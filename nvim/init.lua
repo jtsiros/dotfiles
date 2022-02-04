@@ -21,6 +21,7 @@ require("config/tree-sitter")
 require("config/gopls")
 require("config/github_scheme")
 require("config/lsp-trouble")
+require("config/which-key")
 
 vim.cmd("colorscheme github_*")
 vim.cmd("highlight Normal guibg=none ctermbg=none")

@@ -314,10 +314,10 @@ _G.packer_plugins = {
     path = "/Users/tsiros/.local/share/nvim/site/pack/packer/start/vim-vsnip",
     url = "https://github.com/hrsh7th/vim-vsnip"
   },
-  ["vim-which-key"] = {
+  ["which-key.nvim"] = {
     loaded = true,
-    path = "/Users/tsiros/.local/share/nvim/site/pack/packer/start/vim-which-key",
-    url = "https://github.com/liuchengxu/vim-which-key"
+    path = "/Users/tsiros/.local/share/nvim/site/pack/packer/start/which-key.nvim",
+    url = "https://github.com/folke/which-key.nvim"
   }
 }
 

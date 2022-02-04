@@ -101,7 +101,8 @@ require("packer").startup(function(use)
   -- Startify
   use("mhinz/vim-startify")
   -- Which key
-  use("liuchengxu/vim-which-key")
+  -- use("liuchengxu/vim-which-key")
+  use("folke/which-key.nvim")
   -- git
   use("tpope/vim-fugitive")
   use("antoinemadec/FixCursorHold.nvim")

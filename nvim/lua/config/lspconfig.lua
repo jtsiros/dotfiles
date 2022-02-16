@@ -1,7 +1,6 @@
 local lspconfig = require("lspconfig")
 local setup_auto_format = require("utils.lsp").setup_auto_format
 
-setup_auto_format("dart")
 setup_auto_format("rs")
 setup_auto_format("go")
 
@@ -15,13 +14,35 @@ setup_auto_format("tsx")
 setup_auto_format("svelte")
 setup_auto_format("ts")
 setup_auto_format("py")
-setup_auto_format("dart")
 setup_auto_format("lua", "lua require('stylua-nvim').format_file()")
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
--- require("desktop-notify").override_vim_notify()
+-----------------------
+-- Rust
+-----------------------
+require("rust-tools").setup({})
+
+-----------------------
+-- gopls
+-----------------------
+
+lspconfig.gopls.setup({
+    cmd = {"gopls", "serve"},
+    settings = {
+      gopls = {
+        analyses = {
+          unusedparams = true,
+          nilness = true,
+          shadow = true,
+        },
+        staticcheck = true,
+        usePlaceholders = true,
+        gofumpt = true,
+      },
+    },
+})
 
 -----------------------
 -- Webdev

@@ -73,9 +73,11 @@ nnoremap("gE", "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>", true)
 nnoremap("<silent><leader>a", "<cmd>lua vim.lsp.buf.code_action()<CR>", true)
 nnoremap("<Leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", true)
 
+nnoremap("/", "<cmd>lua require('utils/telescope').search_in_buffer()<CR>", true)
+
 -- Comment Toggling
-nnoremap("/", "<cmd>lua require('utils/comment')()<CR>", true)
-vnoremap("/", "<cmd>lua require('utils/comment')()<CR>")
+nnoremap("<Leader>/", "<cmd>lua require('utils/comment')()<CR>")
+vnoremap("<Leader>/", "<cmd>lua require('utils/comment')()<CR>")
 
 nnoremap(
   "<Leader>fd",

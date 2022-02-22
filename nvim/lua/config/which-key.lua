@@ -55,20 +55,7 @@ local config = {
       noremap = true, -- use `noremap` when creating keymaps
       nowait = true, -- use `nowait` when creating keymaps
    },
-   iopts = {
-      mode = "i", -- INSERT mode
-      prefix = "<leader>",
-      buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
-      silent = true, -- use `silent` when creating keymaps
-      noremap = true, -- use `noremap` when creating keymaps
-      nowait = true, -- use `nowait` when creating keymaps
-   },
    vmappings = {},
-   imappings = {
-       ["<C-f>"] = {
-           "<Esc> :lua require('utils/telescope').search_in_files()<CR>", "Search in files"
-       },
-   },
    mappings = {
        ["w"] = { "<cmd>w!<CR>", "Save" },
        ["q"] = { "<cmd>q!<CR>", "Quit" },
@@ -200,4 +187,3 @@ local config = {
 wk.setup(config.setup)
 wk.register(config.mappings, config.opts)
 wk.register(config.vmappings, config.vopts)
-wk.register(config.imappings, config.iopts)

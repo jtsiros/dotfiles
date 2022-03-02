@@ -13,7 +13,7 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 #
 # Golang
 #
-export GOPATH=/Users/jtsiros/dev/go
+export GOPATH=/Users/tsiros/dev/go
 export GOBIN=$GOPATH/bin
 
 #
@@ -28,8 +28,8 @@ fi
 # Editors
 #
 
-export EDITOR='emacs -nw'
-export VISUAL='emacs -nw'
+export EDITOR='nvim'
+export VISUAL='nvim'
 export PAGER='less'
 
 #
@@ -57,7 +57,6 @@ path=(
   /usr/local/{bin,sbin}
   /opt/homebrew/opt/make/libexec/gnubin
   $GOBIN
-  $HOME/.emacs.d/bin
   $HOME/.local/bin
   $HOME/.cargo/bin
   $HOME/Library/Python/3.8/bin

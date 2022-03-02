@@ -59,15 +59,15 @@ local config = {
    mappings = {
        ["w"] = { "<cmd>w!<CR>", "Save" },
        ["q"] = { "<cmd>q!<CR>", "Quit" },
-       ["c"] = { "<cmd>BufferClose!<CR>", "Close Buffer" },
+       ["c"] = { "<cmd>bw!<CR>", "Close Buffer" },
        ["h"] = { "<cmd>nohlsearch<CR>", "No Highlight" },
 
        b = {
           name = "Buffers",
           j = { "<cmd>BufferPick<CR>", "Jump" },
           f = { "<cmd>Telescope buffers<CR>", "Find" },
-          b = { "<cmd>b#<CR>", "Previous" },
-          w = { "<cmd>BufferWipeout<CR>", "Wipeout" },
+          b = { "<cmd>bprevious<CR>", "Previous" },
+          w = { "<cmd>bw<CR>", "Wipeout" },
           e = {
              "<cmd>BufferCloseAllButCurrent<CR>",
              "Close all but current",

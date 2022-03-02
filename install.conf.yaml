@@ -11,6 +11,7 @@
     ~/.tmux.conf: tmux.conf 
     ~/.zpreztorc: prezto/zpreztorc 
     ~/.zprofile: prezto/zprofile
+    ~/.config/alacritty/alacritty.yml: alacritty/alacritty.yml
     ~/.config/git:
       glob: true
       path: git/*

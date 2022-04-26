@@ -24,6 +24,7 @@
       if: '[ `uname` =  Linux ]'
       glob: true
       path: bin/linux/*
+    ~/.doom.d: doom
     ~/.xmonad:
       if: '[ `uname` =  Linux ]'
       glob: true

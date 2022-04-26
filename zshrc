@@ -21,7 +21,10 @@ fi
 # Customize to your needs...
 
 fpath=( ~/.zfunc "${fpath[@]}" )
-export ZPLUG_HOME=/opt/homebrew/opt/zplug
+
+[[ $(uname -m) == 'arm64' ]] && export ZPLUG_HOME=/opt/homebrew/opt/zplug
+[[ $(uname -m) == 'x86_64' ]] && export ZPLUG_HOME=/usr/local/opt/zplug
+
 source $ZPLUG_HOME/init.zsh
 
 # Plugins

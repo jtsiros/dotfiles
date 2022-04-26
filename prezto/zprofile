@@ -13,7 +13,7 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 #
 # Golang
 #
-export GOPATH=/Users/tsiros/dev/go
+export GOPATH=/Users/jtsiros/dev/go
 export GOBIN=$GOPATH/bin
 
 #
@@ -55,11 +55,11 @@ typeset -gU cdpath fpath mailpath path
 # Set the list of directories that Zsh searches for programs.
 path=(
   /usr/local/{bin,sbin}
-  /opt/homebrew/opt/make/libexec/gnubin
+  /usr/local/opt/make/libexec/gnubin
   $GOBIN
+  $HOME/.emacs.d/bin
   $HOME/.local/bin
   $HOME/.cargo/bin
-  $HOME/Library/Python/3.8/bin
   $path
 )
 

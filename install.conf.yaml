@@ -7,32 +7,26 @@
 - clean: ['~']
 
 - link:
-    ~/.zshrc: zshrc
-    ~/.tmux.conf: tmux.conf 
+    ~/.tmux.conf: tmux.conf
+    ~/.zshrc: prezto/zshrc
     ~/.zpreztorc: prezto/zpreztorc 
     ~/.zprofile: prezto/zprofile
+    ~/.zshenv: prezto/zshenv
     ~/.config/alacritty/alacritty.yml: alacritty/alacritty.yml
     ~/.config/git:
       glob: true
       path: git/*
     ~/.config/nvim: nvim
-    ~/.config/kitty:
-      glob: true
-      path: kitty/*
     ~/.config/htop/htoprc: htop/htoprc
     ~/.local/bin:
       if: '[ `uname` =  Linux ]'
       glob: true
       path: bin/linux/*
+    ~/.config/i3:
+      if: '[ `uname` =  Linux ]'
+      glob: true
+      path: i3/*
     ~/.doom.d: doom
-    ~/.xmonad:
-      if: '[ `uname` =  Linux ]'
-      glob: true
-      path: xmonad/*
-    ~/.config/xmobar:
-      if: '[ `uname` =  Linux ]'
-      glob: true
-      path: xmobar/*
 
 - shell:
     - [git submodule update --init --recursive, Installing submodules]

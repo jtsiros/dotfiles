@@ -57,3 +57,6 @@
 #	insteadOf = https://gitlab.com/
 
 # vi:syntax=gitconfig
+[user]
+	email = jon.tsiros@gmail.com
+	name = Jon Tsiros

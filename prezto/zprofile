@@ -1,19 +1,7 @@
 #
-# Executes commands at login pre-zshrc.
-#
-# Authors:
-#   Sorin Ionescu <sorin.ionescu@gmail.com>
-#
-
-#
-# Homebrew
-#
-eval "$(/opt/homebrew/bin/brew shellenv)"
-
-#
 # Golang
 #
-export GOPATH=/Users/jtsiros/dev/go
+export GOPATH=$HOME/dev/go
 export GOBIN=$GOPATH/bin
 
 #
@@ -21,6 +9,9 @@ export GOBIN=$GOPATH/bin
 #
 
 if [[ "$OSTYPE" == darwin* ]]; then
+  # Homebrew
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+
   export BROWSER='open'
 fi
 
@@ -31,6 +22,11 @@ fi
 export EDITOR='nvim'
 export VISUAL='nvim'
 export PAGER='less'
+
+if [[ "$OSTYPE" = linux* ]]; then
+   export EDITOR='emacsclient -c -a emacs'
+   export VISUAL='emacsclient -c -a emacs'
+fi
 
 #
 # Language
@@ -57,9 +53,9 @@ path=(
   /usr/local/{bin,sbin}
   /usr/local/opt/make/libexec/gnubin
   $GOBIN
-  $HOME/.emacs.d/bin
   $HOME/.local/bin
   $HOME/.cargo/bin
+  $HOME/.emacs.d/bin
   $path
 )
 

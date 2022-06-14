@@ -11,11 +11,9 @@
 
 (setq confirm-kill-emacs nil)
 
-(setq doom-font (font-spec :family "JetBrains Mono" :size 16)
-      doom-big-font (font-spec :family "JetBrains Mono" :size 26)
-      doom-variable-pitch-font (font-spec :family "Overpass" :size 16)
-      doom-unicode-font (font-spec :family "JuliaMono")
-      doom-serif-font (font-spec :family "IBM Plex Mono" :weight 'light))
+(setq doom-font (font-spec :family "SauceCodePro Nerd Font Mono" :size 12.0)
+      doom-variable-pitch-font (font-spec :family "Ubuntu" :size 15.0)
+      doom-big-font (font-spec :family "SauceCodePro Nerd Font Mono" :size 24.0))
 ;; Doom exposes five (optional) variables for controlling fonts in Doom. Here
 ;; are the three important ones:
 ;;

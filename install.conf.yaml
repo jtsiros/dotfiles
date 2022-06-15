@@ -26,6 +26,10 @@
       if: '[ `uname` =  Linux ]'
       glob: true
       path: i3/*
+    ~/.config/rofi:
+      if: '[ `uname` =  Linux ]'
+      glob: true
+      path: rofi/*
     ~/.doom.d: doom
 
 - shell:

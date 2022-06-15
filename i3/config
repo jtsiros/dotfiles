@@ -38,9 +38,10 @@ for_window [class="i3_help"] floating enable sticky enable border normal
 # name workspaces
 set $tag1  "1:  www"
 set $tag2  "2:  code"
-set $tag3  "3:  notes"
+set $tag3  "3: ⌬ chat"
 set $tag4  "4:  email"
 set $tag5  "5:  files"
+set $tag6  "6:  notes"
 
 # switch to workspace
 bindsym $mod+1 workspace $tag1
@@ -48,7 +49,7 @@ bindsym $mod+2 workspace $tag2
 bindsym $mod+3 workspace $tag3
 bindsym $mod+4 workspace $tag4
 bindsym $mod+5 workspace $tag5
-bindsym $mod+6 workspace 6
+bindsym $mod+6 workspace $tag6
 bindsym $mod+7 workspace 7
 bindsym $mod+8 workspace 8
 bindsym $mod+9 workspace 9
@@ -59,7 +60,7 @@ bindsym $mod+Shift+2 move container to workspace $tag2
 bindsym $mod+Shift+3 move container to workspace $tag3
 bindsym $mod+Shift+4 move container to workspace $tag4
 bindsym $mod+Shift+5 move container to workspace $tag5
-bindsym $mod+Shift+6 move container to workspace 6
+bindsym $mod+Shift+6 move container to workspace $tag6
 bindsym $mod+Shift+7 move container to workspace 7
 bindsym $mod+Shift+8 move container to workspace 8
 bindsym $mod+Shift+9 move container to workspace 9
@@ -72,8 +73,9 @@ bindsym $mod+Shift+9 move container to workspace 9
 #####################################################################################################################
 
 # start dmenu
-bindsym $mod+d exec --no-startup-id dmenu_run -i -nb '#1f222d' -nf '#81a1c1' -sb '#81a1c1' -sf '#1f222d' -fn 'Roboto:bold:pixelsize=18'
-
+bindsym $mod+d exec --no-startup-id ~/.config/i3/scripts/rofi_app_launcher
+# file search
+bindsym $mod+Shift+f exec --no-startup-id ~/.config/i3/scripts/rofifinder
 
 
 #####################################################################################################################
@@ -264,7 +266,7 @@ bindsym control+Shift+e exec --no-startup-id emacsclient -c -a emacs;focus
 
 bindsym control+mod1+u exec --no-startup-id pavucontrol
 
-bindsym $mod+Shift+Return exec --no-startup-id nemo;focus
+bindsym $mod+Shift+Return exec --no-startup-id nautilus;focus
 
 
 
@@ -317,9 +319,6 @@ gaps inner 10
 gaps outer 1
 #smart_gaps on
 #smart_borders on
-
-
-
 
 
 #####################################################################################################################
@@ -384,7 +383,7 @@ exec_always --no-startup-id nitrogen --restore
 #####################################################################################################################
 
 bar {
-   	height 25
+   	height 30
 	position top
     font pango:Roboto 10
 	status_command i3status

@@ -20,6 +20,5 @@ cmp.setup({
     { name = "vsnip" },
     { name = "emoji" },
     { name = "buffer" },
-    { name = "neorg" },
   },
 })

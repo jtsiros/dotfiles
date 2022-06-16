@@ -26,6 +26,10 @@
       if: '[ `uname` =  Linux ]'
       glob: true
       path: i3/*
+    ~/.config/i3status:
+      if: '[ `uname` =  Linux ]'
+      glob: true
+      path: i3status/*
     ~/.config/rofi:
       if: '[ `uname` =  Linux ]'
       glob: true

@@ -69,6 +69,15 @@ end
 time([[try_loadstring definition]], false)
 time([[Defining packer_plugins]], true)
 _G.packer_plugins = {
+  ["Comment.nvim"] = {
+    after_files = { "/home/jtsiros/.local/share/nvim/site/pack/packer/opt/Comment.nvim/after/plugin/Comment.lua" },
+    config = { "\27LJ\2\2;\0\0\2\0\3\0\0066\0\0\0'\1\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\18utils.comment\frequire\0" },
+    loaded = false,
+    needs_bufread = false,
+    only_cond = false,
+    path = "/home/jtsiros/.local/share/nvim/site/pack/packer/opt/Comment.nvim",
+    url = "https://github.com/numToStr/Comment.nvim"
+  },
   ["FixCursorHold.nvim"] = {
     loaded = true,
     path = "/home/jtsiros/.local/share/nvim/site/pack/packer/start/FixCursorHold.nvim",
@@ -204,11 +213,6 @@ _G.packer_plugins = {
     path = "/home/jtsiros/.local/share/nvim/site/pack/packer/start/nvim-ts-autotag",
     url = "https://github.com/windwp/nvim-ts-autotag"
   },
-  ["nvim-ts-context-commentstring"] = {
-    loaded = true,
-    path = "/home/jtsiros/.local/share/nvim/site/pack/packer/start/nvim-ts-context-commentstring",
-    url = "https://github.com/JoosepAlviste/nvim-ts-context-commentstring"
-  },
   ["nvim-web-devicons"] = {
     loaded = true,
     path = "/home/jtsiros/.local/share/nvim/site/pack/packer/start/nvim-web-devicons",
@@ -279,11 +283,6 @@ _G.packer_plugins = {
     path = "/home/jtsiros/.local/share/nvim/site/pack/packer/start/uwu.vim",
     url = "https://github.com/mangeshrex/uwu.vim"
   },
-  ["vim-commentary"] = {
-    loaded = true,
-    path = "/home/jtsiros/.local/share/nvim/site/pack/packer/start/vim-commentary",
-    url = "https://github.com/tpope/vim-commentary"
-  },
   ["vim-fugitive"] = {
     loaded = true,
     path = "/home/jtsiros/.local/share/nvim/site/pack/packer/start/vim-fugitive",
@@ -322,6 +321,13 @@ _G.packer_plugins = {
 }
 
 time([[Defining packer_plugins]], false)
+vim.cmd [[augroup packer_load_aucmds]]
+vim.cmd [[au!]]
+  -- Event lazy-loads
+time([[Defining lazy-load event autocommands]], true)
+vim.cmd [[au BufRead * ++once lua require("packer.load")({'Comment.nvim'}, { event = "BufRead *" }, _G.packer_plugins)]]
+time([[Defining lazy-load event autocommands]], false)
+vim.cmd("augroup END")
 if should_profile then save_profiles() end
 
 end)

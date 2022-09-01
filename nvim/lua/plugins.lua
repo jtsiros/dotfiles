@@ -6,7 +6,7 @@ require("packer").startup(function(use)
 	-- UI STUFF
 	-- =====================
 	-- Top buffer/tab line
-	use("akinsho/nvim-bufferline.lua")
+    use {'akinsho/bufferline.nvim', tag = "v2.*", requires = 'kyazdani42/nvim-web-devicons'}
 	-- Gruvbox theme
 	use("morhetz/gruvbox")
 	-- Dracula
@@ -29,7 +29,8 @@ require("packer").startup(function(use)
 	-- indent lines
 	use("lukas-reineke/indent-blankline.nvim")
 	-- statusline
-	use({ "famiu/feline.nvim", branch = "develop" })
+	-- use({ "famiu/feline.nvim", branch = "develop" })
+	use({ "famiu/feline.nvim" })
 
 	use("tpope/vim-scriptease")
 	-- symbols outline for viewing symbols in a tree like view

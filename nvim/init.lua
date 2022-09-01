@@ -1,5 +1,6 @@
 require("globals")
 require("general")
+require("plugins")
 require("mappings").load_defaults()
 require("statusline")
 

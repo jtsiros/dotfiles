@@ -1,8 +1,8 @@
 local lspconfig = require("lspconfig")
 local setup_auto_format = require("utils.lsp").setup_auto_format
 
-setup_auto_format("rs")
-setup_auto_format("go")
+-- setup_auto_format("rs")
+-- setup_auto_format("go")
 
 setup_auto_format("cpp")
 setup_auto_format("cc")
@@ -14,15 +14,48 @@ setup_auto_format("tsx")
 setup_auto_format("svelte")
 setup_auto_format("ts")
 setup_auto_format("py")
-setup_auto_format("lua", "lua require('stylua-nvim').format_file()")
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
+
+-- LSP Diagnostics Options Setup 
+local sign = function(opts)
+  vim.fn.sign_define(opts.name, {
+    texthl = opts.name,
+    text = opts.text,
+    numhl = ''
+  })
+end
+
+sign({name = 'DiagnosticSignError', text = ''})
+sign({name = 'DiagnosticSignWarn', text = ''})
+sign({name = 'DiagnosticSignHint', text = ''})
+sign({name = 'DiagnosticSignInfo', text = ''})
+
+vim.diagnostic.config({
+    virtual_text = false,
+    signs = true,
+    update_in_insert = true,
+    underline = true,
+    severity_sort = false,
+    float = {
+        border = 'rounded',
+        source = 'always',
+        header = '',
+        prefix = '',
+    },
+})
+
+vim.cmd([[
+set signcolumn=yes
+autocmd CursorHold * lua vim.diagnostic.open_float(nil, { focusable = false })
+]])
+
 -----------------------
--- Rust
+-- LSP installer setup
 -----------------------
-require("rust-tools").setup({})
+require("mason").setup()
 
 -----------------------
 -- gopls

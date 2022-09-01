@@ -56,19 +56,34 @@ require("packer").startup(function(use)
 	-- =====================
 	-- note/organization stuff
 	use("nvim-lua/plenary.nvim")
-	-- lsp stuff
+
+    -- =====================
+    -- LSP stuff
+    -- =====================
+    use('williamboman/mason.nvim')    
+    use('williamboman/mason-lspconfig.nvim')
 	use("neovim/nvim-lspconfig")
+    
+    -- Completion framework:
+    use('hrsh7th/nvim-cmp') 
 
-	-- completion plugin
-	use("hrsh7th/nvim-cmp")
-	use("hrsh7th/cmp-nvim-lsp")
-	use("hrsh7th/cmp-buffer")
-	use("hrsh7th/cmp-vsnip")
+    -- LSP completion source:
+    use('hrsh7th/cmp-nvim-lsp')
+
+    -- Useful completion sources:
+    use('hrsh7th/cmp-nvim-lua')
+    use('hrsh7th/cmp-nvim-lsp-signature-help')
+    use('hrsh7th/cmp-vsnip')                             
+    use('hrsh7th/cmp-path')                              
+    use('hrsh7th/cmp-buffer')                            
+    use('hrsh7th/vim-vsnip')     
 	use("hrsh7th/cmp-emoji")
+    --
+    -- =====================
+    -- Rust stuff
+    -- =====================
+    use('simrat39/rust-tools.nvim')
 
-	use("L3MON4D3/LuaSnip")
-
-	use("williamboman/nvim-lsp-installer")
 
 	-- tree-sitter
 	use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
@@ -76,9 +91,7 @@ require("packer").startup(function(use)
 	use("windwp/nvim-ts-autotag")
 	-- Lua dev
 	use("folke/lua-dev.nvim")
-	use("ckipp01/stylua-nvim")
-	-- snippets
-	use("hrsh7th/vim-vsnip")
+
 	-- Ranger
 	use({ "kevinhwang91/rnvimr", run = ":make sync" })
 	-- Comments
@@ -96,8 +109,6 @@ require("packer").startup(function(use)
 	-- idk
 	use("jose-elias-alvarez/null-ls.nvim")
 	use("jose-elias-alvarez/nvim-lsp-ts-utils")
-	-- rust
-	use("simrat39/rust-tools.nvim")
 
 	-- =====================
 	-- OTHERS

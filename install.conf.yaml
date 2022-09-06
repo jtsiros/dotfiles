@@ -16,6 +16,9 @@
     ~/.config/git:
       glob: true
       path: git/*
+    ~/.config/kitty:
+      glob: true
+      path: kitty/*
     ~/.config/nvim: nvim
     ~/.config/htop/htoprc: htop/htoprc
     ~/.local/bin:

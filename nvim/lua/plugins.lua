@@ -7,6 +7,10 @@ require("packer").startup(function(use)
 	-- =====================
 	-- Top buffer/tab line
     use {'akinsho/bufferline.nvim', tag = "v2.*", requires = 'kyazdani42/nvim-web-devicons'}
+    -- nightfox theme
+    use("nvim-lualine/lualine.nvim")
+    use("EdenEast/nightfox.nvim")
+    use("nanozuki/tabby.nvim")
 	-- Gruvbox theme
 	use("morhetz/gruvbox")
 	-- Dracula

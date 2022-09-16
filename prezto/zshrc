@@ -42,6 +42,10 @@ zplug "Peltoche/lsd"
 zplug "g-plane/zsh-yarn-autocompletions"
 zplug "romkatv/powerlevel10k", as:theme, depth:1
 
+autoload -Uz promptinit
+promptinit
+prompt skwp
+
 # Aliases
 alias untar='tar -zxvf' # Unpack .tar file
 alias wget='wget -c' # Download and resume

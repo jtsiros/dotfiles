@@ -21,7 +21,7 @@ require("config/github-colors")
 require("config/lsp-trouble")
 require("config/which-key")
 
-vim.cmd("colorscheme nightfox")
+vim.cmd("colorscheme gruvbox")
 require("config/tabby")
 require("statusline")
 

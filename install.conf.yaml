@@ -13,6 +13,7 @@
     ~/.zprofile: prezto/zprofile
     ~/.zshenv: prezto/zshenv
     ~/.config/alacritty/alacritty.yml: alacritty/alacritty.yml
+    ~/.config/lvim/config.lua: lvim/config.lua
     ~/.config/git:
       glob: true
       path: git/*

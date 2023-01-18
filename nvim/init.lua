@@ -1,35 +1,21 @@
-require("globals")
-require("general")
-require("plugins")
-require("mappings").load_defaults()
+local impatient_ok, impatient = pcall(require, "impatient")
+if impatient_ok then impatient.enable_profile() end
 
-require("config/bufferline")
-require("config/compe")
-require("config/dashboard-nvim")
-require("config/gitsigns")
-require("config/indent-blankline")
-require("config/rust-tools")
-require("config/lspconfig")
-require("config/nvim-autopairs")
-require("config/nvim-colorizer")
-require("config/nvim-tree")
-require("config/nvim-ts-autotag")
-require("config/symbols-outline")
-require("config/telescope")
-require("config/tree-sitter")
-require("config/github-colors")
-require("config/lsp-trouble")
-require("config/which-key")
+for _, source in ipairs {
+  "core.utils",
+  "core.options",
+  "core.bootstrap",
+  "core.diagnostics",
+  "core.autocmds",
+  "core.mappings",
+  "configs.which-key-register",
+} do
+  local status_ok, fault = pcall(require, source)
+  if not status_ok then vim.api.nvim_err_writeln("Failed to load " .. source .. "\n\n" .. fault) end
+end
 
-vim.cmd("colorscheme gruvbox")
-require("config/tabby")
-require("statusline")
+astronvim.conditional_func(astronvim.user_plugin_opts("polish", nil, false))
 
--- vim.cmd("highlight Normal guibg=none ctermbg=none")
--- vim.cmd("highlight NonText guibg=none ctermbg=none")
--- vim.cmd("highlight SignColumn guibg=none ctermbg=none")
--- vim.cmd("highlight CursorLineNR guibg=none ctermbg=none")
--- vim.cmd("highlight VertSplit guibg=none ctermbg=none")
--- vim.cmd("highlight NvimTreeNormal guibg=none ctermbg=none")
--- vim.cmd("highlight NvimTreeNormalNC guibg=none ctermbg=none")
--- vim.opt.guifont='FiraCodeNerdFont'
+if vim.fn.has "nvim-0.8" ~= 1 or vim.version().prerelease then
+  vim.schedule(function() astronvim.notify("Unsupported Neovim Version! Please check the requirements", "error") end)
+end

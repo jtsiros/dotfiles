@@ -1,0 +1,20 @@
+layout {
+    default_tab_template {
+        children
+        pane size=1 borderless=true {
+            plugin location="zellij:compact-bar"
+        }
+    }
+    tab name="scratchpad" {
+        pane split_direction="vertical" {
+            pane name="api-go" cwd="~/dev/code/scratchpad-api-go" 
+            pane split_direction="horizontal" {
+                pane name="api-ruby" cwd="~/dev/code/api-ruby"
+                pane name="spa" cwd="~/dev/code/spa"
+            }
+        }
+    }
+    tab name="term" cwd="~/dev/code" {
+        pane name="term"
+    }
+}

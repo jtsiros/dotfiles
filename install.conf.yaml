@@ -9,9 +9,11 @@
 - link:
     ~/.tmux.conf: tmux.conf
     ~/.zshrc: prezto/zshrc
-    ~/.zpreztorc: prezto/zpreztorc 
+    ~/.zpreztorc: prezto/zpreztorc
     ~/.zprofile: prezto/zprofile
     ~/.zshenv: prezto/zshenv
+    ~/.config/yabai/yabairc: yabai/yabairc
+    ~/.config/skhd/skhdrc: skhd/skhdrc
     ~/.config/alacritty/alacritty.yml: alacritty/alacritty.yml
     ~/.config/lvim/config.lua: lvim/config.lua
     ~/.config/git:

@@ -3,11 +3,13 @@
 -- Forum: https://www.reddit.com/r/lunarvim/
 -- Discord: https://discord.com/invite/Xb9B4Ny
 --
-lvim.colorscheme = "fleet"
+lvim.colorscheme = "oxocarbon"
 vim.opt.relativenumber = true
 lvim.format_on_save.enabled = true
 
 lvim.plugins = {
+  { "tpope/vim-surround" },
+  { "nyoom-engineering/oxocarbon.nvim" },
   {
     "felipeagc/fleet-theme-nvim",
     config = function() vim.cmd("colorscheme fleet") end,

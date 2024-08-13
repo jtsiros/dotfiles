@@ -1,46 +1,75 @@
 - defaults:
     link:
-      relink: true
-      create: true
       force: true
+      relink: true
 
-- clean: ['~']
+- shell:
+    - description: "Install Homebrew if not already installed"
+      command: |
+        if ! command -v brew &>/dev/null; then
+          /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+        fi
+
+    - description: "Download fzf-git.sh into ~/lib"
+      command: |
+        mkdir -p ~/lib
+        curl -o ~/lib/fzf-git.sh https://raw.githubusercontent.com/junegunn/fzf-git.sh/main/fzf-git.sh
+        chmod +x ~/lib/fzf-git.sh
+
+- brew:
+    taps:
+      - homebrew/core
+      - homebrew/cask
+      - homebrew/cask-fonts
+      - FelixKratz/formulae
+      - nikitabobko/tap
+      - railwaycat/emacsmacport
+
+    # Install command-line tools
+    brews:
+      - fzf
+      - fd
+      - bat
+      - git-delta
+      - exa
+      - tldr
+      - thefuck
+      - tmux
+      - neovim --HEAD
+      - aerospace
+      - sketchybar
+      - zsh-autosuggestions
+      - zsh-syntax-highlighting
+      - emacs-mac --with-modules
+      - font-sf-pro
+      - font-hack-nerd-font
+
+    # Install cask apps
+    casks:
+      - wezterm
+      - emacs
+      - nikitabobko/tap/aerospace
 
 - link:
     ~/.tmux.conf: tmux.conf
-    ~/.zshrc: prezto/zshrc
-    ~/.zpreztorc: prezto/zpreztorc
-    ~/.zprofile: prezto/zprofile
-    ~/.zshenv: prezto/zshenv
-    ~/.config/yabai/yabairc: yabai/yabairc
-    ~/.config/skhd/skhdrc: skhd/skhdrc
     ~/.config/alacritty/alacritty.yml: alacritty/alacritty.yml
-    ~/.config/lvim/config.lua: lvim/config.lua
-    ~/.config/git:
-      glob: true
-      path: git/*
-    ~/.config/kitty:
-      glob: true
-      path: kitty/*
+    ~/.config/git: git
+    ~/.config/aerospace: aerospace
+    ~/.config/sketchybar: sketchybar
     ~/.config/nvim: nvim
+    ~/.config/doom: doom
+    ~/.zshrc: zsh/zshrc
+    ~/.zprofile: zsh/zprofile
+    ~/.zshenv: zsh/zshenv
     ~/.config/htop/htoprc: htop/htoprc
-    ~/.local/bin:
-      if: '[ `uname` =  Linux ]'
-      glob: true
-      path: bin/linux/*
-    ~/.config/i3:
-      if: '[ `uname` =  Linux ]'
-      glob: true
-      path: i3/*
-    ~/.config/i3status:
-      if: '[ `uname` =  Linux ]'
-      glob: true
-      path: i3status/*
-    ~/.config/rofi:
-      if: '[ `uname` =  Linux ]'
-      glob: true
-      path: rofi/*
-    ~/.doom.d: doom
+    ~/.wezterm.lua: .wezterm.lua
 
 - shell:
-    - [git submodule update --init --recursive, Installing submodules]
+    - description: "Link Emacs Mac port to Applications"
+      command: |
+        ln -sf /usr/local/opt/emacs-mac/Emacs.app /Applications/Emacs.app
+
+    - description: "Install Doom Emacs"
+      command: |
+        git clone --depth 1 https://github.com/doomemacs/doomemacs ~/.config/emacs
+        ~/.config/emacs/bin/doom install

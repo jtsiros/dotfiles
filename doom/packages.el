@@ -54,3 +54,5 @@
 (package! clippy)
 (package! minimap)
 (package! monokai-pro-theme)
+(package! fleetish-theme)
+(package! rainbow-mode)

@@ -1,13 +1,21 @@
 ;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
 
+(set-frame-parameter (selected-frame) 'alpha '(75 . 75))
+(add-to-list 'default-frame-alist '(alpha . (75 . 75)))
+
 ;; Place your private configuration here! Remember, you do not need to run 'doom
 ;; sync' after modifying this file!
+(add-hook 'doom-after-init-hook (lambda () (tool-bar-mode 1) (tool-bar-mode 0)))
 
 
+(add-to-list 'load-path "~/.config/emacs/.local/")
+(add-to-list 'custom-theme-load-path (expand-file-name "~/.config/emacs/.themes/"))
+
+(require 'c3-mode)
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets. It is optional.
 (setq user-full-name "Jon Tsiros"
-       user-mail-address "jontsiros@scratchpad.com")
+       user-mail-address "jon@brightblock.ai")
 
 (setq display-line-numbers-type 'relative)
 (global-display-line-numbers-mode)
@@ -16,18 +24,15 @@
 ;; change `org-directory'. It must be set before org loads!
 (setq org-directory "~/org/")
 
-(add-to-list 'custom-theme-load-path
-  "/Users/jtsiros/dev/lib/gruber-darker-theme/")
-
 (setq lsp-modeline-diagnostics-scope :workspace)
 (after! lsp-mode
     (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]vendor$")
     (setq lsp-ui-sideline-enable nil)
     (setq lsp-signature-render-documentation nil))
 
-(setq doom-font (font-spec :family "JetBrains Mono" :size 16.0)
+(setq doom-font (font-spec :family "Iosevka Nerd Font" :size 16.0)
       doom-variable-pitch-font (font-spec :family "Ubuntu" :size 16.0)
-      doom-big-font (font-spec :family "JetBrains Mono" :size 22.0))
+      doom-big-font (font-spec :family "Iosevka Nerd Font" :size 22.0))
 
 (after! doom-themes
   (setq doom-themes-enable-bold t
@@ -39,7 +44,7 @@
 (setq imenu-list-focus-after-activation t)
 
 (set-face-attribute 'default nil
-  :font "JetBrains Mono"
+  :font "Iosevka Nerd Font"
   :height 110
   :weight 'medium)
 (set-face-attribute 'variable-pitch nil
@@ -47,12 +52,14 @@
   :height 120
   :weight 'medium)
 (set-face-attribute 'fixed-pitch nil
-  :font "JetBrains Mono"
+  :font "Iosevka Nerd Font"
   :height 110
   :weight 'medium)
-;;
+
 ;; open full screen
 (add-to-list 'initial-frame-alist '(fullscreen . maximized))
+;; (add-to-list 'default-frame-alist '(height . 120))
+;; (add-to-list 'default-frame-alist '(width . 240))
 
 (setq minimap-window-location 'right)
 (map! :leader
@@ -274,5 +281,5 @@
 
 
 ;; Load our desired dt/org-colors-* theme on startup
-(with-eval-after-load 'org-faces (jt/org-colors-monokai-pro))
-(setq doom-theme 'monokai-pro)
+;; (with-eval-after-load 'org-faces (jt/org-colors-monokai-pro))
+(setq doom-theme 'doom-tokyo-night)

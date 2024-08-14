@@ -42,15 +42,14 @@
     - zsh-autosuggestions
     - zsh-syntax-highlighting
     - emacs-mac --with-modules
-    - font-meslo-lg-nerd-font
-    - font-sf-pro
-    - font-hack-nerd-font
-
 # Install cask apps
 - cask:
     - wezterm
     - nikitabobko/tap/aerospace
     - sf-symbols
+    - font-meslo-lg-nerd-font
+    - font-sf-pro
+    - font-hack-nerd-font
 
 - link:
     ~/.tmux.conf: tmux.conf
@@ -75,6 +74,3 @@
       command: |
         git clone --depth 1 https://github.com/doomemacs/doomemacs ~/.config/emacs
         ~/.config/emacs/bin/doom install
-
-- shell:
-    - [git submodule update --init --recursive, Installing submodules]

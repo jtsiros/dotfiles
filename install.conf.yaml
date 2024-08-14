@@ -54,7 +54,7 @@
 
 - link:
     ~/.tmux.conf: tmux.conf
-    ~/.config/alacritty/alacritty.yml: alacritty/alacritty.yml
+    ~/.config/alacritty/alacritty.toml: alacritty/alacritty.toml
     ~/.config/git: git
     ~/.config/aerospace: aerospace
     ~/.config/sketchybar: sketchybar

@@ -50,6 +50,7 @@
 - cask:
     - wezterm
     - nikitabobko/tap/aerospace
+    - sf-symbols
 
 - link:
     ~/.tmux.conf: tmux.conf

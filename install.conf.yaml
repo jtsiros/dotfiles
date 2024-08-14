@@ -16,6 +16,10 @@
         curl -o ~/lib/fzf-git.sh https://raw.githubusercontent.com/junegunn/fzf-git.sh/main/fzf-git.sh
         chmod +x ~/lib/fzf-git.sh
 
+    - description: "Install icons for Sketchybar"
+      command: |
+        curl -L https://github.com/kvndrsslr/sketchybar-app-font/releases/download/v1.0.16/sketchybar-app-font.ttf -o $HOME/Library/Fonts/sketchybar-app-font.ttf
+
 - tap:
     - FelixKratz/formulae
     - nikitabobko/tap

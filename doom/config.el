@@ -2,7 +2,7 @@
 
 (set-frame-parameter (selected-frame) 'alpha '(75 . 75))
 (add-to-list 'default-frame-alist '(alpha . (75 . 75)))
-
+;;
 ;; Place your private configuration here! Remember, you do not need to run 'doom
 ;; sync' after modifying this file!
 (add-hook 'doom-after-init-hook (lambda () (tool-bar-mode 1) (tool-bar-mode 0)))

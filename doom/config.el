@@ -6,12 +6,8 @@
 ;; Place your private configuration here! Remember, you do not need to run 'doom
 ;; sync' after modifying this file!
 (add-hook 'doom-after-init-hook (lambda () (tool-bar-mode 1) (tool-bar-mode 0)))
-
-
-(add-to-list 'load-path "~/.config/emacs/.local/")
 (add-to-list 'custom-theme-load-path (expand-file-name "~/.config/emacs/.themes/"))
 
-(require 'c3-mode)
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets. It is optional.
 (setq user-full-name "Jon Tsiros"

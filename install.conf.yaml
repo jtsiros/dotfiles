@@ -16,39 +16,36 @@
         curl -o ~/lib/fzf-git.sh https://raw.githubusercontent.com/junegunn/fzf-git.sh/main/fzf-git.sh
         chmod +x ~/lib/fzf-git.sh
 
+- tap:
+    - FelixKratz/formulae
+    - nikitabobko/tap
+    - railwaycat/emacsmacport
+
+# Install command-line tools
 - brew:
-    taps:
-      - homebrew/core
-      - homebrew/cask
-      - homebrew/cask-fonts
-      - FelixKratz/formulae
-      - nikitabobko/tap
-      - railwaycat/emacsmacport
+    - fzf
+    - fd
+    - bat
+    - git-delta
+    - eza
+    - tldr
+    - thefuck
+    - tmux
+    - tree-sitter
+    - neovim
+    - aerospace
+    - sketchybar
+    - zsh-autosuggestions
+    - zsh-syntax-highlighting
+    - emacs-mac --with-modules
+    - font-meslo-lg-nerd-font
+    - font-sf-pro
+    - font-hack-nerd-font
 
-    # Install command-line tools
-    brews:
-      - fzf
-      - fd
-      - bat
-      - git-delta
-      - exa
-      - tldr
-      - thefuck
-      - tmux
-      - neovim --HEAD
-      - aerospace
-      - sketchybar
-      - zsh-autosuggestions
-      - zsh-syntax-highlighting
-      - emacs-mac --with-modules
-      - font-sf-pro
-      - font-hack-nerd-font
-
-    # Install cask apps
-    casks:
-      - wezterm
-      - emacs
-      - nikitabobko/tap/aerospace
+# Install cask apps
+- cask:
+    - wezterm
+    - nikitabobko/tap/aerospace
 
 - link:
     ~/.tmux.conf: tmux.conf
@@ -73,3 +70,6 @@
       command: |
         git clone --depth 1 https://github.com/doomemacs/doomemacs ~/.config/emacs
         ~/.config/emacs/bin/doom install
+
+- shell:
+    - [git submodule update --init --recursive, Installing submodules]

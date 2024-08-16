@@ -42,6 +42,9 @@
     - zsh-autosuggestions
     - zsh-syntax-highlighting
     - emacs-mac --with-modules
+    - switchaudio-osx
+    - nowplaying-cli
+
 # Install cask apps
 - cask:
     - wezterm

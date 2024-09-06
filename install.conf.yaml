@@ -58,6 +58,7 @@
     - font-hack-nerd-font
 
 - link:
+    ~/.editorconfig: editorconfig
     ~/.tmux.conf: tmux.conf
     ~/.config/alacritty: alacritty
     ~/dev/odin/ols.json: odin/ols.json

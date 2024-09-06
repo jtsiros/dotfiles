@@ -1,17 +1,24 @@
 ;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
 
-(set-frame-parameter (selected-frame) 'alpha '(75 . 75))
-(add-to-list 'default-frame-alist '(alpha . (75 . 75)))
+(set-frame-parameter (selected-frame) 'alpha '(95 . 95))
+(add-to-list 'default-frame-alist '(alpha . (95 . 95)))
 ;;
 ;; Place your private configuration here! Remember, you do not need to run 'doom
 ;; sync' after modifying this file!
 (add-hook 'doom-after-init-hook (lambda () (tool-bar-mode 1) (tool-bar-mode 0)))
 (add-to-list 'custom-theme-load-path (expand-file-name "~/.config/emacs/.themes/"))
 
+(use-package! odin-mode :mode "\\.odin\\'" :config)
+
+;; formatters
+(after! json-mode
+  (set-formatter! 'jq "jq ." :modes '(json-mode))
+  (add-hook 'json-mode-hook #'format-all-mode))
+
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets. It is optional.
 (setq user-full-name "Jon Tsiros"
-       user-mail-address "jon@brightblock.ai")
+      user-mail-address "jon@brightblock.ai")
 
 (setq display-line-numbers-type 'relative)
 (global-display-line-numbers-mode)
@@ -22,13 +29,13 @@
 
 (setq lsp-modeline-diagnostics-scope :workspace)
 (after! lsp-mode
-    (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]vendor$")
-    (setq lsp-ui-sideline-enable nil)
-    (setq lsp-signature-render-documentation nil))
+  (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]vendor$")
+  (setq lsp-ui-sideline-enable nil)
+  (setq lsp-signature-render-documentation nil))
 
-(setq doom-font (font-spec :family "Iosevka Nerd Font" :size 16.0)
+(setq doom-font (font-spec :family "MesloLGS Nerd Font Mono" :size 18.0)
       doom-variable-pitch-font (font-spec :family "Ubuntu" :size 16.0)
-      doom-big-font (font-spec :family "Iosevka Nerd Font" :size 22.0))
+      doom-big-font (font-spec :family "MesloLGS Nerd Font Mono" :size 22.0))
 
 (after! doom-themes
   (setq doom-themes-enable-bold t
@@ -40,20 +47,20 @@
 (setq imenu-list-focus-after-activation t)
 
 (set-face-attribute 'default nil
-  :font "Iosevka Nerd Font"
-  :height 110
-  :weight 'medium)
+                    :font "Iosevka Nerd Font"
+                    :height 110
+                    :weight 'medium)
 (set-face-attribute 'variable-pitch nil
-  :font "Ubuntu"
-  :height 120
-  :weight 'medium)
+                    :font "Ubuntu"
+                    :height 120
+                    :weight 'medium)
 (set-face-attribute 'fixed-pitch nil
-  :font "Iosevka Nerd Font"
-  :height 110
-  :weight 'medium)
+                    :font "Iosevka Nerd Font"
+                    :height 110
+                    :weight 'medium)
 
 ;; open full screen
-(add-to-list 'initial-frame-alist '(fullscreen . maximized))
+;; (add-to-list 'initial-frame-alist '(fullscreen . maximized))
 ;; (add-to-list 'default-frame-alist '(height . 120))
 ;; (add-to-list 'default-frame-alist '(width . 240))
 
@@ -87,32 +94,32 @@
         ;; ex. of org-link-abbrev-alist in action
         ;; [[arch-wiki:Name_of_Page][Description]]
         org-link-abbrev-alist    ; This overwrites the default Doom org-link-abbrev-list
-          '(("ddg" . "https://duckduckgo.com/?q=")
-            ("wiki" . "https://en.wikipedia.org/wiki/"))
+        '(("ddg" . "https://duckduckgo.com/?q=")
+          ("wiki" . "https://en.wikipedia.org/wiki/"))
         org-table-convert-region-max-lines 20000
         org-todo-keywords        ; This overwrites the default Doom org-todo-keywords
-          '((sequence
-             "TODO(t)"           ; A task that is ready to be tackled
-             "BLOG(b)"           ; Blog writing assignments
-             "DEV(d)"            ; Things to accomplish in the dev space
-             "PROJ(p)"           ; A project that contains other tasks
-             "WAIT(w)"           ; Something is holding up this task
-             "|"                 ; The pipe necessary to separate "active" states and "inactive" states
-             "DONE(d)"           ; Task has been completed
-             "CANCELLED(c)" )))) ; Task has been cancelled
+        '((sequence
+           "TODO(t)"           ; A task that is ready to be tackled
+           "BLOG(b)"           ; Blog writing assignments
+           "DEV(d)"            ; Things to accomplish in the dev space
+           "PROJ(p)"           ; A project that contains other tasks
+           "WAIT(w)"           ; Something is holding up this task
+           "|"                 ; The pipe necessary to separate "active" states and "inactive" states
+           "DONE(d)"           ; Task has been completed
+           "CANCELLED(c)" )))) ; Task has been cancelled
 
 (after! org
   (setq org-agenda-files '("~/org/agenda.org")))
 
 (setq
-   ;; org-fancy-priorities-list '("[A]" "[B]" "[C]")
-   ;; org-fancy-priorities-list '("❗" "[B]" "[C]")
-   org-fancy-priorities-list '("🟥" "🟧" "🟨")
-   org-priority-faces
-   '((?A :foreground "#ff6c6b" :weight bold)
-     (?B :foreground "#98be65" :weight bold)
-     (?C :foreground "#c678dd" :weight bold))
-   org-agenda-block-separator 8411)
+ ;; org-fancy-priorities-list '("[A]" "[B]" "[C]")
+ ;; org-fancy-priorities-list '("❗" "[B]" "[C]")
+ org-fancy-priorities-list '("🟥" "🟧" "🟨")
+ org-priority-faces
+ '((?A :foreground "#ff6c6b" :weight bold)
+   (?B :foreground "#98be65" :weight bold)
+   (?C :foreground "#c678dd" :weight bold))
+ org-agenda-block-separator 8411)
 
 ;; colors for org mode
 (defun jt/org-colors-doom-one ()
@@ -129,7 +136,7 @@
          (org-level-7 1.1 "#46d9ff" normal)
          (org-level-8 1.0 "#ff6c6b" normal)))
     (set-face-attribute (nth 0 face) nil :font doom-variable-pitch-font :weight (nth 3 face) :height (nth 1 face) :foreground (nth 2 face)))
-    (set-face-attribute 'org-table nil :font doom-font :weight 'normal :height 1.0 :foreground "#bfafdf"))
+  (set-face-attribute 'org-table nil :font doom-font :weight 'normal :height 1.0 :foreground "#bfafdf"))
 
 (defun jt/org-colors-dracula ()
   "Enable Dracula colors for Org headers."
@@ -145,7 +152,7 @@
          (org-level-7 1.1 "#5af78e" normal)
          (org-level-8 1.0 "#ff92d0" normal)))
     (set-face-attribute (nth 0 face) nil :font doom-variable-pitch-font :weight (nth 3 face) :height (nth 1 face) :foreground (nth 2 face)))
-    (set-face-attribute 'org-table nil :font doom-font :weight 'normal :height 1.0 :foreground "#bfafdf"))
+  (set-face-attribute 'org-table nil :font doom-font :weight 'normal :height 1.0 :foreground "#bfafdf"))
 
 (defun jt/org-colors-gruvbox-dark ()
   "Enable Gruvbox Dark colors for Org headers."
@@ -161,7 +168,7 @@
          (org-level-7 1.1 "#d79921" normal)
          (org-level-8 1.0 "#8ec07c" normal)))
     (set-face-attribute (nth 0 face) nil :font doom-variable-pitch-font :weight (nth 3 face) :height (nth 1 face) :foreground (nth 2 face)))
-    (set-face-attribute 'org-table nil :font doom-font :weight 'normal :height 1.0 :foreground "#bfafdf"))
+  (set-face-attribute 'org-table nil :font doom-font :weight 'normal :height 1.0 :foreground "#bfafdf"))
 
 (defun jt/org-colors-monokai-pro ()
   "Enable Monokai Pro colors for Org headers."
@@ -177,7 +184,7 @@
          (org-level-7 1.1 "#78dce8" normal)
          (org-level-8 1.0 "#ab9df2" normal)))
     (set-face-attribute (nth 0 face) nil :font doom-variable-pitch-font :weight (nth 3 face) :height (nth 1 face) :foreground (nth 2 face)))
-    (set-face-attribute 'org-table nil :font doom-font :weight 'normal :height 1.0 :foreground "#bfafdf"))
+  (set-face-attribute 'org-table nil :font doom-font :weight 'normal :height 1.0 :foreground "#bfafdf"))
 
 (defun jt/org-colors-nord ()
   "Enable Nord colors for Org headers."
@@ -193,7 +200,7 @@
          (org-level-7 1.1 "#81a1c1" normal)
          (org-level-8 1.0 "#b48ead" normal)))
     (set-face-attribute (nth 0 face) nil :font doom-variable-pitch-font :weight (nth 3 face) :height (nth 1 face) :foreground (nth 2 face)))
-    (set-face-attribute 'org-table nil :font doom-font :weight 'normal :height 1.0 :foreground "#bfafdf"))
+  (set-face-attribute 'org-table nil :font doom-font :weight 'normal :height 1.0 :foreground "#bfafdf"))
 
 (defun jt/org-colors-oceanic-next ()
   "Enable Oceanic Next colors for Org headers."
@@ -209,7 +216,7 @@
          (org-level-7 1.1 "#6699cc" normal)
          (org-level-8 1.0 "#c594c5" normal)))
     (set-face-attribute (nth 0 face) nil :font doom-variable-pitch-font :weight (nth 3 face) :height (nth 1 face) :foreground (nth 2 face)))
-    (set-face-attribute 'org-table nil :font doom-font :weight 'normal :height 1.0 :foreground "#bfafdf"))
+  (set-face-attribute 'org-table nil :font doom-font :weight 'normal :height 1.0 :foreground "#bfafdf"))
 
 (defun jt/org-colors-palenight ()
   "Enable Palenight colors for Org headers."
@@ -225,7 +232,7 @@
          (org-level-7 1.1 "#f07178" normal)
          (org-level-8 1.0 "#ddffa7" normal)))
     (set-face-attribute (nth 0 face) nil :font doom-variable-pitch-font :weight (nth 3 face) :height (nth 1 face) :foreground (nth 2 face)))
-    (set-face-attribute 'org-table nil :font doom-font :weight 'normal :height 1.0 :foreground "#bfafdf"))
+  (set-face-attribute 'org-table nil :font doom-font :weight 'normal :height 1.0 :foreground "#bfafdf"))
 
 (defun jt/org-colors-solarized-dark ()
   "Enable Solarized Dark colors for Org headers."
@@ -241,7 +248,7 @@
          (org-level-7 1.1 "#2aa198" normal)
          (org-level-8 1.0 "#657b83" normal)))
     (set-face-attribute (nth 0 face) nil :font doom-variable-pitch-font :weight (nth 3 face) :height (nth 1 face) :foreground (nth 2 face)))
-    (set-face-attribute 'org-table nil :font doom-font :weight 'normal :height 1.0 :foreground "#bfafdf"))
+  (set-face-attribute 'org-table nil :font doom-font :weight 'normal :height 1.0 :foreground "#bfafdf"))
 
 (defun jt/org-colors-solarized-light ()
   "Enable Solarized Light colors for Org headers."
@@ -257,7 +264,7 @@
          (org-level-7 1.1 "#2aa198" normal)
          (org-level-8 1.0 "#657b83" normal)))
     (set-face-attribute (nth 0 face) nil :font doom-variable-pitch-font :weight (nth 3 face) :height (nth 1 face) :foreground (nth 2 face)))
-    (set-face-attribute 'org-table nil :font doom-font :weight 'normal :height 1.0 :foreground "#bfafdf"))
+  (set-face-attribute 'org-table nil :font doom-font :weight 'normal :height 1.0 :foreground "#bfafdf"))
 
 (defun jt/org-colors-tomorrow-night ()
   "Enable Tomorrow Night colors for Org headers."
@@ -273,9 +280,28 @@
          (org-level-7 1.1 "#b77ee0" normal)
          (org-level-8 1.0 "#9ec400" normal)))
     (set-face-attribute (nth 0 face) nil :font doom-variable-pitch-font :weight (nth 3 face) :height (nth 1 face) :foreground (nth 2 face)))
-    (set-face-attribute 'org-table nil :font doom-font :weight 'normal :height 1.0 :foreground "#bfafdf"))
+  (set-face-attribute 'org-table nil :font doom-font :weight 'normal :height 1.0 :foreground "#bfafdf"))
 
 
 ;; Load our desired dt/org-colors-* theme on startup
 ;; (with-eval-after-load 'org-faces (jt/org-colors-monokai-pro))
 (setq doom-theme 'doom-tokyo-night)
+
+
+;; Odin language config
+(use-package! odin-mode
+  :mode ("\\.odin\\'" . odin-mode)
+  :hook (odin-mode . lsp))
+
+;; Set up OLS as the language server for Odin, ensuring lsp-mode is loaded first
+(with-eval-after-load 'lsp-mode
+  (setq-default lsp-auto-guess-root t) ;; Helps find the ols.json file with Projectile or project.el
+  (setq lsp-language-id-configuration (cons '(odin-mode . "odin") lsp-language-id-configuration))
+
+  (lsp-register-client
+   (make-lsp-client :new-connection (lsp-stdio-connection "/Users/jtsiros/dev/lib/ols/ols")
+                    :major-modes '(odin-mode)
+                    :server-id 'ols
+                    :multi-root t))) ;; Ensures lsp-mode sends "workspaceFolders" to the server
+
+(add-hook 'odin-mode-hook #'lsp)

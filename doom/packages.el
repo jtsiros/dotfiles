@@ -56,3 +56,6 @@
 (package! monokai-pro-theme)
 (package! fleetish-theme)
 (package! rainbow-mode)
+(package! format-all)
+(package! odin-mode
+  :recipe (:host github :repo "mrjcraft/odin-mode"))

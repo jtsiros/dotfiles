@@ -285,7 +285,7 @@
 
 ;; Load our desired dt/org-colors-* theme on startup
 ;; (with-eval-after-load 'org-faces (jt/org-colors-monokai-pro))
-(setq doom-theme 'doom-tokyo-night)
+(setq doom-theme 'doom-dracula)
 
 
 ;; Odin language config

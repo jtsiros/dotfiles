@@ -153,3 +153,4 @@ eval $(thefuck --alias)
 eval $(thefuck --alias fk)
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+export PATH="/opt/homebrew/opt/libpq/bin:$PATH"

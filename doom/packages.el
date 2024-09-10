@@ -58,4 +58,4 @@
 (package! rainbow-mode)
 (package! format-all)
 (package! odin-mode
-  :recipe (:host github :repo "mrjcraft/odin-mode"))
+  :recipe (:host github :repo "mattt-b/odin-mode"))

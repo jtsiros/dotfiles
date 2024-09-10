@@ -1,7 +1,8 @@
 - defaults:
     link:
-      force: true
-      relink: true
+      create: true # Create target directories if they don't exist
+      force: true # Overwrite existing files with symlinks
+      relink: true # Relink existing symlinks if they already exist     force: true
 
 - shell:
     - description: "Install Homebrew if not already installed"
@@ -42,6 +43,7 @@
     - thefuck
     - tmux
     - tree-sitter
+    - sublime-text
     - neovim
     - aerospace
     - sketchybar
@@ -61,6 +63,9 @@
     ~/.editorconfig: editorconfig
     ~/.tmux.conf: tmux.conf
     ~/.config/alacritty: alacritty
+    ~/Library/Application Support/Sublime Text/Packages/User/:
+      path: sublime/*
+      glob: "*"
     ~/dev/odin/ols.json: odin/ols.json
     ~/.config/git: git
     ~/.config/aerospace: aerospace

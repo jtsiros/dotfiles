@@ -10,11 +10,6 @@
         if ! command -v brew &>/dev/null; then
           /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
         fi
-    - description: "Setup and install OLS language server for Odin"
-      command: |
-        mkdir -p ~/dev/lib
-        mkdir -p ~/dev/odin
-        [ ! -d "/Users/jtsiros/dev/lib/ols" ] && git clone git@github.com:DanielGavin/ols.git ~/dev/lib/ols
 
     - description: "Download fzf-git.sh into ~/lib"
       command: |
@@ -46,7 +41,6 @@
     - sublime-text
     - neovim
     - aerospace
-    - sketchybar
     - zsh-autosuggestions
     - zsh-syntax-highlighting
     - emacs-mac --with-modules
@@ -63,6 +57,7 @@
     ~/.editorconfig: editorconfig
     ~/.tmux.conf: tmux.conf
     ~/.config/alacritty: alacritty
+    ~/.config/zed/settings.json: zed/settings.json
     ~/Library/Application Support/Sublime Text/Packages/User/:
       path: sublime/*
       glob: "*"

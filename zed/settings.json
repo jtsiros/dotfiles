@@ -7,13 +7,21 @@
 // custom settings, run the `open default settings` command
 // from the command palette or from `Zed` application menu.
 {
+  "assistant": {
+    "default_model": {
+      "provider": "copilot_chat",
+      "model": "gpt-4o"
+    },
+    "version": "2"
+  },
   "project_panel": {
     "dock": "right"
   },
-  "theme": "Fleet Dark",
-  "base_keymap": "SublimeText",
+  "theme": "Catppuccin Macchiato",
+  "base_keymap": "VSCode",
   "telemetry": {
-    "metrics": false
+    "metrics": false,
+    "diagnostics": false
   },
   "vim_mode": true,
   "terminal": {
@@ -22,5 +30,7 @@
   "buffer_font_family": "MesloLGL Nerd Font Mono",
   "buffer_font_size": 14,
   "relative_line_numbers": true,
-  "preferred_line_length": 80
+  "preferred_line_length": 80,
+  "show_completions_on_input": false,
+  "show_inline_completions": false
 }

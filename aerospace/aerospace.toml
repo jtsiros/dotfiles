@@ -169,18 +169,86 @@ alt-shift-j = ['join-with down', 'mode main']
 alt-shift-k = ['join-with up', 'mode main']
 alt-shift-l = ['join-with right', 'mode main']
 
-[[on-window-detected]]
-if.app-id = 'com.github.wez.wezterm'
-run = "move-node-to-workspace T"
+[workspace-to-monitor-force-assignment]
+D = 'secondary'
+P = 'main'
+B = 'main'
+T = 'main'
+S = 'secondary'
+M = 'main'
 
-[[on-window-detected]]
-if.app-id = 'org.alacritty'
-run = "move-node-to-workspace T"
+## Productivity
 
 [[on-window-detected]]
 if.app-id = 'com.tinyspeck.slackmacgap'
 run = "move-node-to-workspace S"
 
 [[on-window-detected]]
+if.app-id = 'com.todesktop.210203cqcj00tw1'
+run = "move-node-to-workspace P"
+
+[[on-window-detected]]
+if.app-id = 'notion.id'
+run = "move-node-to-workspace P"
+
+[[on-window-detected]]
+if.app-id = 'com.linear'
+run = "move-node-to-workspace P"
+
+[[on-window-detected]]
+if.app-id = 'md.obsidian'
+run = 'move-node-to-workspace P'
+
+## Browsers
+
+[[on-window-detected]]
+if.app-id = 'com.apple.Safari'
+run = 'move-node-to-workspace B'
+
+[[on-window-detected]]
+if.app-id = 'com.google.Chrome'
+run = 'move-node-to-workspace B'
+
+[[on-window-detected]]
+if.app-id = 'com.mozilla.firefox'
+run = 'move-node-to-workspace B'
+
+[[on-window-detected]]
 if.app-id = 'company.thebrowser.Browser'
 run = "move-node-to-workspace B"
+
+## Development 
+
+[[on-window-detected]]
+if.app-id = 'io.beekeeperstudio.desktop'
+run = "move-node-to-workspace D"
+
+[[on-window-detected]]
+if.app-id = 'org.alacritty'
+run = "move-node-to-workspace T"
+
+[[on-window-detected]]
+if.app-id = 'com.microsoft.VSCode'
+run = 'move-node-to-workspace E'
+
+[[on-window-detected]]
+if.app-id = 'dev.zed.Zed'
+run = 'move-node-to-workspace E'
+
+
+[[on-window-detected]]
+if.app-id = 'com.zoom.*'
+run = "layout floating"
+
+[[on-window-detected]]
+if.app-id = 'com.1password.1password'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-id = 'com.apple.FaceTime'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-id = 'com.apple.ScreenContinuity'
+run = 'layout floating'
+

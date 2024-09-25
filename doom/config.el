@@ -33,7 +33,7 @@
   (setq lsp-ui-sideline-enable nil)
   (setq lsp-signature-render-documentation nil))
 
-(setq doom-font (font-spec :family "MesloLGS Nerd Font Mono" :size 18.0)
+(setq doom-font (font-spec :family "MesloLGS Nerd Font Mono" :size 16.0)
       doom-variable-pitch-font (font-spec :family "Ubuntu" :size 16.0)
       doom-big-font (font-spec :family "MesloLGS Nerd Font Mono" :size 22.0))
 
@@ -285,7 +285,7 @@
 
 ;; Load our desired dt/org-colors-* theme on startup
 ;; (with-eval-after-load 'org-faces (jt/org-colors-monokai-pro))
-(setq doom-theme 'doom-dracula)
+(setq doom-theme 'doom-homage-black)
 
 
 ;; Odin language config

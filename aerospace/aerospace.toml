@@ -175,7 +175,7 @@ P = 'main'
 B = 'main'
 T = 'main'
 S = 'secondary'
-M = 'main'
+M = 'secondary'
 
 ## Productivity
 

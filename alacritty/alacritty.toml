@@ -7,10 +7,10 @@ TERM = "xterm-256color"
 padding.x = 12
 padding.y = 12
 
-decorations = "Buttonless"
+# decorations = "Buttonless"
 
 # opacity = 0.75
-#blur = true
+# blur = true
 
 option_as_alt = "Both"
 
@@ -18,4 +18,4 @@ option_as_alt = "Both"
 normal.family = "MesloLGS Nerd Font Mono"
 
 #regular
-size = 14
+size = 16

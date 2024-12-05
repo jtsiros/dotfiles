@@ -1,7 +1,7 @@
 ;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
 
-(set-frame-parameter (selected-frame) 'alpha '(95 . 95))
-(add-to-list 'default-frame-alist '(alpha . (95 . 95)))
+;; (set-frame-parameter (selected-frame) 'alpha '(95 . 95))
+;; (add-to-list 'default-frame-alist '(alpha . (95 . 95)))
 ;;
 ;; Place your private configuration here! Remember, you do not need to run 'doom
 ;; sync' after modifying this file!
@@ -33,9 +33,9 @@
   (setq lsp-ui-sideline-enable nil)
   (setq lsp-signature-render-documentation nil))
 
-(setq doom-font (font-spec :family "MesloLGS Nerd Font Mono" :size 18.0)
+(setq doom-font (font-spec :family "JetBrainsMono Nerd Font Mono" :size 16.0)
       doom-variable-pitch-font (font-spec :family "Ubuntu" :size 16.0)
-      doom-big-font (font-spec :family "MesloLGS Nerd Font Mono" :size 22.0))
+      doom-big-font (font-spec :family "JetBrainsMono Nerd Font Mono" :size 22.0))
 
 (after! doom-themes
   (setq doom-themes-enable-bold t
@@ -285,8 +285,11 @@
 
 ;; Load our desired dt/org-colors-* theme on startup
 ;; (with-eval-after-load 'org-faces (jt/org-colors-monokai-pro))
-(setq doom-theme 'doom-dracula)
+(setq doom-theme 'almost-mono-cream)
 
+;; disable lsp auto complete. This should still work with the keyboard shortcut
+(after! company
+  (setq company-idle-delay nil))  ;; Disable automatic popups
 
 ;; Odin language config
 (use-package! odin-mode

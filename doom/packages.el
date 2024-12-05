@@ -57,6 +57,7 @@
 (package! fleetish-theme)
 (package! rainbow-mode)
 (package! format-all)
+(package! gruber-darker-theme)
 (package! almost-mono-themes)
 (package! odin-mode
   :recipe (:host github :repo "mattt-b/odin-mode"))

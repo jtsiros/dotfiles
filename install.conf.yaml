@@ -41,7 +41,7 @@
     - emacs-mac --with-modules
 # Install cask apps
 - cask:
-    - wezterm
+    - ghostty
     - sf-symbols
     - font-meslo-lg-nerd-font
     - font-sf-pro
@@ -50,7 +50,6 @@
 - link:
     ~/.editorconfig: editorconfig
     ~/.tmux.conf: tmux.conf
-    ~/.config/alacritty: alacritty
     ~/.config/karabiner:
       path: karabiner/*
       glob: "*"
@@ -68,7 +67,6 @@
     ~/.zprofile: zsh/zprofile
     ~/.zshenv: zsh/zshenv
     ~/.config/htop/htoprc: htop/htoprc
-    ~/.wezterm.lua: wezterm/wezterm.lua
 
 - shell:
     - description: "Link Emacs Mac port to Applications"

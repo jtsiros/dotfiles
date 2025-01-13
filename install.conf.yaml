@@ -40,14 +40,12 @@
     - tree-sitter
     - sublime-text
     - neovim
-    - aerospace
     - zsh-autosuggestions
     - zsh-syntax-highlighting
     - emacs-mac --with-modules
 # Install cask apps
 - cask:
     - wezterm
-    - nikitabobko/tap/aerospace
     - sf-symbols
     - font-meslo-lg-nerd-font
     - font-sf-pro
@@ -71,7 +69,7 @@
     ~/.zprofile: zsh/zprofile
     ~/.zshenv: zsh/zshenv
     ~/.config/htop/htoprc: htop/htoprc
-    ~/.wezterm.lua: .wezterm.lua
+    ~/.wezterm.lua: wezterm/wezterm.lua
 
 - shell:
     - description: "Link Emacs Mac port to Applications"

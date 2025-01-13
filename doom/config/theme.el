@@ -18,7 +18,7 @@
   (add-to-list 'default-frame-alist '(ns-appearance . light)))
 
 
-(setq doom-theme 'almost-mono-gray)
+(setq doom-theme 'doom-challenger-deep)
 
 ;; Toggle themes
 (defvar my-light-theme 'almost-mono-cream)

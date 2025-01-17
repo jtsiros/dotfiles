@@ -36,6 +36,7 @@
     - tree-sitter
     - sublime-text
     - neovim
+    - helix
     - zsh-autosuggestions
     - zsh-syntax-highlighting
     - emacs-mac --with-modules
@@ -50,9 +51,7 @@
 - link:
     ~/.editorconfig: editorconfig
     ~/.tmux.conf: tmux.conf
-    ~/.config/karabiner:
-      path: karabiner/*
-      glob: "*"
+    ~/.config/helix: helix
     ~/.config/zed/settings.json: zed/settings.json
     ~/Library/Application Support/Sublime Text/Packages/User/:
       path: sublime/*

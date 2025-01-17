@@ -25,3 +25,6 @@
       doom-themes-enable-italic t) ;; If nil, italics are universally disabled
 
 (setq-default line-spacing 0.12)
+
+(after! doom-modeline
+  (setq doom-modeline-enable-which-func nil))  ; Disable `which-function-mode` in the modeline

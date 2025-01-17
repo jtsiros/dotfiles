@@ -19,13 +19,13 @@ fi
 # Editors
 #
 
-export EDITOR='emacsclient -nw'
-export VISUAL='emacsclient -nw'
+export EDITOR='hx'
+export VISUAL='zed'
 export PAGER='less'
 
 if [[ "$OSTYPE" = linux* ]]; then
-   export EDITOR='emacsclient -nw'
-   export VISUAL='emacsclient -nw'
+   export EDITOR='hx'
+   export VISUAL='zed'
 fi
 
 #

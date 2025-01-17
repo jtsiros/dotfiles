@@ -1,0 +1,82 @@
+# Author: zSnails <erizojuan33@gmail.com>
+
+# UI Configuration
+"ui.background" = { bg = "background" }
+"ui.selection" = { fg = "foreground", bg = "gray" }
+"ui.text" = { fg = "foreground" }
+"ui.cursor" = { fg = "background", bg = "red", modifiers = ["bold"] }
+"ui.menu.selected" = { fg = "black", bg = "gray" }
+"ui.linenr" = { fg = "gray", bg = "background" }
+"ui.popup" = { bg = "background" }
+"ui.statusline" = { fg = "foreground", bg = "black" }
+"ui.statusline.inactive" = { fg = "gray", bg = "black" }
+
+# Syntax Highlighting
+"operator" = { fg = "dark-cyan" }
+"special" = { fg = "blue" }
+"variable" = { fg = "foreground" }
+"variable.builtin" = { fg = "blue" }
+"variable.parameter" = { fg = "magenta" }
+"variable.other.member" = { fg = "magenta" }
+"constant" = { fg = "dark-yellow" }
+"constant.builtin" = { fg = "cyan" }
+"constant.numeric" = { fg = "dark-yellow" }
+"type" = { fg = "blue" }
+"type.builtin" = { fg = "cyan" }
+"keyword" = { fg = "red" }
+"keyword.control.conditional" = { fg = "dark-cyan" }
+"keyword.control.repeat" = { fg = "dark-cyan" }
+"keyword.control.directive" = { fg = "dark-magenta" }
+"comment" = { fg = "gray" }
+"comment.block.documentation" = { fg = "yellow" }
+"attributes" = { fg = "yellow" }
+"string" = { fg = "yellow" }
+"function" = { fg = "magenta" }
+"function.builtin" = { fg = "cyan" }
+"function.macro" = { fg = "cyan" }
+"namespace" = { fg = "dark-blue" }
+"constructor" = { fg = "blue" }
+"tag" = { fg = "red" }
+
+# Markup Styling
+"markup.heading" = { fg = "red" }
+"markup.raw.inline" = { fg = "green" }
+"markup.bold" = { fg = "dark-yellow", modifiers = ["bold"] }
+"markup.italic" = { fg = "dark-magenta", modifiers = ["italic"] }
+"markup.list" = { fg = "red" }
+"markup.quote" = { fg = "yellow" }
+"markup.link.url" = { fg = "cyan", underline = { style = "line" } }
+"markup.link.text" = { fg = "dark-yellow" }
+
+# Diff Styling
+"diff.plus" = { fg = "dark-green" }
+"diff.delta" = { fg = "dark-yellow" }
+"diff.minus" = { fg = "dark-red" }
+
+# Diagnostics
+"diagnostic" = { modifiers = ["underlined"] }
+"diagnostic.info" = { fg = "blue" }
+"diagnostic.hint" = { fg = "green" }
+"diagnostic.debug" = { fg = "yellow" }
+"diagnostic.warning" = { fg = "dark-yellow" }
+"diagnostic.error" = { fg = "dark-red" }
+
+# Define color palette
+[palette]
+black = "#100e23"
+gray = "#a6b3cc"
+foreground = "#cbe3e7"
+background = "#1b182c"
+red = "#ff8080"
+dark-red = "#ff5458"
+green = "#95ffa4"
+dark-green = "#62d196"
+yellow = "#ffe9aa"
+dark-yellow = "#ffb378"
+blue = "#91ddff"
+dark-blue = "#65b2ff"
+magenta = "#c991e1"
+dark-magenta = "#906cff"
+cyan = "#aaffe4"
+dark-cyan = "#63f2f1"
+

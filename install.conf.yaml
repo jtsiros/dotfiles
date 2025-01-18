@@ -34,8 +34,6 @@
     - thefuck
     - tmux
     - tree-sitter
-    - sublime-text
-    - neovim
     - helix
     - zsh-autosuggestions
     - zsh-syntax-highlighting
@@ -53,13 +51,8 @@
     ~/.tmux.conf: tmux.conf
     ~/.config/helix: helix
     ~/.config/zed/settings.json: zed/settings.json
-    ~/Library/Application Support/Sublime Text/Packages/User/:
-      path: sublime/*
-      glob: "*"
     ~/dev/odin/ols.json: odin/ols.json
     ~/.config/git: git
-    ~/.config/aerospace: aerospace
-    ~/.config/sketchybar: sketchybar
     ~/.config/nvim: nvim
     ~/.config/doom: doom
     ~/.zshrc: zsh/zshrc

@@ -1,12 +1,20 @@
 layout {
-    pane split_direction="vertical" {
-        pane
-        pane split_direction="horizontal" {
-            pane
-            pane
+    default_tab_template {
+        children
+        pane size=1 borderless=true {
+            plugin location="zellij:compact-bar"
         }
     }
-    pane size=1 borderless=true {
-        plugin location="zellij:compact-bar"
+    tab name="dev" {
+        pane split_direction="vertical" {
+            pane split_direction="horizontal" {
+                pane name="api-shell" cwd="~/dev/code"
+                pane name="spa-shell" cwd="~/dev/code"
+            }
+            pane name="code" cwd="~/dev/code" 
+        }
+    }
+    tab name="term" cwd="~/dev/code" {
+        pane name="term"
     }
 }

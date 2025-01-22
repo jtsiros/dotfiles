@@ -35,6 +35,7 @@
     - tmux
     - tree-sitter
     - helix
+    - zellij
     - zsh-autosuggestions
     - zsh-syntax-highlighting
     - emacs-mac --with-modules
@@ -50,6 +51,7 @@
     ~/.editorconfig: editorconfig
     ~/.tmux.conf: tmux.conf
     ~/.config/helix: helix
+    ~/.config/zellij: zellij
     ~/.config/zed/settings.json: zed/settings.json
     ~/dev/odin/ols.json: odin/ols.json
     ~/.config/git: git

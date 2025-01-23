@@ -51,6 +51,7 @@
     ~/.editorconfig: editorconfig
     ~/.tmux.conf: tmux.conf
     ~/.config/helix: helix
+    ~/.config/ghostty: ghostty
     ~/.config/zellij: zellij
     ~/.config/zed/settings.json: zed/settings.json
     ~/dev/odin/ols.json: odin/ols.json

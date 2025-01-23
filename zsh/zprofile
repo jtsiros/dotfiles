@@ -53,6 +53,7 @@ path=(
   /usr/local/{bin,sbin}
   /usr/local/opt/make/libexec/gnubin
   /opt/homebrew/Cellar/vips/bin
+  /Applications/Xcode.app/Contents/Developer/usr/bin
   $GOBIN
   $HOME/.local/bin
   $HOME/.cargo/bin

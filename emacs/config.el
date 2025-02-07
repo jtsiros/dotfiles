@@ -149,7 +149,7 @@
 
 (use-package eradio
   :init
-  (setq eradio-player '("mpv" "--no-video" "--no-terminal"))
+  (setq eradio-player '("mpv" "--no-video" "--no-terminal" "--ytdl-raw-options=yt-dlp"))
   :config
   (setq eradio-channels '(("Totally 80s FM" . "https://zeno.fm/radio/totally-80s-fm/")
                           ("Oldies Radio 50s-60s" . "https://zeno.fm/radio/oldies-radio-50s-60s/")
@@ -231,7 +231,7 @@
 ;; This sets the default font on all graphical frames created after restarting Emacs.
 ;; Does the same thing as 'set-face-attribute default' above, but emacsclient fonts
 ;; are not right unless I also add this method of setting the default font.
-(add-to-list 'default-frame-alist '(font . "JetBrains Mono-11"))
+(add-to-list 'default-frame-alist '(font . "JetBrains Mono-13"))
 
 ;; Uncomment the following line if line spacing needs adjusting.
 (setq-default line-spacing 0.12)
@@ -767,6 +767,15 @@
 	  which-key-max-description-length 25
 	  which-key-allow-imprecise-window-fit nil
 	  which-key-separator " → " ))
+
+(use-package lsp-mode
+  :ensure t
+  :commands lsp)
+
+(use-package zig-mode
+  :ensure t
+  :config
+  (setq zig-format-on-save nil))  ;; Disables format on save globally
 
 (defun reader ()
   (interactive)

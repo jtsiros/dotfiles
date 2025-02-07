@@ -5,7 +5,7 @@
 #+OPTIONS: toc:2
 
 * TABLE OF CONTENTS :toc:
-- [[#important-programs-to-load-first][IMPORTANT PROGRAMS TO LOAD FIRST]]
+- [[#scriptsconfig-setup][SCRIPTS/CONFIG SETUP]]
   - [[#adding-the-scripts-directory-to-path][Adding the scripts directory to path]]
   - [[#sourcing-the-scripts][Sourcing the scripts]]
 - [[#all-the-icons][ALL THE ICONS]]
@@ -57,11 +57,10 @@
 - [[#tldr][TLDR]]
 - [[#transparency][TRANSPARENCY]]
 - [[#which-key][WHICH-KEY]]
+- [[#dev-modes][DEV-MODES]]
 - [[#test][TEST]]
 
-* IMPORTANT PROGRAMS TO LOAD FIRST
-To keep this =config.org= a reasonable length, I have moved a lot of code to individual scripts that will be sourced by this config.  These scripts are found in "~/.config/emacs/scripts" and do not contain any code that most people are likely to need to edit.
-
+* SCRIPTS/CONFIG SETUP 
 ** Adding the scripts directory to path
 #+begin_src emacs-lisp
 (add-to-list 'load-path "~/.config/emacs/scripts/")
@@ -278,7 +277,7 @@ An RSS newsfeed reader for Emacs.  Move through the articles with 'j/k'.  Move t
 #+begin_src emacs-lisp
 (use-package eradio
   :init
-  (setq eradio-player '("mpv" "--no-video" "--no-terminal"))
+  (setq eradio-player '("mpv" "--no-video" "--no-terminal" "--ytdl-raw-options=yt-dlp"))
   :config
   (setq eradio-channels '(("Totally 80s FM" . "https://zeno.fm/radio/totally-80s-fm/")
                           ("Oldies Radio 50s-60s" . "https://zeno.fm/radio/oldies-radio-50s-60s/")
@@ -378,7 +377,7 @@ Defining the various fonts that Emacs will use.
 ;; This sets the default font on all graphical frames created after restarting Emacs.
 ;; Does the same thing as 'set-face-attribute default' above, but emacsclient fonts
 ;; are not right unless I also add this method of setting the default font.
-(add-to-list 'default-frame-alist '(font . "JetBrains Mono-11"))
+(add-to-list 'default-frame-alist '(font . "JetBrains Mono-13"))
 
 ;; Uncomment the following line if line spacing needs adjusting.
 (setq-default line-spacing 0.12)
@@ -1098,6 +1097,19 @@ With Emacs version 29, true transparency has been added.  I have turned transpar
 	  which-key-max-description-length 25
 	  which-key-allow-imprecise-window-fit nil
 	  which-key-separator " → " ))
+#+end_src
+
+
+* DEV-MODES
+#+begin_src emacs-lisp
+(use-package lsp-mode
+  :ensure t
+  :commands lsp)
+
+(use-package zig-mode
+  :ensure t
+  :config
+  (setq zig-format-on-save nil))  ;; Disables format on save globally
 #+end_src
 
 * TEST

@@ -39,6 +39,7 @@
   (setq dashboard-banner-logo-title "Emacs Is More Than A Text Editor!")
   (setq dashboard-startup-banner 'logo) ;; use standard emacs logo as banner
   (setq dashboard-center-content nil) ;; set to 't' for centered content
+  (setq dashboard-projects-backend 'projectile)
   (setq dashboard-items '((recents . 5)
                           (agenda . 5 )
                           (bookmarks . 3)
@@ -149,7 +150,7 @@
 
 (use-package eradio
   :init
-  (setq eradio-player '("mpv" "--no-video" "--no-terminal" "--ytdl-raw-options=yt-dlp"))
+  (setq eradio-player '("mpv" "--no-video" "--no-terminal"))
   :config
   (setq eradio-channels '(("Totally 80s FM" . "https://zeno.fm/radio/totally-80s-fm/")
                           ("Oldies Radio 50s-60s" . "https://zeno.fm/radio/oldies-radio-50s-60s/")
@@ -209,16 +210,16 @@
   :init (global-flycheck-mode))
 
 (set-face-attribute 'default nil
-  :font "JetBrains Mono"
-  :height 110
+  :font "Monaspace Krypton"
+  :height 190
   :weight 'medium)
 (set-face-attribute 'variable-pitch nil
-  :font "Ubuntu"
-  :height 120
+  :font "Monaspace Krypton Var"
+  :height 190
   :weight 'medium)
 (set-face-attribute 'fixed-pitch nil
-  :font "JetBrains Mono"
-  :height 110
+  :font "Monaspace Krypton"
+  :height 190
   :weight 'medium)
 ;; Makes commented text and keywords italics.
 ;; This is working in emacsclient but not emacs.
@@ -231,10 +232,10 @@
 ;; This sets the default font on all graphical frames created after restarting Emacs.
 ;; Does the same thing as 'set-face-attribute default' above, but emacsclient fonts
 ;; are not right unless I also add this method of setting the default font.
-(add-to-list 'default-frame-alist '(font . "JetBrains Mono-13"))
+(add-to-list 'default-frame-alist '(font . "Monaspace Argon"))
 
 ;; Uncomment the following line if line spacing needs adjusting.
-(setq-default line-spacing 0.12)
+;; (setq-default line-spacing 0.12)
 
 (global-set-key (kbd "C-=") 'text-scale-increase)
 (global-set-key (kbd "C--") 'text-scale-decrease)
@@ -705,7 +706,7 @@
 
 (use-package vterm
 :config
-(setq shell-file-name "/usr/bin/fish"
+(setq shell-file-name "/usr/bin/sh"
       vterm-max-scrollback 5000))
 
 (use-package vterm-toggle
@@ -739,7 +740,7 @@
   (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
         doom-themes-enable-italic t) ; if nil, italics is universally disabled
   ;; Sets the default theme to load!!! 
-  (load-theme 'doom-one t)
+  (load-theme 'doom-challenger-deep t)
   ;; Enable custom neotree theme (all-the-icons must be installed!)
   (doom-themes-neotree-config)
   ;; Corrects (and improves) org-mode's native fontification.
@@ -776,6 +777,9 @@
   :ensure t
   :config
   (setq zig-format-on-save nil))  ;; Disables format on save globally
+
+(use-package go-mode
+  :ensure t)
 
 (defun reader ()
   (interactive)

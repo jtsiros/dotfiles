@@ -1,0 +1,92 @@
+{
+  "author": "Jon Tsiros",
+  "name": "Dracula",
+  "themes": [
+    {
+      "appearance": "dark",
+      "name": "Dracula - JT",
+      "style": {
+        "background": "#282a36",
+        "editor.background": "#282a36",
+        "editor.foreground": "#f8f8f2",
+        "editor.line_number": "#6272a4",
+        "editor.active_line.background": "#44475a",
+        "editor.invisible": "#3B3A32",
+        "editor.highlighted_line.background": "#44475a",
+        "editor.caret": "#f8f8f0",
+        "editor.selection": "#44475a",
+        "editor.active_wrap_guide": "#9D550FB0",
+        "editor.wrap_guide": "#9D550FB0",
+        "element.selected": "#44475a",
+        "element.background": "#222218",
+        "menu": {
+          "background": "#1C1F33",
+          "foreground": "#f8f8f2"
+        },
+        "explorer": {
+          "background": "#1C1F33",
+          "foreground": "#f8f8f2",
+          "activeItemBackground": "#2C3047"
+        },
+        "syntax": {
+          "comment": {
+            "color": "#6272a4"
+          },
+          "string": {
+            "color": "#f1fa8c"
+          },
+          "constant.numeric": {
+            "color": "#bd93f9"
+          },
+          "constant.language": {
+            "color": "#bd93f9"
+          },
+          "constant.character": {
+            "color": "#bd93f9"
+          },
+          "variable": {
+            "color": "#ffb86c"
+          },
+          "keyword": {
+            "color": "#ff79c6"
+          },
+          "storage": {
+            "color": "#ff79c6"
+          },
+          "storage.type": {
+            "color": "#8be9fd",
+            "font_style": "italic"
+          },
+          "entity.name.class": {
+            "color": "#8be9fd",
+            "font_style": "underline"
+          },
+          "entity.name.function": {
+            "color": "#50fa7b"
+          },
+          "variable.parameter": {
+            "color": "#ffb86c",
+            "font_style": "italic"
+          },
+          "entity.name.tag": {
+            "color": "#ff79c6"
+          },
+          "support.function": {
+            "color": "#8be9fd"
+          },
+          "support.constant": {
+            "color": "#6be5fd"
+          },
+          "support.type": {
+            "color": "#66d9ef",
+            "font_style": "italic"
+          },
+          "invalid": {
+            "color": "#f8f8f0",
+            "background": "#ff79c6"
+          }
+        }
+      }
+    }
+  ]
+}

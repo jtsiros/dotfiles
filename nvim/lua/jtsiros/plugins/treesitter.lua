@@ -22,14 +22,14 @@ return {
       },
       -- ensure these language parsers are installed
       ensure_installed = {
+        "go",
+        "zig",
+        "rust",
         "json",
         "javascript",
         "typescript",
         "tsx",
         "yaml",
-        "html",
-        "css",
-        "prisma",
         "markdown",
         "markdown_inline",
         "svelte",

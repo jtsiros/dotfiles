@@ -1,7 +1,8 @@
-font-family = Monaspace Krypton Var
-font-size = 18
-font-variation = "wght=400"
-theme = dark:Dracula,light:zenwritten_light
+font-family = Iosevka Term
+font-size = 20.0
+adjust-cell-width = 5%
+
+theme = "black-metal.toml"
 
 unfocused-split-opacity = 0.35
 unfocused-split-fill = 3A3B3C

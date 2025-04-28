@@ -1,13 +1,12 @@
 (add-to-list 'load-path "~/.config/emacs/scripts/")
 
-(setq package-enable-at-startup nil)
-
 (require 'elpaca-setup)  ;; The Elpaca Package Manager
 (require 'app-launchers) ;; Use emacs as a run launcher like dmenu (experimental)
 (require 'buffer-move)   ;; Buffer-move for better window management
 (require 'eshell-prompt) ;; A fancy prompt for eshell
 
 ;; Tell Emacs to prefer external packages over built-in ones
+(setq package-enable-at-startup nil)
 (setq package-install-upgrade-built-in t)
 
 (elpaca seq)
@@ -15,6 +14,11 @@
 (elpaca eldoc)
 (elpaca flymake)
 (elpaca jsonrpc)
+
+(use-package exec-path-from-shell
+  :if (memq window-system '(mac ns x))
+  :config
+  (exec-path-from-shell-initialize))
 
 (use-package all-the-icons
   :ensure t
@@ -270,7 +274,7 @@
     "u" '(universal-argument :wk "Universal argument"))
 
    (jt/leader-keys
-    "a" '(:ignore t :wk "A.I.")
+    "a" '(:ignore t :wk "AI")
     "a a" '(ellama-ask-about :wk "Ask ellama about region")
     "a e" '(:ignore t :wk "Ellama enhance")
     "a e g" '(ellama-improve-grammar :wk "Ellama enhance wording")
@@ -410,6 +414,14 @@
     "m T" '(org-todo-list :wk "Org todo list"))
 
   (jt/leader-keys
+    "m j" '(:ignore t :wk "Org Journal")
+    "m j j" '(org-journal-new-entry :wk "New journal entry")
+    "m j d" '(org-journal-new-date-entry :wk "New entry for date")
+    "m j s" '(org-journal-search :wk "Search journal")
+    "m j f" '(org-journal-open-current-journal-file :wk "Open today's file"))
+
+
+  (jt/leader-keys
     "m b" '(:ignore t :wk "Tables")
     "m b -" '(org-table-insert-hline :wk "Insert hline in table"))
 
@@ -538,10 +550,40 @@
   (ivy-set-display-transformer 'ivy-switch-buffer
                                'ivy-rich-switch-buffer-transformer))
 
-(use-package dart-mode)
-(use-package haskell-mode)
-(use-package lua-mode)
-(use-package php-mode)
+(use-package eglot
+  :hook
+  ((c-mode python-mode go-mode rust-mode) . eglot-ensure)
+  :config
+  ;; Correct spelling + cleaner quoting
+  (setq eglot-ignored-server-capabilities
+        '(:documentHighlightProvider
+          :hoverProvider
+          :inlayHintProvider)))
+
+(use-package zig-mode
+  :ensure t
+  :config
+  (setq zig-format-on-save nil))  ;; Disables format on save globally
+
+(use-package go-mode
+  :ensure t)
+
+(use-package yaml-mode
+  :ensure t)
+
+(use-package bicep-mode
+  :ensure (bicep-mode :host github :repo "christiaan-janssen/bicep-mode"))
+
+(use-package terraform-mode
+  :ensure t)
+
+(use-package rustic
+  :ensure t
+  :config
+  (setq rustic-format-on-save nil)
+  (setq rustic-lsp-client 'eglot)
+  :custom
+  (rustic-cargo-use-last-stored-arguments t))
 
 (global-set-key [escape] 'keyboard-escape-quit)
 
@@ -570,6 +612,15 @@
                  (setq word-wrap nil)
                  (make-local-variable 'auto-hscroll-mode)
                  (setq auto-hscroll-mode nil)))))
+
+(use-package org-journal
+  :ensure t
+  :config
+  (setq org-journal-dir "~/Org/journal/"      ;; Where your journal files go
+        org-journal-file-type 'daily           ;; One file per day
+        org-journal-date-format "%A, %Y-%m-%d" ;; Nice readable dates
+        org-journal-file-format "%Y-%m-%d.org" ;; Files like 2025-04-28.org
+        org-journal-enable-agenda-integration t)) ;; Show in org-agenda if you want
 
 (setq org-agenda-files '("~/Org/agenda.org"))
 
@@ -781,31 +832,6 @@
 ;;(use-package lsp-mode
 ;;  :ensure t
 ;;  :commands lsp)
-(use-package eglot
-  :hook
-  ((c-mode python-mode go-mode rust-mode) . eglot-ensure)
-  :config
-  ;; Correct spelling + cleaner quoting
-  (setq eglot-ignored-server-capabilities
-        '(:documentHighlightProvider
-          :hoverProvider
-          :inlayHintProvider)))
-
-(use-package zig-mode
-  :ensure t
-  :config
-  (setq zig-format-on-save nil))  ;; Disables format on save globally
-
-(use-package go-mode
-  :ensure t)
-
-(use-package rustic
-  :ensure t
-  :config
-  (setq rustic-format-on-save nil)
-  (setq rustic-lsp-client 'eglot)
-  :custom
-  (rustic-cargo-use-last-stored-arguments t))
 
 (defun reader ()
   (interactive)

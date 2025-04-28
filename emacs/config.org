@@ -8,6 +8,7 @@
 - [[#scriptsconfig-setup][SCRIPTS/CONFIG SETUP]]
   - [[#adding-the-scripts-directory-to-path][Adding the scripts directory to path]]
   - [[#sourcing-the-scripts][Sourcing the scripts]]
+- [[#path][PATH]]
 - [[#all-the-icons][ALL THE ICONS]]
 - [[#backup][BACKUP]]
 - [[#company][COMPANY]]
@@ -35,6 +36,7 @@
 - [[#modeline][MODELINE]]
 - [[#neotree][NEOTREE]]
 - [[#org-mode][ORG MODE]]
+  - [[#journal][Journal]]
   - [[#agenda][Agenda]]
   - [[#bullets][Bullets]]
   - [[#diminish-org-indent-mode][Diminish Org Indent Mode]]
@@ -68,7 +70,6 @@
 
 ** Sourcing the scripts
 #+begin_src emacs-lisp
-(setq package-enable-at-startup nil)
 
 (require 'elpaca-setup)  ;; The Elpaca Package Manager
 (require 'app-launchers) ;; Use emacs as a run launcher like dmenu (experimental)
@@ -76,6 +77,7 @@
 (require 'eshell-prompt) ;; A fancy prompt for eshell
 
 ;; Tell Emacs to prefer external packages over built-in ones
+(setq package-enable-at-startup nil)
 (setq package-install-upgrade-built-in t)
 
 (elpaca seq)
@@ -83,6 +85,16 @@
 (elpaca eldoc)
 (elpaca flymake)
 (elpaca jsonrpc)
+
+#+end_src
+
+* PATH
+
+#+begin_src emacs-lisp
+(use-package exec-path-from-shell
+  :if (memq window-system '(mac ns x))
+  :config
+  (exec-path-from-shell-initialize))
 #+end_src
 
 * ALL THE ICONS
@@ -428,7 +440,7 @@ You can use the bindings CTRL plus =/- for zooming in/out.  You can also use CTR
     "u" '(universal-argument :wk "Universal argument"))
 
    (jt/leader-keys
-    "a" '(:ignore t :wk "A.I.")
+    "a" '(:ignore t :wk "AI")
     "a a" '(ellama-ask-about :wk "Ask ellama about region")
     "a e" '(:ignore t :wk "Ellama enhance")
     "a e g" '(ellama-improve-grammar :wk "Ellama enhance wording")
@@ -566,6 +578,14 @@ You can use the bindings CTRL plus =/- for zooming in/out.  You can also use CTR
     "m t" '(org-todo :wk "Org todo")
     "m B" '(org-babel-tangle :wk "Org babel tangle")
     "m T" '(org-todo-list :wk "Org todo list"))
+
+  (jt/leader-keys
+    "m j" '(:ignore t :wk "Org Journal")
+    "m j j" '(org-journal-new-entry :wk "New journal entry")
+    "m j d" '(org-journal-new-date-entry :wk "New entry for date")
+    "m j s" '(org-journal-search :wk "Search journal")
+    "m j f" '(org-journal-open-current-journal-file :wk "Open today's file"))
+
 
   (jt/leader-keys
     "m b" '(:ignore t :wk "Tables")
@@ -729,11 +749,40 @@ Adding highlights to TODO and related words.
 Emacs has built-in programming language modes for Lisp, Scheme, DSSSL, Ada, ASM, AWK, C, C++, Fortran, Icon, IDL (CORBA), IDLWAVE, Java, Javascript, M4, Makefiles, Metafont, Modula2, Object Pascal, Objective-C, Octave, Pascal, Perl, Pike, PostScript, Prolog, Python, Ruby, Simula, SQL, Tcl, Verilog, and VHDL.  Other languages will require you to install additional modes.
 
 #+begin_src emacs-lisp
-(use-package dart-mode)
-(use-package haskell-mode)
-(use-package lua-mode)
-(use-package php-mode)
+(use-package eglot
+  :hook
+  ((c-mode python-mode go-mode rust-mode) . eglot-ensure)
+  :config
+  ;; Correct spelling + cleaner quoting
+  (setq eglot-ignored-server-capabilities
+        '(:documentHighlightProvider
+          :hoverProvider
+          :inlayHintProvider)))
 
+(use-package zig-mode
+  :ensure t
+  :config
+  (setq zig-format-on-save nil))  ;; Disables format on save globally
+
+(use-package go-mode
+  :ensure t)
+
+(use-package yaml-mode
+  :ensure t)
+
+(use-package bicep-mode
+  :ensure (bicep-mode :host github :repo "christiaan-janssen/bicep-mode"))
+
+(use-package terraform-mode
+  :ensure t)
+
+(use-package rustic
+  :ensure t
+  :config
+  (setq rustic-format-on-save nil)
+  (setq rustic-lsp-client 'eglot)
+  :custom
+  (rustic-cargo-use-last-stored-arguments t))
 #+end_src
 
 * MINIBUFFER ESCAPE
@@ -787,6 +836,18 @@ Neotree is a file tree viewer.  When you open neotree, it jumps to the current f
 #+end_src
 
 * ORG MODE
+** Journal
+#+begin_src emacs-lisp
+(use-package org-journal
+  :ensure t
+  :config
+  (setq org-journal-dir "~/Org/journal/"      ;; Where your journal files go
+        org-journal-file-type 'daily           ;; One file per day
+        org-journal-date-format "%A, %Y-%m-%d" ;; Nice readable dates
+        org-journal-file-format "%Y-%m-%d.org" ;; Files like 2025-04-28.org
+        org-journal-enable-agenda-integration t)) ;; Show in org-agenda if you want
+#+end_src
+
 ** Agenda
 #+begin_src emacs-lisp
 (setq org-agenda-files '("~/Org/agenda.org"))
@@ -1117,31 +1178,6 @@ With Emacs version 29, true transparency has been added.  I have turned transpar
 ;;(use-package lsp-mode
 ;;  :ensure t
 ;;  :commands lsp)
-(use-package eglot
-  :hook
-  ((c-mode python-mode go-mode rust-mode) . eglot-ensure)
-  :config
-  ;; Correct spelling + cleaner quoting
-  (setq eglot-ignored-server-capabilities
-        '(:documentHighlightProvider
-          :hoverProvider
-          :inlayHintProvider)))
-
-(use-package zig-mode
-  :ensure t
-  :config
-  (setq zig-format-on-save nil))  ;; Disables format on save globally
-
-(use-package go-mode
-  :ensure t)
-
-(use-package rustic
-  :ensure t
-  :config
-  (setq rustic-format-on-save nil)
-  (setq rustic-lsp-client 'eglot)
-  :custom
-  (rustic-cargo-use-last-stored-arguments t))
 #+end_src
 
 * TEST

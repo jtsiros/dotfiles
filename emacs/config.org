@@ -68,10 +68,21 @@
 
 ** Sourcing the scripts
 #+begin_src emacs-lisp
+(setq package-enable-at-startup nil)
+
 (require 'elpaca-setup)  ;; The Elpaca Package Manager
 (require 'app-launchers) ;; Use emacs as a run launcher like dmenu (experimental)
 (require 'buffer-move)   ;; Buffer-move for better window management
 (require 'eshell-prompt) ;; A fancy prompt for eshell
+
+;; Tell Emacs to prefer external packages over built-in ones
+(setq package-install-upgrade-built-in t)
+
+(elpaca seq)
+(elpaca transient)
+(elpaca eldoc)
+(elpaca flymake)
+(elpaca jsonrpc)
 #+end_src
 
 * ALL THE ICONS
@@ -125,7 +136,7 @@ Emacs Dashboard is an extensible startup screen showing you recent files, bookma
   (setq initial-buffer-choice 'dashboard-open)
   (setq dashboard-set-heading-icons t)
   (setq dashboard-set-file-icons t)
-  (setq dashboard-banner-logo-title "Emacs Is More Than A Text Editor!")
+  (setq dashboard-banner-logo-title "JT Emacs Dev")
   (setq dashboard-startup-banner 'logo) ;; use standard emacs logo as banner
   (setq dashboard-center-content nil) ;; set to 't' for centered content
   (setq dashboard-projects-backend 'projectile)
@@ -185,7 +196,7 @@ This package implements hiding or abbreviation of the modeline displays (lighter
 * EDIFF
 'ediff' is a diff program that is built into Emacs.  By default, 'ediff' splits files vertically and places the 'help' frame in its own window.  I have changed this so the two files are split horizontally and the 'help' frame appears as a lower split within the existing window.  Also, I create my own 'jt-ediff-hook' where I add 'j/k' for moving to next/prev diffs.  By default, this is set to 'n/p'.
 
-#+begin_src emacs-lisp
+#+Begin_srC emacs-lisp
 (setq ediff-split-window-function 'split-window-horizontally
       ediff-window-setup-function 'ediff-setup-windows-plain)
 
@@ -301,6 +312,9 @@ An RSS newsfeed reader for Emacs.  Move through the articles with 'j/k'.  Move t
                           ("RocknRoll Radio" . "https://zeno.fm/radio/rocknroll-radio994c7517qs8uv/"))))
 #+end_src
 
+#+RESULTS:
+: [nil 26639 31072 163337 nil elpaca-process-queues nil nil 0 nil]
+
 * EVIL
 [[https://github.com/emacs-evil/evil][Evil]] is an extensible vi/vim layer for Emacs.  Because...let's face it.  The Vim keybindings are just plain better.
 
@@ -355,31 +369,29 @@ Defining the various fonts that Emacs will use.
 
 ** Setting the Font Face
 #+begin_src emacs-lisp
-;; (set-face-attribute 'default nil
-;;   :font "Monaspace Krypton"
-;;   :height 190
-;;   :weight 'medium)
-;; (set-face-attribute 'variable-pitch nil
-;;   :font "Monaspace Krypton Var"
-;;   :height 190
-;;   :weight 'medium)
-;; (set-face-attribute 'fixed-pitch nil
-;;   :font "Monaspace Krypton"
-;;   :height 190
-;;   :weight 'medium)
-;; ;; Makes commented text and keywords italics.
-;; ;; This is working in emacsclient but not emacs.
-;; ;; Your font must have an italic face available.
-;; (set-face-attribute 'font-lock-comment-face nil
-;;   :slant 'italic)
-;; (set-face-attribute 'font-lock-keyword-face nil
-;;   :slant 'italic)
+(set-face-attribute 'default nil
+  :font "Iosevka Term"
+  :height 190
+  :weight 'medium)
+(set-face-attribute 'variable-pitch nil
+  :font "Iosevka Term"
+  :height 190
+  :weight 'medium)
+(set-face-attribute 'fixed-pitch nil
+  :font "Iosevka Term"
+  :height 190
+  :weight 'medium)
+;; Makes commented text and keywords italics.
+;; This is working in emacsclient but not emacs.
+;; Your font must have an italic face available.
+(set-face-attribute 'font-lock-comment-face nil
+  :slant 'italic)
+(set-face-attribute 'font-lock-keyword-face nil
+  :slant 'italic)
 
 ;; This sets the default font on all graphical frames created after restarting Emacs.
 ;; Does the same thing as 'set-face-attribute default' above, but emacsclient fonts
 ;; are not right unless I also add this method of setting the default font.
-(add-to-list 'default-frame-alist '(font . "Monaspace Krypton-20"))
-
 ;; Uncomment the following line if line spacing needs adjusting.
 ;; (setq-default line-spacing 0.12)
 
@@ -483,7 +495,7 @@ You can use the bindings CTRL plus =/- for zooming in/out.  You can also use CTR
               (find-file "~/.config/emacs/init.el")) 
             :wk "Open emacs init.el")
     "f j" '(counsel-file-jump :wk "Jump to a file below current directory")
-    "f l" '(counsel-locate :wk "Locate a file")
+    "f f" '(counsel-fzf :wk "FZF find file")
     "f r" '(counsel-recentf :wk "Find recent files")
     "f u" '(sudo-edit-find-file :wk "Sudo find file")
     "f U" '(sudo-edit :wk "Sudo edit file"))
@@ -867,7 +879,7 @@ Allows us to create a Table of Contents in our Org docs.
 * PERSPECTIVE
 [[https://github.com/nex3/perspective-el][Perspective]] provides multiple named workspaces (or "perspectives") in Emacs, similar to multiple desktops in window managers.  Each perspective has its own buffer list and its own window layout, along with some other isolated niceties, like the [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Xref.html][xref]] ring.
 
-#+begin_src emacs-lisp
+#+Begin_src emacs-lisp
 (use-package perspective
   :custom
   ;; NOTE! I have also set 'SCP =' to open the perspective menu.
@@ -946,7 +958,6 @@ The following settings are simple modes that are enabled (or disabled) so that E
 #+end_src
 
 * SHELLS AND TERMINALS
-In my configs, all of my shells (bash, fish, zsh and the ESHELL) require my shell-color-scripts-git package to be installed.  On Arch Linux, you can install it from the AUR.  Otherwise, go to my shell-color-scripts repository on GitLab to get it.
 
 ** Eshell
 Eshell is an Emacs 'shell' that is written in Elisp.
@@ -1006,7 +1017,7 @@ Vterm is a terminal emulator within Emacs.  The 'shell-file-name' setting sets t
 #+begin_src emacs-lisp
 (use-package vterm
 :config
-(setq shell-file-name "/usr/bin/sh"
+(setq shell-file-name "/bin/zsh"
       vterm-max-scrollback 5000))
 #+end_src
 
@@ -1046,7 +1057,7 @@ Vterm is a terminal emulator within Emacs.  The 'shell-file-name' setting sets t
 #+end_src
 
 * THEME
-The first line below designates the directory where will place all of our custom-made themes, which I have created only one (dtmacs).  You can create your own Emacs themes with the help of the [[https://emacsfodder.github.io/emacs-theme-editor/][Emacs Theme Editor]].  I am also installing =doom-themes= because it contains a huge collection of themes.  M-x load-theme will list all of the themes available.
+Provides the ability to have a custom theme and also installs Doom Themes. There's a vast selection from Doom to choose from.
 
 #+begin_src emacs-lisp
 (add-to-list 'custom-theme-load-path "~/.config/emacs/themes/")
@@ -1103,9 +1114,18 @@ With Emacs version 29, true transparency has been added.  I have turned transpar
 
 * DEV-MODES
 #+begin_src emacs-lisp
-(use-package lsp-mode
-  :ensure t
-  :commands lsp)
+;;(use-package lsp-mode
+;;  :ensure t
+;;  :commands lsp)
+(use-package eglot
+  :hook
+  ((c-mode python-mode go-mode rust-mode) . eglot-ensure)
+  :config
+  ;; Correct spelling + cleaner quoting
+  (setq eglot-ignored-server-capabilities
+        '(:documentHighlightProvider
+          :hoverProvider
+          :inlayHintProvider)))
 
 (use-package zig-mode
   :ensure t
@@ -1114,6 +1134,14 @@ With Emacs version 29, true transparency has been added.  I have turned transpar
 
 (use-package go-mode
   :ensure t)
+
+(use-package rustic
+  :ensure t
+  :config
+  (setq rustic-format-on-save nil)
+  (setq rustic-lsp-client 'eglot)
+  :custom
+  (rustic-cargo-use-last-stored-arguments t))
 #+end_src
 
 * TEST

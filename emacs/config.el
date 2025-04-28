@@ -1,9 +1,20 @@
 (add-to-list 'load-path "~/.config/emacs/scripts/")
 
+(setq package-enable-at-startup nil)
+
 (require 'elpaca-setup)  ;; The Elpaca Package Manager
 (require 'app-launchers) ;; Use emacs as a run launcher like dmenu (experimental)
 (require 'buffer-move)   ;; Buffer-move for better window management
 (require 'eshell-prompt) ;; A fancy prompt for eshell
+
+;; Tell Emacs to prefer external packages over built-in ones
+(setq package-install-upgrade-built-in t)
+
+(elpaca seq)
+(elpaca transient)
+(elpaca eldoc)
+(elpaca flymake)
+(elpaca jsonrpc)
 
 (use-package all-the-icons
   :ensure t
@@ -36,7 +47,7 @@
   (setq initial-buffer-choice 'dashboard-open)
   (setq dashboard-set-heading-icons t)
   (setq dashboard-set-file-icons t)
-  (setq dashboard-banner-logo-title "Emacs Is More Than A Text Editor!")
+  (setq dashboard-banner-logo-title "JT Emacs Dev")
   (setq dashboard-startup-banner 'logo) ;; use standard emacs logo as banner
   (setq dashboard-center-content nil) ;; set to 't' for centered content
   (setq dashboard-projects-backend 'projectile)
@@ -209,31 +220,29 @@
   :diminish
   :init (global-flycheck-mode))
 
-;; (set-face-attribute 'default nil
-;;   :font "Monaspace Krypton"
-;;   :height 190
-;;   :weight 'medium)
-;; (set-face-attribute 'variable-pitch nil
-;;   :font "Monaspace Krypton Var"
-;;   :height 190
-;;   :weight 'medium)
-;; (set-face-attribute 'fixed-pitch nil
-;;   :font "Monaspace Krypton"
-;;   :height 190
-;;   :weight 'medium)
-;; ;; Makes commented text and keywords italics.
-;; ;; This is working in emacsclient but not emacs.
-;; ;; Your font must have an italic face available.
-;; (set-face-attribute 'font-lock-comment-face nil
-;;   :slant 'italic)
-;; (set-face-attribute 'font-lock-keyword-face nil
-;;   :slant 'italic)
+(set-face-attribute 'default nil
+  :font "Iosevka Term"
+  :height 190
+  :weight 'medium)
+(set-face-attribute 'variable-pitch nil
+  :font "Iosevka Term"
+  :height 190
+  :weight 'medium)
+(set-face-attribute 'fixed-pitch nil
+  :font "Iosevka Term"
+  :height 190
+  :weight 'medium)
+;; Makes commented text and keywords italics.
+;; This is working in emacsclient but not emacs.
+;; Your font must have an italic face available.
+(set-face-attribute 'font-lock-comment-face nil
+  :slant 'italic)
+(set-face-attribute 'font-lock-keyword-face nil
+  :slant 'italic)
 
 ;; This sets the default font on all graphical frames created after restarting Emacs.
 ;; Does the same thing as 'set-face-attribute default' above, but emacsclient fonts
 ;; are not right unless I also add this method of setting the default font.
-(add-to-list 'default-frame-alist '(font . "Monaspace Krypton-20"))
-
 ;; Uncomment the following line if line spacing needs adjusting.
 ;; (setq-default line-spacing 0.12)
 
@@ -328,7 +337,7 @@
               (find-file "~/.config/emacs/init.el")) 
             :wk "Open emacs init.el")
     "f j" '(counsel-file-jump :wk "Jump to a file below current directory")
-    "f l" '(counsel-locate :wk "Locate a file")
+    "f f" '(counsel-fzf :wk "FZF find file")
     "f r" '(counsel-recentf :wk "Find recent files")
     "f u" '(sudo-edit-find-file :wk "Sudo find file")
     "f U" '(sudo-edit :wk "Sudo edit file"))
@@ -706,7 +715,7 @@
 
 (use-package vterm
 :config
-(setq shell-file-name "/usr/bin/sh"
+(setq shell-file-name "/bin/zsh"
       vterm-max-scrollback 5000))
 
 (use-package vterm-toggle
@@ -769,9 +778,18 @@
 	  which-key-allow-imprecise-window-fit nil
 	  which-key-separator " → " ))
 
-(use-package lsp-mode
-  :ensure t
-  :commands lsp)
+;;(use-package lsp-mode
+;;  :ensure t
+;;  :commands lsp)
+(use-package eglot
+  :hook
+  ((c-mode python-mode go-mode rust-mode) . eglot-ensure)
+  :config
+  ;; Correct spelling + cleaner quoting
+  (setq eglot-ignored-server-capabilities
+        '(:documentHighlightProvider
+          :hoverProvider
+          :inlayHintProvider)))
 
 (use-package zig-mode
   :ensure t
@@ -780,6 +798,14 @@
 
 (use-package go-mode
   :ensure t)
+
+(use-package rustic
+  :ensure t
+  :config
+  (setq rustic-format-on-save nil)
+  (setq rustic-lsp-client 'eglot)
+  :custom
+  (rustic-cargo-use-last-stored-arguments t))
 
 (defun reader ()
   (interactive)

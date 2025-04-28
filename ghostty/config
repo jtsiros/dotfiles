@@ -1,8 +1,8 @@
 font-family = Iosevka Term
-font-size = 20.0
+font-size = 18.0
 adjust-cell-width = 5%
 
-theme = "black-metal.toml"
+theme = "nord"
 
 unfocused-split-opacity = 0.35
 unfocused-split-fill = 3A3B3C

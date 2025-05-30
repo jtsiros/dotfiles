@@ -8,6 +8,7 @@
 - [[#scriptsconfig-setup][SCRIPTS/CONFIG SETUP]]
   - [[#adding-the-scripts-directory-to-path][Adding the scripts directory to path]]
   - [[#sourcing-the-scripts][Sourcing the scripts]]
+  - [[#set-initial-frame-to-maximized-on-startup][Set initial frame to maximized on startup]]
 - [[#path][PATH]]
 - [[#all-the-icons][ALL THE ICONS]]
 - [[#backup][BACKUP]]
@@ -15,15 +16,11 @@
 - [[#dashboard][DASHBOARD]]
 - [[#diminish][DIMINISH]]
 - [[#dired][DIRED]]
-- [[#drag-stuff][DRAG-STUFF]]
 - [[#ediff][EDIFF]]
-- [[#elfeed][ELFEED]]
 - [[#ellama][ELLAMA]]
-- [[#eradio][ERADIO]]
 - [[#evil][EVIL]]
 - [[#flycheck][FLYCHECK]]
 - [[#fonts][FONTS]]
-  - [[#setting-the-font-face][Setting the Font Face]]
   - [[#zooming-inout][Zooming In/Out]]
 - [[#general-keybindings][GENERAL KEYBINDINGS]]
 - [[#git-programs][GIT PROGRAMS]]
@@ -36,33 +33,24 @@
 - [[#modeline][MODELINE]]
 - [[#neotree][NEOTREE]]
 - [[#org-mode][ORG MODE]]
-  - [[#journal][Journal]]
   - [[#agenda][Agenda]]
   - [[#bullets][Bullets]]
   - [[#diminish-org-indent-mode][Diminish Org Indent Mode]]
   - [[#org-level-headers][Org Level Headers]]
-  - [[#org-tempo][Org-Tempo]]
   - [[#preserve-indentation-on-org-babel-tangle][Preserve Indentation On Org-Babel-Tangle]]
   - [[#toc-org][Toc-Org]]
-- [[#pdfs][PDFs]]
 - [[#perspective][PERSPECTIVE]]
 - [[#projectile][PROJECTILE]]
 - [[#rainbow-delimiters][RAINBOW DELIMITERS]]
-- [[#rainbow-mode][RAINBOW MODE]]
 - [[#sane-defaults][SANE DEFAULTS]]
 - [[#shells-and-terminals][SHELLS AND TERMINALS]]
-  - [[#eshell][Eshell]]
   - [[#vterm][Vterm]]
   - [[#vterm-toggle][Vterm-Toggle]]
 - [[#sudo-edit][SUDO EDIT]]
 - [[#theme][THEME]]
-- [[#tldr][TLDR]]
-- [[#transparency][TRANSPARENCY]]
 - [[#which-key][WHICH-KEY]]
-- [[#dev-modes][DEV-MODES]]
-- [[#test][TEST]]
 
-* SCRIPTS/CONFIG SETUP 
+* SCRIPTS/CONFIG SETUP
 ** Adding the scripts directory to path
 #+begin_src emacs-lisp
 (add-to-list 'load-path "~/.config/emacs/scripts/")
@@ -70,9 +58,7 @@
 
 ** Sourcing the scripts
 #+begin_src emacs-lisp
-
 (require 'elpaca-setup)  ;; The Elpaca Package Manager
-(require 'app-launchers) ;; Use emacs as a run launcher like dmenu (experimental)
 (require 'buffer-move)   ;; Buffer-move for better window management
 (require 'eshell-prompt) ;; A fancy prompt for eshell
 
@@ -80,12 +66,15 @@
 (setq package-enable-at-startup nil)
 (setq package-install-upgrade-built-in t)
 
-(elpaca seq)
 (elpaca transient)
-(elpaca eldoc)
 (elpaca flymake)
 (elpaca jsonrpc)
+#+end_src
 
+** Set initial frame to maximized on startup
+#+begin_src emacs-lisp
+;; Maximize the Emacs frame on startup (works on macOS)
+(add-hook 'window-setup-hook #'toggle-frame-maximized)
 #+end_src
 
 * PATH
@@ -194,17 +183,6 @@ This package implements hiding or abbreviation of the modeline displays (lighter
 
 #+end_src
 
-* DRAG-STUFF
-[[https://github.com/rejeep/drag-stuff.el][Drag Stuff]] is a minor mode for Emacs that makes it possible to drag stuff (words, region, lines) around in Emacs.  When 'drag-stuff-define-keys' is enabled, then the following keybindings are set: M-up, M-down, M-left, and M-right.
-
-#+begin_src emacs-lisp
-(use-package drag-stuff
-  :init
-  (drag-stuff-global-mode 1)
-  (drag-stuff-define-keys))
-
-#+end_src
-
 * EDIFF
 'ediff' is a diff program that is built into Emacs.  By default, 'ediff' splits files vertically and places the 'help' frame in its own window.  I have changed this so the two files are split horizontally and the 'help' frame appears as a lower split within the existing window.  Also, I create my own 'jt-ediff-hook' where I add 'j/k' for moving to next/prev diffs.  By default, this is set to 'n/p'.
 
@@ -219,42 +197,6 @@ This package implements hiding or abbreviation of the modeline displays (lighter
 
 (add-hook 'ediff-mode-hook 'jt-ediff-hook)
 #+end_src 
-
-* ELFEED
-An RSS newsfeed reader for Emacs.  Move through the articles with 'j/k'.  Move through the stories with 'CTRL j/k' when in other frame.
-
-#+begin_src emacs-lisp
-(use-package elfeed
-  :config
-  (setq elfeed-search-feed-face ":foreground #ffffff :weight bold"
-        elfeed-feeds (quote
-                       (("https://www.reddit.com/r/linux.rss" reddit linux)
-                        ("https://www.reddit.com/r/commandline.rss" reddit commandline)
-                        ("https://www.reddit.com/r/distrotube.rss" reddit distrotube)
-                        ("https://www.reddit.com/r/emacs.rss" reddit emacs)
-                        ("https://www.gamingonlinux.com/article_rss.php" gaming linux)
-                        ("https://hackaday.com/blog/feed/" hackaday linux)
-                        ("https://opensource.com/feed" opensource linux)
-                        ("https://linux.softpedia.com/backend.xml" softpedia linux)
-                        ("https://itsfoss.com/feed/" itsfoss linux)
-                        ("https://www.zdnet.com/topic/linux/rss.xml" zdnet linux)
-                        ("https://www.phoronix.com/rss.php" phoronix linux)
-                        ("http://feeds.feedburner.com/d0od" omgubuntu linux)
-                        ("https://www.computerworld.com/index.rss" computerworld linux)
-                        ("https://www.networkworld.com/category/linux/index.rss" networkworld linux)
-                        ("https://www.techrepublic.com/rssfeeds/topic/open-source/" techrepublic linux)
-                        ("https://betanews.com/feed" betanews linux)
-                        ("http://lxer.com/module/newswire/headlines.rss" lxer linux)
-                        ("https://distrowatch.com/news/dwd.xml" distrowatch linux)))))
- 
-
-(use-package elfeed-goodies
-  :init
-  (elfeed-goodies/setup)
-  :config
-  (setq elfeed-goodies/entry-pane-size 0.5))
-
-#+end_src
 
 * ELLAMA
 [[https://github.com/s-kostyaev/ellama][Ellama]] is a tool for interacting with large language models from Emacs.  You need to have 'ollama' installed on your computer to use 'ellama' in Emacs.  You need to pull in any LLMs that you want to have available for use.  For example, if you want to be able to use Llama 3.1, then you need to run 'ollama pull llama3.1'.
@@ -295,41 +237,7 @@ An RSS newsfeed reader for Emacs.  Move through the articles with 'j/k'.  Move t
 
 #+end_src
 
-* ERADIO
-[[https://github.com/olavfosse/eradio][eradio]] is a simple Internet radio player for Emacs.  It uses 'vlc as its backend by default, but you can change the =eradio-player= variable to use another multimedia player.  I have set eradio to use 'mpv' instead of 'vlc' because it supports more types of Internet radio streams.
-
-#+begin_src emacs-lisp
-(use-package eradio
-  :init
-  (setq eradio-player '("mpv" "--no-video" "--no-terminal"))
-  :config
-  (setq eradio-channels '(("Totally 80s FM" . "https://zeno.fm/radio/totally-80s-fm/")
-                          ("Oldies Radio 50s-60s" . "https://zeno.fm/radio/oldies-radio-50s-60s/")
-                          ("Oldies Radio 70s" . "https://zeno.fm/radio/oldies-radio-70s/")
-                          ("Unlimited 80s" . "https://zeno.fm/radio/unlimited80s/")
-                          ("80s Hits" . "https://zeno.fm/radio/80shits/")
-                          ("90s Hits" . "https://zeno.fm/radio/90s_HITS/")
-                          ("2000s Pop" . "https://zeno.fm/radio/2000s-pop/")
-                          ("The 2000s" . "https://zeno.fm/radio/the-2000s/")
-                          ("Hits 2010s" . "https://zeno.fm/radio/helia-hits-2010/")
-                          ("Classical Radio" . "https://zeno.fm/radio/classical-radio/")
-                          ("Classical Relaxation" . "https://zeno.fm/radio/radio-christmas-non-stop-classical/")
-                          ("Classic Rock" . "https://zeno.fm/radio/classic-rockdnb2sav8qs8uv/")
-                          ("Gangsta49" . "https://zeno.fm/radio/gangsta49/")
-                          ("HipHop49" . "https://zeno.fm/radio/hiphop49/")
-                          ("Madhouse Country Radio" . "https://zeno.fm/radio/madhouse-country-radio/")
-                          ("PopMusic" . "https://zeno.fm/radio/popmusic74vyurvmug0uv/")
-                          ("PopStars" . "https://zeno.fm/radio/popstars/")
-                          ("RadioMetal" . "https://zeno.fm/radio/radio-metal/")
-                          ("RocknRoll Radio" . "https://zeno.fm/radio/rocknroll-radio994c7517qs8uv/"))))
-#+end_src
-
-#+RESULTS:
-: [nil 26639 31072 163337 nil elpaca-process-queues nil nil 0 nil]
-
 * EVIL
-[[https://github.com/emacs-evil/evil][Evil]] is an extensible vi/vim layer for Emacs.  Because...let's face it.  The Vim keybindings are just plain better.
-
 #+begin_src emacs-lisp
 ;; Expands to: (elpaca evil (use-package evil :demand t))
 (use-package evil
@@ -365,8 +273,6 @@ An RSS newsfeed reader for Emacs.  Move through the articles with 'j/k'.  Move t
 #+end_src
 
 * FLYCHECK
-Install =luacheck= from your Linux distro's repositories for flycheck to work correctly with lua files.  Install =python-pylint= for flycheck to work with python files.  Haskell works with flycheck as long as =haskell-ghc= or =haskell-stack-ghc= is installed.  For more information on language support for flycheck, [[https://www.flycheck.org/en/latest/languages.html][read this]].
-
 #+begin_src emacs-lisp
 (use-package flycheck
   :ensure t
@@ -377,22 +283,19 @@ Install =luacheck= from your Linux distro's repositories for flycheck to work co
 #+end_src
 
 * FONTS
-Defining the various fonts that Emacs will use.
-
-** Setting the Font Face
 #+begin_src emacs-lisp
 (set-face-attribute 'default nil
-  :font "Iosevka Term"
-  :height 190
-  :weight 'medium)
+  :font "Monaspace Neon"
+  :height 180
+  :weight 'light)
 (set-face-attribute 'variable-pitch nil
-  :font "Iosevka Term"
-  :height 190
-  :weight 'medium)
+  :font "Monaspace Neon Var"
+  :height 180
+  :weight 'light)
 (set-face-attribute 'fixed-pitch nil
-  :font "Iosevka Term"
-  :height 190
-  :weight 'medium)
+  :font "Monaspace Neon"
+  :height 180
+  :weight 'light)
 ;; Makes commented text and keywords italics.
 ;; This is working in emacsclient but not emacs.
 ;; Your font must have an italic face available.
@@ -424,7 +327,6 @@ You can use the bindings CTRL plus =/- for zooming in/out.  You can also use CTR
 (use-package general
   :config
   (general-evil-setup)
-  
   ;; set up 'SPC' as the global leader key
   (general-create-definer jt/leader-keys
     :states '(normal insert visual emacs)
@@ -435,7 +337,7 @@ You can use the bindings CTRL plus =/- for zooming in/out.  You can also use CTR
   (jt/leader-keys
     "SPC" '(counsel-M-x :wk "Counsel M-x")
     "." '(find-file :wk "Find file")
-    "=" '(perspective-map :wk "Perspective") ;; Lists all the perspective keybindings
+    "=" '(perspective-map :wk "Perspective")
     "TAB TAB" '(comment-line :wk "Comment lines")
     "u" '(universal-argument :wk "Universal argument"))
 
@@ -449,7 +351,7 @@ You can use the bindings CTRL plus =/- for zooming in/out.  You can also use CTR
     "a p" '(ellama-provider-select :wk "Ellama provider select")
     "a s" '(ellama-summarize :wk "Ellama summarize region")
     "a t" '(ellama-translate :wk "Ellama translate region"))
-   
+
   (jt/leader-keys
     "b" '(:ignore t :wk "Bookmarks/Buffers")
     "b b" '(switch-to-buffer :wk "Switch to buffer")
@@ -618,8 +520,6 @@ You can use the bindings CTRL plus =/- for zooming in/out.  You can also use CTR
     "s" '(:ignore t :wk "Search")
     "s d" '(dictionary-search :wk "Search dictionary")
     "s m" '(man :wk "Man pages")
-    "s o" '(pdf-occur :wk "Pdf search lines matching STRING")
-    "s t" '(tldr :wk "Lookup TLDR docs for a command")
     "s w" '(woman :wk "Similar to man but doesn't require man"))
 
   (jt/leader-keys
@@ -656,7 +556,6 @@ You can use the bindings CTRL plus =/- for zooming in/out.  You can also use CTR
     "w u" '(upcase-word :wk "Upcase word")
     "w =" '(count-words :wk "Count words/lines for buffer"))
 )
-
 #+end_src
 
 * GIT PROGRAMS
@@ -767,6 +666,11 @@ Emacs has built-in programming language modes for Lisp, Scheme, DSSSL, Ada, ASM,
 (use-package go-mode
   :ensure t)
 
+;; Auto-format Go code on save using Eglot (LSP)
+(add-hook 'go-mode-hook
+          (lambda ()
+            (add-hook 'before-save-hook #'eglot-format-buffer nil t)))
+
 (use-package yaml-mode
   :ensure t)
 
@@ -808,8 +712,6 @@ The modeline is the bottom status bar that appears in Emacs windows.  While you 
 #+end_src
 
 * NEOTREE
-Neotree is a file tree viewer.  When you open neotree, it jumps to the current file thanks to neo-smart-open.  The neo-window-fixed-size setting makes the neotree width be adjustable.  NeoTree provides following themes: classic, ascii, arrow, icons, and nerd.  Theme can be config'd by setting "two" themes for neo-theme: one for the GUI and one for the terminal.  I like to use 'SPC t' for 'toggle' keybindings, so I have used 'SPC t n' for toggle-neotree.
-
 | COMMAND        | DESCRIPTION               | KEYBINDING |
 |----------------+---------------------------+------------|
 | neotree-toggle | /Toggle neotree/            | SPC t n    |
@@ -836,18 +738,6 @@ Neotree is a file tree viewer.  When you open neotree, it jumps to the current f
 #+end_src
 
 * ORG MODE
-** Journal
-#+begin_src emacs-lisp
-(use-package org-journal
-  :ensure t
-  :config
-  (setq org-journal-dir "~/Org/journal/"      ;; Where your journal files go
-        org-journal-file-type 'daily           ;; One file per day
-        org-journal-date-format "%A, %Y-%m-%d" ;; Nice readable dates
-        org-journal-file-format "%Y-%m-%d.org" ;; Files like 2025-04-28.org
-        org-journal-enable-agenda-integration t)) ;; Show in org-agenda if you want
-#+end_src
-
 ** Agenda
 #+begin_src emacs-lisp
 (setq org-agenda-files '("~/Org/agenda.org"))
@@ -881,26 +771,6 @@ Removes "Ind" from showing in the modeline.
    '(org-level-7 ((t (:inherit outline-5 :height 1.1)))))
 #+end_src
 
-** Org-Tempo
-Org-tempo is not a separate package but a module within org that can be enabled.  Org-tempo allows for '<s' followed by TAB to expand to a begin_src tag.  Other expansions available include:
-
-| Typing the below + TAB | Expands to ...                          |
-|------------------------+-----------------------------------------|
-| <a                     | '#+BEGIN_EXPORT ascii' … '#+END_EXPORT  |
-| <c                     | '#+BEGIN_CENTER' … '#+END_CENTER'       |
-| <C                     | '#+BEGIN_COMMENT' … '#+END_COMMENT'     |
-| <e                     | '#+BEGIN_EXAMPLE' … '#+END_EXAMPLE'     |
-| <E                     | '#+BEGIN_EXPORT' … '#+END_EXPORT'       |
-| <h                     | '#+BEGIN_EXPORT html' … '#+END_EXPORT'  |
-| <l                     | '#+BEGIN_EXPORT latex' … '#+END_EXPORT' |
-| <q                     | '#+BEGIN_QUOTE' … '#+END_QUOTE'         |
-| <s                     | '#+BEGIN_SRC' … '#+END_SRC'             |
-| <v                     | '#+BEGIN_VERSE' … '#+END_VERSE'         |
-
-#+begin_src emacs-lisp 
-(require 'org-tempo)
-#+end_src
-
 ** Preserve Indentation On Org-Babel-Tangle
 #+begin_src emacs-lisp
 (setq org-src-preserve-indentation t)
@@ -916,29 +786,7 @@ Allows us to create a Table of Contents in our Org docs.
     :init (add-hook 'org-mode-hook 'toc-org-enable))
 #+end_src
 
-* PDFs
-[[https://github.com/vedang/pdf-tools][pdf-tools]] is a replacement of DocView for viewing PDF files inside Emacs.  It uses the =poppler= library, which also means that 'pdf-tools' can by used to modify PDFs.  I use to disable 'display-line-numbers-mode' in 'pdf-view-mode' because line numbers crash it.
-
-#+begin_src emacs-lisp
-(use-package pdf-tools
-  :defer t
-  :commands (pdf-loader-install)
-  :mode "\\.pdf\\'"
-  :bind (:map pdf-view-mode-map
-              ("j" . pdf-view-next-line-or-next-page)
-              ("k" . pdf-view-previous-line-or-previous-page)
-              ("C-=" . pdf-view-enlarge)
-              ("C--" . pdf-view-shrink))
-  :init (pdf-loader-install)
-  :config (add-to-list 'revert-without-query ".pdf"))
-
-(add-hook 'pdf-view-mode-hook #'(lambda () (interactive) (display-line-numbers-mode -1)
-                                                         (blink-cursor-mode -1)
-                                                         (doom-modeline-mode -1)))
-#+end_src
-
 * PERSPECTIVE
-[[https://github.com/nex3/perspective-el][Perspective]] provides multiple named workspaces (or "perspectives") in Emacs, similar to multiple desktops in window managers.  Each perspective has its own buffer list and its own window layout, along with some other isolated niceties, like the [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Xref.html][xref]] ring.
 
 #+Begin_src emacs-lisp
 (use-package perspective
@@ -984,21 +832,11 @@ Adding rainbow coloring to parentheses.
 
 #+end_src
 
-* RAINBOW MODE
-Display the actual color as a background for any hex color value (ex. #ffffff).  The code block below enables rainbow-mode in all programming modes (prog-mode) as well as org-mode, which is why rainbow works in this document.  
-
-#+begin_src emacs-lisp
-(use-package rainbow-mode
-  :diminish
-  :hook org-mode prog-mode)
-#+end_src
-
 * SANE DEFAULTS
-The following settings are simple modes that are enabled (or disabled) so that Emacs functions more like you would expect a proper editor/IDE to function.
 
 #+begin_src emacs-lisp
 (delete-selection-mode 1)    ;; You can select text and delete it by typing.
-(electric-indent-mode -1)    ;; Turn off the weird indenting that Emacs does by default.
+(electric-indent-mode 1)    ;; Enable smart indentation
 (electric-pair-mode 1)       ;; Turns on automatic parens pairing
 ;; The following prevents <> from auto-pairing when electric-pair-mode is on.
 ;; Otherwise, org-tempo is broken when you try to <s TAB...
@@ -1019,61 +857,7 @@ The following settings are simple modes that are enabled (or disabled) so that E
 #+end_src
 
 * SHELLS AND TERMINALS
-
-** Eshell
-Eshell is an Emacs 'shell' that is written in Elisp.
-
-#+begin_src emacs-lisp
-;; The eshell prompt
-(setopt eshell-prompt-function 'fancy-shell)
-(setopt eshell-prompt-regexp "^[^#$\n]* [$#] ")
-(setopt eshell-highlight-prompt nil)
-
-;; Disabling company mode in eshell, because it's annoying.
-(setq company-global-modes '(not eshell-mode))
-
-;; Adding a keybinding for 'pcomplete-list' on F9 key.
-(add-hook 'eshell-mode-hook
-          (lambda ()
-            (define-key eshell-mode-map (kbd "<f9>") #'pcomplete-list)))
-
-;; A function for easily creating multiple buffers of 'eshell'.
-;; NOTE: `C-u M-x eshell` would also create new 'eshell' buffers.
-(defun eshell-new (name)
-  "Create new eshell buffer named NAME."
-  (interactive "sName: ")
-  (setq name (concat "$" name))
-  (eshell)
-  (rename-buffer name))
-
-(use-package eshell-toggle
-  :custom
-  (eshell-toggle-size-fraction 3)
-  (eshell-toggle-use-projectile-root t)
-  (eshell-toggle-run-command nil)
-  (eshell-toggle-init-function #'eshell-toggle-init-ansi-term))
-
-  (use-package eshell-syntax-highlighting
-    :after esh-mode
-    :config
-    (eshell-syntax-highlighting-global-mode +1))
-
-  ;; eshell-syntax-highlighting -- adds fish/zsh-like syntax highlighting.
-  ;; eshell-rc-script -- your profile for eshell; like a bashrc for eshell.
-  ;; eshell-aliases-file -- sets an aliases file for the eshell.
-
-  (setq eshell-rc-script (concat user-emacs-directory "eshell/profile")
-        eshell-aliases-file (concat user-emacs-directory "eshell/aliases")
-        eshell-history-size 5000
-        eshell-buffer-maximum-lines 5000
-        eshell-hist-ignoredups t
-        eshell-scroll-to-bottom-on-input t
-        eshell-destroy-buffer-when-process-dies t
-        eshell-visual-commands'("bash" "fish" "htop" "ssh" "top" "zsh"))
-#+end_src
-
 ** Vterm
-Vterm is a terminal emulator within Emacs.  The 'shell-file-name' setting sets the shell to be used in M-x shell, M-x term, M-x ansi-term and M-x vterm.  By default, the shell is set to 'fish' but could change it to 'bash' or 'zsh' if you prefer.
 
 #+begin_src emacs-lisp
 (use-package vterm
@@ -1135,21 +919,6 @@ Provides the ability to have a custom theme and also installs Doom Themes. There
   (doom-themes-org-config))
 #+end_src
 
-* TLDR
-
-#+begin_src emacs-lisp
-(use-package tldr)
-
-#+end_src
-
-* TRANSPARENCY
-With Emacs version 29, true transparency has been added.  I have turned transparency off by setting the alpha to '100'.  If you want some slight transparency, try setting alpha to '90'.  Of course, if you set alpha to '0', the background of Emacs would completely transparent.
-
-#+begin_src emacs-lisp
-(add-to-list 'default-frame-alist '(alpha-background . 100)) ; For all new frames henceforth
-
-#+end_src
-
 * WHICH-KEY
 #+begin_src emacs-lisp
 (use-package which-key
@@ -1170,59 +939,4 @@ With Emacs version 29, true transparency has been added.  I have turned transpar
 	  which-key-max-description-length 25
 	  which-key-allow-imprecise-window-fit nil
 	  which-key-separator " → " ))
-#+end_src
-
-
-* DEV-MODES
-#+begin_src emacs-lisp
-;;(use-package lsp-mode
-;;  :ensure t
-;;  :commands lsp)
-#+end_src
-
-* TEST
-#+begin_src emacs-lisp
-(defun reader ()
-  (interactive)
-  (let ((choices '(("First"  . "Hi!")
-                   ("Second" . 'second-choice)
-                   ("Third"  . 'third-choice))))
-    (alist-get
-     (completing-read "Choose: " choices)
-     choices nil nil 'message)))
-
-(defun github-code-search ()
-  "Search code on github for a given language."
-  (interactive)
-  (let ((language (completing-read
-                   "Language: "
-                   '("Emacs Lisp" "Python"  "Clojure" "R")))
-        (code (read-string "Code: ")))
-    (browse-url
-     (concat "https://github.com/search?l=" language
-             "&type=code&q=" code))))
-  
-(defun dm-search ()
-  "Search various search engines."
-  (interactive)
-  (let ((engine (completing-read
-                 "Search Engine: "
-                 '("Arch Wiki" 
-                   "Bing"
-                   "Google"
-                   "Wikipedia")))
-        (query (read-string "Query: ")))
-    (if (equal engine "Google")
-      (browse-url
-       (concat "https://www.google.com/search?q=" query)))))
-
-(defun jt/key-value-completing (choice)                                     
-  (interactive
-   (list
-    (let ((completions '(("1" "One") 
-                         ("2" "Two")
-                         ("3" "Three"))))              
-      (cadr (assoc (completing-read "Choose: " completions) completions)))))
-  (message "You choose `%s'" choice))
-
 #+end_src

@@ -1,7 +1,6 @@
 (add-to-list 'load-path "~/.config/emacs/scripts/")
 
 (require 'elpaca-setup)  ;; The Elpaca Package Manager
-(require 'app-launchers) ;; Use emacs as a run launcher like dmenu (experimental)
 (require 'buffer-move)   ;; Buffer-move for better window management
 (require 'eshell-prompt) ;; A fancy prompt for eshell
 
@@ -9,11 +8,12 @@
 (setq package-enable-at-startup nil)
 (setq package-install-upgrade-built-in t)
 
-(elpaca seq)
 (elpaca transient)
-(elpaca eldoc)
 (elpaca flymake)
 (elpaca jsonrpc)
+
+;; Maximize the Emacs frame on startup (works on macOS)
+(add-hook 'window-setup-hook #'toggle-frame-maximized)
 
 (use-package exec-path-from-shell
   :if (memq window-system '(mac ns x))
@@ -85,11 +85,6 @@
     (evil-define-key 'normal peep-dired-mode-map (kbd "k") 'peep-dired-prev-file)
 )
 
-(use-package drag-stuff
-  :init
-  (drag-stuff-global-mode 1)
-  (drag-stuff-define-keys))
-
 (setq ediff-split-window-function 'split-window-horizontally
       ediff-window-setup-function 'ediff-setup-windows-plain)
 
@@ -99,36 +94,6 @@
   (define-key ediff-mode-map "k" 'ediff-previous-difference))
 
 (add-hook 'ediff-mode-hook 'jt-ediff-hook)
-
-(use-package elfeed
-  :config
-  (setq elfeed-search-feed-face ":foreground #ffffff :weight bold"
-        elfeed-feeds (quote
-                       (("https://www.reddit.com/r/linux.rss" reddit linux)
-                        ("https://www.reddit.com/r/commandline.rss" reddit commandline)
-                        ("https://www.reddit.com/r/distrotube.rss" reddit distrotube)
-                        ("https://www.reddit.com/r/emacs.rss" reddit emacs)
-                        ("https://www.gamingonlinux.com/article_rss.php" gaming linux)
-                        ("https://hackaday.com/blog/feed/" hackaday linux)
-                        ("https://opensource.com/feed" opensource linux)
-                        ("https://linux.softpedia.com/backend.xml" softpedia linux)
-                        ("https://itsfoss.com/feed/" itsfoss linux)
-                        ("https://www.zdnet.com/topic/linux/rss.xml" zdnet linux)
-                        ("https://www.phoronix.com/rss.php" phoronix linux)
-                        ("http://feeds.feedburner.com/d0od" omgubuntu linux)
-                        ("https://www.computerworld.com/index.rss" computerworld linux)
-                        ("https://www.networkworld.com/category/linux/index.rss" networkworld linux)
-                        ("https://www.techrepublic.com/rssfeeds/topic/open-source/" techrepublic linux)
-                        ("https://betanews.com/feed" betanews linux)
-                        ("http://lxer.com/module/newswire/headlines.rss" lxer linux)
-                        ("https://distrowatch.com/news/dwd.xml" distrowatch linux)))))
- 
-
-(use-package elfeed-goodies
-  :init
-  (elfeed-goodies/setup)
-  :config
-  (setq elfeed-goodies/entry-pane-size 0.5))
 
 (use-package ellama
   :init
@@ -162,30 +127,6 @@
   :config
   (setq ellama-sessions-directory "~/.config/emacs/ellama-sessions/"
         ellama-sessions-auto-save t))
-
-(use-package eradio
-  :init
-  (setq eradio-player '("mpv" "--no-video" "--no-terminal"))
-  :config
-  (setq eradio-channels '(("Totally 80s FM" . "https://zeno.fm/radio/totally-80s-fm/")
-                          ("Oldies Radio 50s-60s" . "https://zeno.fm/radio/oldies-radio-50s-60s/")
-                          ("Oldies Radio 70s" . "https://zeno.fm/radio/oldies-radio-70s/")
-                          ("Unlimited 80s" . "https://zeno.fm/radio/unlimited80s/")
-                          ("80s Hits" . "https://zeno.fm/radio/80shits/")
-                          ("90s Hits" . "https://zeno.fm/radio/90s_HITS/")
-                          ("2000s Pop" . "https://zeno.fm/radio/2000s-pop/")
-                          ("The 2000s" . "https://zeno.fm/radio/the-2000s/")
-                          ("Hits 2010s" . "https://zeno.fm/radio/helia-hits-2010/")
-                          ("Classical Radio" . "https://zeno.fm/radio/classical-radio/")
-                          ("Classical Relaxation" . "https://zeno.fm/radio/radio-christmas-non-stop-classical/")
-                          ("Classic Rock" . "https://zeno.fm/radio/classic-rockdnb2sav8qs8uv/")
-                          ("Gangsta49" . "https://zeno.fm/radio/gangsta49/")
-                          ("HipHop49" . "https://zeno.fm/radio/hiphop49/")
-                          ("Madhouse Country Radio" . "https://zeno.fm/radio/madhouse-country-radio/")
-                          ("PopMusic" . "https://zeno.fm/radio/popmusic74vyurvmug0uv/")
-                          ("PopStars" . "https://zeno.fm/radio/popstars/")
-                          ("RadioMetal" . "https://zeno.fm/radio/radio-metal/")
-                          ("RocknRoll Radio" . "https://zeno.fm/radio/rocknroll-radio994c7517qs8uv/"))))
 
 ;; Expands to: (elpaca evil (use-package evil :demand t))
 (use-package evil
@@ -225,17 +166,17 @@
   :init (global-flycheck-mode))
 
 (set-face-attribute 'default nil
-  :font "Iosevka Term"
-  :height 190
-  :weight 'medium)
+  :font "Monaspace Neon"
+  :height 180
+  :weight 'light)
 (set-face-attribute 'variable-pitch nil
-  :font "Iosevka Term"
-  :height 190
-  :weight 'medium)
+  :font "Monaspace Neon Var"
+  :height 180
+  :weight 'light)
 (set-face-attribute 'fixed-pitch nil
-  :font "Iosevka Term"
-  :height 190
-  :weight 'medium)
+  :font "Monaspace Neon"
+  :height 180
+  :weight 'light)
 ;; Makes commented text and keywords italics.
 ;; This is working in emacsclient but not emacs.
 ;; Your font must have an italic face available.
@@ -258,7 +199,6 @@
 (use-package general
   :config
   (general-evil-setup)
-  
   ;; set up 'SPC' as the global leader key
   (general-create-definer jt/leader-keys
     :states '(normal insert visual emacs)
@@ -269,7 +209,7 @@
   (jt/leader-keys
     "SPC" '(counsel-M-x :wk "Counsel M-x")
     "." '(find-file :wk "Find file")
-    "=" '(perspective-map :wk "Perspective") ;; Lists all the perspective keybindings
+    "=" '(perspective-map :wk "Perspective")
     "TAB TAB" '(comment-line :wk "Comment lines")
     "u" '(universal-argument :wk "Universal argument"))
 
@@ -283,7 +223,7 @@
     "a p" '(ellama-provider-select :wk "Ellama provider select")
     "a s" '(ellama-summarize :wk "Ellama summarize region")
     "a t" '(ellama-translate :wk "Ellama translate region"))
-   
+
   (jt/leader-keys
     "b" '(:ignore t :wk "Bookmarks/Buffers")
     "b b" '(switch-to-buffer :wk "Switch to buffer")
@@ -452,8 +392,6 @@
     "s" '(:ignore t :wk "Search")
     "s d" '(dictionary-search :wk "Search dictionary")
     "s m" '(man :wk "Man pages")
-    "s o" '(pdf-occur :wk "Pdf search lines matching STRING")
-    "s t" '(tldr :wk "Lookup TLDR docs for a command")
     "s w" '(woman :wk "Similar to man but doesn't require man"))
 
   (jt/leader-keys
@@ -613,15 +551,6 @@
                  (make-local-variable 'auto-hscroll-mode)
                  (setq auto-hscroll-mode nil)))))
 
-(use-package org-journal
-  :ensure t
-  :config
-  (setq org-journal-dir "~/Org/journal/"      ;; Where your journal files go
-        org-journal-file-type 'daily           ;; One file per day
-        org-journal-date-format "%A, %Y-%m-%d" ;; Nice readable dates
-        org-journal-file-format "%Y-%m-%d.org" ;; Files like 2025-04-28.org
-        org-journal-enable-agenda-integration t)) ;; Show in org-agenda if you want
-
 (setq org-agenda-files '("~/Org/agenda.org"))
 
 (add-hook 'org-mode-hook 'org-indent-mode)
@@ -639,29 +568,11 @@
  '(org-level-6 ((t (:inherit outline-5 :height 1.2))))
  '(org-level-7 ((t (:inherit outline-5 :height 1.1)))))
 
-(require 'org-tempo)
-
 (setq org-src-preserve-indentation t)
 
 (use-package toc-org
     :commands toc-org-enable
     :init (add-hook 'org-mode-hook 'toc-org-enable))
-
-(use-package pdf-tools
-  :defer t
-  :commands (pdf-loader-install)
-  :mode "\\.pdf\\'"
-  :bind (:map pdf-view-mode-map
-              ("j" . pdf-view-next-line-or-next-page)
-              ("k" . pdf-view-previous-line-or-previous-page)
-              ("C-=" . pdf-view-enlarge)
-              ("C--" . pdf-view-shrink))
-  :init (pdf-loader-install)
-  :config (add-to-list 'revert-without-query ".pdf"))
-
-(add-hook 'pdf-view-mode-hook #'(lambda () (interactive) (display-line-numbers-mode -1)
-                                                         (blink-cursor-mode -1)
-                                                         (doom-modeline-mode -1)))
 
 (use-package perspective
   :custom
@@ -693,13 +604,10 @@
   :hook ((emacs-lisp-mode . rainbow-delimiters-mode)
          (clojure-mode . rainbow-delimiters-mode)))
 
-(use-package rainbow-mode
-  :diminish
-  :hook org-mode prog-mode)
-
-(delete-selection-mode 1)    ;; You can select text and delete it by typing.
-(electric-indent-mode -1)    ;; Turn off the weird indenting that Emacs does by default.
+(delete-selection-mode 1) 
+(electric-indent-mode 1)    
 (electric-pair-mode 1)       ;; Turns on automatic parens pairing
+
 ;; The following prevents <> from auto-pairing when electric-pair-mode is on.
 ;; Otherwise, org-tempo is broken when you try to <s TAB...
 (add-hook 'org-mode-hook (lambda ()
@@ -716,53 +624,6 @@
 (setq use-file-dialog nil)   ;; No file dialog
 (setq use-dialog-box nil)    ;; No dialog box
 (setq pop-up-windows nil)    ;; No popup windows
-
-;; The eshell prompt
-(setopt eshell-prompt-function 'fancy-shell)
-(setopt eshell-prompt-regexp "^[^#$\n]* [$#] ")
-(setopt eshell-highlight-prompt nil)
-
-;; Disabling company mode in eshell, because it's annoying.
-(setq company-global-modes '(not eshell-mode))
-
-;; Adding a keybinding for 'pcomplete-list' on F9 key.
-(add-hook 'eshell-mode-hook
-          (lambda ()
-            (define-key eshell-mode-map (kbd "<f9>") #'pcomplete-list)))
-
-;; A function for easily creating multiple buffers of 'eshell'.
-;; NOTE: `C-u M-x eshell` would also create new 'eshell' buffers.
-(defun eshell-new (name)
-  "Create new eshell buffer named NAME."
-  (interactive "sName: ")
-  (setq name (concat "$" name))
-  (eshell)
-  (rename-buffer name))
-
-(use-package eshell-toggle
-  :custom
-  (eshell-toggle-size-fraction 3)
-  (eshell-toggle-use-projectile-root t)
-  (eshell-toggle-run-command nil)
-  (eshell-toggle-init-function #'eshell-toggle-init-ansi-term))
-
-  (use-package eshell-syntax-highlighting
-    :after esh-mode
-    :config
-    (eshell-syntax-highlighting-global-mode +1))
-
-  ;; eshell-syntax-highlighting -- adds fish/zsh-like syntax highlighting.
-  ;; eshell-rc-script -- your profile for eshell; like a bashrc for eshell.
-  ;; eshell-aliases-file -- sets an aliases file for the eshell.
-
-  (setq eshell-rc-script (concat user-emacs-directory "eshell/profile")
-        eshell-aliases-file (concat user-emacs-directory "eshell/aliases")
-        eshell-history-size 5000
-        eshell-buffer-maximum-lines 5000
-        eshell-hist-ignoredups t
-        eshell-scroll-to-bottom-on-input t
-        eshell-destroy-buffer-when-process-dies t
-        eshell-visual-commands'("bash" "fish" "htop" "ssh" "top" "zsh"))
 
 (use-package vterm
 :config
@@ -806,10 +667,6 @@
   ;; Corrects (and improves) org-mode's native fontification.
   (doom-themes-org-config))
 
-(use-package tldr)
-
-(add-to-list 'default-frame-alist '(alpha-background . 100)) ; For all new frames henceforth
-
 (use-package which-key
   :init
     (which-key-mode 1)
@@ -828,50 +685,3 @@
 	  which-key-max-description-length 25
 	  which-key-allow-imprecise-window-fit nil
 	  which-key-separator " → " ))
-
-;;(use-package lsp-mode
-;;  :ensure t
-;;  :commands lsp)
-
-(defun reader ()
-  (interactive)
-  (let ((choices '(("First"  . "Hi!")
-                   ("Second" . 'second-choice)
-                   ("Third"  . 'third-choice))))
-    (alist-get
-     (completing-read "Choose: " choices)
-     choices nil nil 'message)))
-
-(defun github-code-search ()
-  "Search code on github for a given language."
-  (interactive)
-  (let ((language (completing-read
-                   "Language: "
-                   '("Emacs Lisp" "Python"  "Clojure" "R")))
-        (code (read-string "Code: ")))
-    (browse-url
-     (concat "https://github.com/search?l=" language
-             "&type=code&q=" code))))
-  
-(defun dm-search ()
-  "Search various search engines."
-  (interactive)
-  (let ((engine (completing-read
-                 "Search Engine: "
-                 '("Arch Wiki" 
-                   "Bing"
-                   "Google"
-                   "Wikipedia")))
-        (query (read-string "Query: ")))
-    (if (equal engine "Google")
-      (browse-url
-       (concat "https://www.google.com/search?q=" query)))))
-
-(defun jt/key-value-completing (choice)                                     
-  (interactive
-   (list
-    (let ((completions '(("1" "One") 
-                         ("2" "Two")
-                         ("3" "Three"))))              
-      (cadr (assoc (completing-read "Choose: " completions) completions)))))
-  (message "You choose `%s'" choice))

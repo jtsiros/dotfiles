@@ -285,7 +285,7 @@ This package implements hiding or abbreviation of the modeline displays (lighter
 * FONTS
 #+begin_src emacs-lisp
 (set-face-attribute 'default nil
-  :font "Monaspace Neon"
+  :font "JetBrainsMono Nerd Font Mono"
   :height 180
   :weight 'light)
 (set-face-attribute 'variable-pitch nil
@@ -293,7 +293,7 @@ This package implements hiding or abbreviation of the modeline displays (lighter
   :height 180
   :weight 'light)
 (set-face-attribute 'fixed-pitch nil
-  :font "Monaspace Neon"
+  :font "JetBrainsMono Nerd Font Mono"
   :height 180
   :weight 'light)
 ;; Makes commented text and keywords italics.
@@ -912,11 +912,15 @@ Provides the ability to have a custom theme and also installs Doom Themes. There
   (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
         doom-themes-enable-italic t) ; if nil, italics is universally disabled
   ;; Sets the default theme to load!!! 
-  (load-theme 'doom-challenger-deep t)
+  ;;(load-theme 'doom-challenger-deep t)
   ;; Enable custom neotree theme (all-the-icons must be installed!)
   (doom-themes-neotree-config)
   ;; Corrects (and improves) org-mode's native fontification.
   (doom-themes-org-config))
+
+(use-package fleetish-theme
+  :config
+  (load-theme 'fleetish t))
 #+end_src
 
 * WHICH-KEY

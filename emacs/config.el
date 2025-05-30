@@ -166,7 +166,7 @@
   :init (global-flycheck-mode))
 
 (set-face-attribute 'default nil
-  :font "Monaspace Neon"
+  :font "JetBrainsMono Nerd Font Mono"
   :height 180
   :weight 'light)
 (set-face-attribute 'variable-pitch nil
@@ -174,7 +174,7 @@
   :height 180
   :weight 'light)
 (set-face-attribute 'fixed-pitch nil
-  :font "Monaspace Neon"
+  :font "JetBrainsMono Nerd Font Mono"
   :height 180
   :weight 'light)
 ;; Makes commented text and keywords italics.
@@ -506,6 +506,11 @@
 (use-package go-mode
   :ensure t)
 
+;; Auto-format Go code on save using Eglot (LSP)
+(add-hook 'go-mode-hook
+          (lambda ()
+            (add-hook 'before-save-hook #'eglot-format-buffer nil t)))
+
 (use-package yaml-mode
   :ensure t)
 
@@ -604,10 +609,9 @@
   :hook ((emacs-lisp-mode . rainbow-delimiters-mode)
          (clojure-mode . rainbow-delimiters-mode)))
 
-(delete-selection-mode 1) 
-(electric-indent-mode 1)    
+(delete-selection-mode 1)    ;; You can select text and delete it by typing.
+(electric-indent-mode 1)    ;; Enable smart indentation
 (electric-pair-mode 1)       ;; Turns on automatic parens pairing
-
 ;; The following prevents <> from auto-pairing when electric-pair-mode is on.
 ;; Otherwise, org-tempo is broken when you try to <s TAB...
 (add-hook 'org-mode-hook (lambda ()
@@ -661,11 +665,15 @@
   (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
         doom-themes-enable-italic t) ; if nil, italics is universally disabled
   ;; Sets the default theme to load!!! 
-  (load-theme 'doom-challenger-deep t)
+  ;;(load-theme 'doom-challenger-deep t)
   ;; Enable custom neotree theme (all-the-icons must be installed!)
   (doom-themes-neotree-config)
   ;; Corrects (and improves) org-mode's native fontification.
   (doom-themes-org-config))
+
+(use-package fleetish-theme
+  :config
+  (load-theme 'fleetish t))
 
 (use-package which-key
   :init

@@ -14,13 +14,8 @@
      "636b135e4b7c86ac41375da39ade929e2bd6439de8901f53f88fde7dd5ac3561"
      "1f669e8abe4dc2855268c9a607b5e350e2811b3c5afd09af5939ff0c01a89c5a"
      default))
- '(org-agenda-files
-   '("/Users/jtsiros/Org/agenda.org"
-     "/Users/jtsiros/Org/journal/2025-04-28.org"))
- '(package-selected-packages '(lsp-mode eglot))
- '(send-mail-function 'smtpmail-send-it)
- '(smtpmail-smtp-server "smtp.1and1.com")
- '(smtpmail-smtp-service 587))
+ '(org-agenda-files '("/Users/jtsiros/Org/agenda.org"))
+ '(package-selected-packages '(lsp-mode eglot)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

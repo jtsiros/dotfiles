@@ -51,7 +51,7 @@
   (setq initial-buffer-choice 'dashboard-open)
   (setq dashboard-set-heading-icons t)
   (setq dashboard-set-file-icons t)
-  (setq dashboard-banner-logo-title "JT Emacs Dev")
+  (setq dashboard-banner-logo-title "E M Λ C S")
   (setq dashboard-startup-banner 'logo) ;; use standard emacs logo as banner
   (setq dashboard-center-content nil) ;; set to 't' for centered content
   (setq dashboard-projects-backend 'projectile)
@@ -346,20 +346,11 @@
 
   (jt/leader-keys
     "m" '(:ignore t :wk "Org")
-    "m a" '(org-agenda :wk "Org agenda")
     "m e" '(org-export-dispatch :wk "Org export dispatch")
     "m i" '(org-toggle-item :wk "Org toggle item")
     "m t" '(org-todo :wk "Org todo")
     "m B" '(org-babel-tangle :wk "Org babel tangle")
     "m T" '(org-todo-list :wk "Org todo list"))
-
-  (jt/leader-keys
-    "m j" '(:ignore t :wk "Org Journal")
-    "m j j" '(org-journal-new-entry :wk "New journal entry")
-    "m j d" '(org-journal-new-date-entry :wk "New entry for date")
-    "m j s" '(org-journal-search :wk "Search journal")
-    "m j f" '(org-journal-open-current-journal-file :wk "Open today's file"))
-
 
   (jt/leader-keys
     "m b" '(:ignore t :wk "Tables")
@@ -372,7 +363,6 @@
   (jt/leader-keys
     "o" '(:ignore t :wk "Open")
     "o d" '(dashboard-open :wk "Dashboard")
-    "o e" '(elfeed :wk "Elfeed RSS")
     "o f" '(make-frame :wk "Open buffer in new frame")
     "o F" '(select-frame-by-name :wk "Select frame by name"))
 
@@ -380,13 +370,6 @@
   ;; set for us, so no need to specify each individually.
   (jt/leader-keys
     "p" '(projectile-command-map :wk "Projectile"))
-  
-  (jt/leader-keys
-    "r" '(:ignore t :wk "Radio")
-    "r p" '(eradio-play :wk "Eradio play")
-    "r s" '(eradio-stop :wk "Eradio stop")
-    "r t" '(eradio-toggle :wk "Eradio toggle"))
-
 
   (jt/leader-keys
     "s" '(:ignore t :wk "Search")
@@ -394,9 +377,14 @@
     "s m" '(man :wk "Man pages")
     "s w" '(woman :wk "Similar to man but doesn't require man"))
 
+(jt/leader-keys
+    "s" '(:ignore t :wk "Search")
+    "s d" '(dictionary-search :wk "Search dictionary")
+    "s m" '(man :wk "Man pages")
+    "s w" '(woman :wk "Similar to man but doesn't require man"))
+
   (jt/leader-keys
     "t" '(:ignore t :wk "Toggle")
-    "t e" '(eshell-toggle :wk "Toggle eshell")
     "t f" '(flycheck-mode :wk "Toggle flycheck")
     "t l" '(display-line-numbers-mode :wk "Toggle line numbers")
     "t n" '(neotree-toggle :wk "Toggle neotree file viewer")
@@ -479,14 +467,18 @@
 (use-package ivy-rich
   :after ivy
   :ensure t
-  :init (ivy-rich-mode 1) ;; this gets us descriptions in M-x.
+  :init
+  (ivy-rich-mode 1) ;; enables rich display
   :custom
-  (ivy-virtual-abbreviate 'full
-   ivy-rich-switch-buffer-align-virtual-buffer t
-   ivy-rich-path-style 'abbrev)
+  (ivy-virtual-abbreviate 'full)
+  (ivy-rich-switch-buffer-align-virtual-buffer t)
+  (ivy-rich-path-style 'abbrev)
   :config
-  (ivy-set-display-transformer 'ivy-switch-buffer
-                               'ivy-rich-switch-buffer-transformer))
+  ;; This should only be called after ivy-rich is fully loaded
+  (require 'ivy-rich) ;; ensure the functions are loaded
+  ;; (ivy-set-display-transformer 'ivy-switch-buffer
+  ;;                              'ivy-rich-switch-buffer-transformer))
+  )
 
 (use-package eglot
   :hook
@@ -513,9 +505,6 @@
 
 (use-package yaml-mode
   :ensure t)
-
-(use-package bicep-mode
-  :ensure (bicep-mode :host github :repo "christiaan-janssen/bicep-mode"))
 
 (use-package terraform-mode
   :ensure t)
@@ -555,8 +544,6 @@
                  (setq word-wrap nil)
                  (make-local-variable 'auto-hscroll-mode)
                  (setq auto-hscroll-mode nil)))))
-
-(setq org-agenda-files '("~/Org/agenda.org"))
 
 (add-hook 'org-mode-hook 'org-indent-mode)
 (use-package org-bullets)
@@ -605,10 +592,6 @@
   :config
   (projectile-mode 1))
 
-(use-package rainbow-delimiters
-  :hook ((emacs-lisp-mode . rainbow-delimiters-mode)
-         (clojure-mode . rainbow-delimiters-mode)))
-
 (delete-selection-mode 1)    ;; You can select text and delete it by typing.
 (electric-indent-mode 1)    ;; Enable smart indentation
 (electric-pair-mode 1)       ;; Turns on automatic parens pairing
@@ -628,6 +611,7 @@
 (setq use-file-dialog nil)   ;; No file dialog
 (setq use-dialog-box nil)    ;; No dialog box
 (setq pop-up-windows nil)    ;; No popup windows
+(setq ring-bell-function 'ignore) ;; disable sounds
 
 (use-package vterm
 :config

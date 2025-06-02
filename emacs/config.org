@@ -33,7 +33,6 @@
 - [[#modeline][MODELINE]]
 - [[#neotree][NEOTREE]]
 - [[#org-mode][ORG MODE]]
-  - [[#agenda][Agenda]]
   - [[#bullets][Bullets]]
   - [[#diminish-org-indent-mode][Diminish Org Indent Mode]]
   - [[#org-level-headers][Org Level Headers]]
@@ -41,7 +40,6 @@
   - [[#toc-org][Toc-Org]]
 - [[#perspective][PERSPECTIVE]]
 - [[#projectile][PROJECTILE]]
-- [[#rainbow-delimiters][RAINBOW DELIMITERS]]
 - [[#sane-defaults][SANE DEFAULTS]]
 - [[#shells-and-terminals][SHELLS AND TERMINALS]]
   - [[#vterm][Vterm]]
@@ -137,7 +135,7 @@ Emacs Dashboard is an extensible startup screen showing you recent files, bookma
   (setq initial-buffer-choice 'dashboard-open)
   (setq dashboard-set-heading-icons t)
   (setq dashboard-set-file-icons t)
-  (setq dashboard-banner-logo-title "JT Emacs Dev")
+  (setq dashboard-banner-logo-title "E M Λ C S")
   (setq dashboard-startup-banner 'logo) ;; use standard emacs logo as banner
   (setq dashboard-center-content nil) ;; set to 't' for centered content
   (setq dashboard-projects-backend 'projectile)
@@ -474,20 +472,11 @@ You can use the bindings CTRL plus =/- for zooming in/out.  You can also use CTR
 
   (jt/leader-keys
     "m" '(:ignore t :wk "Org")
-    "m a" '(org-agenda :wk "Org agenda")
     "m e" '(org-export-dispatch :wk "Org export dispatch")
     "m i" '(org-toggle-item :wk "Org toggle item")
     "m t" '(org-todo :wk "Org todo")
     "m B" '(org-babel-tangle :wk "Org babel tangle")
     "m T" '(org-todo-list :wk "Org todo list"))
-
-  (jt/leader-keys
-    "m j" '(:ignore t :wk "Org Journal")
-    "m j j" '(org-journal-new-entry :wk "New journal entry")
-    "m j d" '(org-journal-new-date-entry :wk "New entry for date")
-    "m j s" '(org-journal-search :wk "Search journal")
-    "m j f" '(org-journal-open-current-journal-file :wk "Open today's file"))
-
 
   (jt/leader-keys
     "m b" '(:ignore t :wk "Tables")
@@ -500,7 +489,6 @@ You can use the bindings CTRL plus =/- for zooming in/out.  You can also use CTR
   (jt/leader-keys
     "o" '(:ignore t :wk "Open")
     "o d" '(dashboard-open :wk "Dashboard")
-    "o e" '(elfeed :wk "Elfeed RSS")
     "o f" '(make-frame :wk "Open buffer in new frame")
     "o F" '(select-frame-by-name :wk "Select frame by name"))
 
@@ -508,13 +496,6 @@ You can use the bindings CTRL plus =/- for zooming in/out.  You can also use CTR
   ;; set for us, so no need to specify each individually.
   (jt/leader-keys
     "p" '(projectile-command-map :wk "Projectile"))
-  
-  (jt/leader-keys
-    "r" '(:ignore t :wk "Radio")
-    "r p" '(eradio-play :wk "Eradio play")
-    "r s" '(eradio-stop :wk "Eradio stop")
-    "r t" '(eradio-toggle :wk "Eradio toggle"))
-
 
   (jt/leader-keys
     "s" '(:ignore t :wk "Search")
@@ -522,9 +503,14 @@ You can use the bindings CTRL plus =/- for zooming in/out.  You can also use CTR
     "s m" '(man :wk "Man pages")
     "s w" '(woman :wk "Similar to man but doesn't require man"))
 
+(jt/leader-keys
+    "s" '(:ignore t :wk "Search")
+    "s d" '(dictionary-search :wk "Search dictionary")
+    "s m" '(man :wk "Man pages")
+    "s w" '(woman :wk "Similar to man but doesn't require man"))
+
   (jt/leader-keys
     "t" '(:ignore t :wk "Toggle")
-    "t e" '(eshell-toggle :wk "Toggle eshell")
     "t f" '(flycheck-mode :wk "Toggle flycheck")
     "t l" '(display-line-numbers-mode :wk "Toggle line numbers")
     "t n" '(neotree-toggle :wk "Toggle neotree file viewer")
@@ -606,47 +592,48 @@ Adding highlights to TODO and related words.
 + Ivy-rich allows us to add descriptions alongside the commands in M-x.
 
 #+begin_src emacs-lisp
-(use-package counsel
-  :after ivy
-  :diminish
-  :config 
-    (counsel-mode)
-    (setq ivy-initial-inputs-alist nil)) ;; removes starting ^ regex in M-x
+  (use-package counsel
+    :after ivy
+    :diminish
+    :config 
+      (counsel-mode)
+      (setq ivy-initial-inputs-alist nil)) ;; removes starting ^ regex in M-x
 
-(use-package ivy
-  :bind
-  ;; ivy-resume resumes the last Ivy-based completion.
-  (("C-c C-r" . ivy-resume)
-   ("C-x B" . ivy-switch-buffer-other-window))
-  :diminish
-  :custom
-  (setq ivy-use-virtual-buffers t)
-  (setq ivy-count-format "(%d/%d) ")
-  (setq enable-recursive-minibuffers t)
-  :config
-  (ivy-mode))
+  (use-package ivy
+    :bind
+    ;; ivy-resume resumes the last Ivy-based completion.
+    (("C-c C-r" . ivy-resume)
+     ("C-x B" . ivy-switch-buffer-other-window))
+    :diminish
+    :custom
+    (setq ivy-use-virtual-buffers t)
+    (setq ivy-count-format "(%d/%d) ")
+    (setq enable-recursive-minibuffers t)
+    :config
+    (ivy-mode))
 
-(use-package all-the-icons-ivy-rich
-  :ensure t
-  :init (all-the-icons-ivy-rich-mode 1))
+  (use-package all-the-icons-ivy-rich
+    :ensure t
+    :init (all-the-icons-ivy-rich-mode 1))
 
-(use-package ivy-rich
-  :after ivy
-  :ensure t
-  :init (ivy-rich-mode 1) ;; this gets us descriptions in M-x.
-  :custom
-  (ivy-virtual-abbreviate 'full
-   ivy-rich-switch-buffer-align-virtual-buffer t
-   ivy-rich-path-style 'abbrev)
-  :config
-  (ivy-set-display-transformer 'ivy-switch-buffer
-                               'ivy-rich-switch-buffer-transformer))
-
+  (use-package ivy-rich
+    :after ivy
+    :ensure t
+    :init
+    (ivy-rich-mode 1) ;; enables rich display
+    :custom
+    (ivy-virtual-abbreviate 'full)
+    (ivy-rich-switch-buffer-align-virtual-buffer t)
+    (ivy-rich-path-style 'abbrev)
+    :config
+    ;; This should only be called after ivy-rich is fully loaded
+    (require 'ivy-rich) ;; ensure the functions are loaded
+    ;; (ivy-set-display-transformer 'ivy-switch-buffer
+    ;;                              'ivy-rich-switch-buffer-transformer))
+    )
 #+end_src
 
 * LANGUAGE SUPPORT
-Emacs has built-in programming language modes for Lisp, Scheme, DSSSL, Ada, ASM, AWK, C, C++, Fortran, Icon, IDL (CORBA), IDLWAVE, Java, Javascript, M4, Makefiles, Metafont, Modula2, Object Pascal, Objective-C, Octave, Pascal, Perl, Pike, PostScript, Prolog, Python, Ruby, Simula, SQL, Tcl, Verilog, and VHDL.  Other languages will require you to install additional modes.
-
 #+begin_src emacs-lisp
 (use-package eglot
   :hook
@@ -673,9 +660,6 @@ Emacs has built-in programming language modes for Lisp, Scheme, DSSSL, Ada, ASM,
 
 (use-package yaml-mode
   :ensure t)
-
-(use-package bicep-mode
-  :ensure (bicep-mode :host github :repo "christiaan-janssen/bicep-mode"))
 
 (use-package terraform-mode
   :ensure t)
@@ -738,11 +722,6 @@ The modeline is the bottom status bar that appears in Emacs windows.  While you 
 #+end_src
 
 * ORG MODE
-** Agenda
-#+begin_src emacs-lisp
-(setq org-agenda-files '("~/Org/agenda.org"))
-#+end_src
-
 ** Bullets
 =Org-bullets= gives us attractive bullets rather than asterisks.
 
@@ -814,26 +793,13 @@ Allows us to create a Table of Contents in our Org docs.
 #+end_src
 
 * PROJECTILE
-[[https://github.com/bbatsov/projectile][Projectile]] is a project interaction library for Emacs.  It should be noted that many projectile commands do not work if you have set "fish" as the "shell-file-name" for Emacs.  I had initially set "fish" as the "shell-file-name" in the Vterm section of this config, but oddly enough I changed it to "bin/sh" and projectile now works as expected, and Vterm still uses "fish" because my default user "sh" on my Linux system is "fish".
-
 #+begin_src emacs-lisp
 (use-package projectile
   :config
   (projectile-mode 1))
 #+end_src
 
-* RAINBOW DELIMITERS
-Adding rainbow coloring to parentheses.
-
-#+begin_src emacs-lisp
-(use-package rainbow-delimiters
-  :hook ((emacs-lisp-mode . rainbow-delimiters-mode)
-         (clojure-mode . rainbow-delimiters-mode)))
-
-#+end_src
-
 * SANE DEFAULTS
-
 #+begin_src emacs-lisp
 (delete-selection-mode 1)    ;; You can select text and delete it by typing.
 (electric-indent-mode 1)    ;; Enable smart indentation
@@ -854,6 +820,7 @@ Adding rainbow coloring to parentheses.
 (setq use-file-dialog nil)   ;; No file dialog
 (setq use-dialog-box nil)    ;; No dialog box
 (setq pop-up-windows nil)    ;; No popup windows
+(setq ring-bell-function 'ignore) ;; disable sounds
 #+end_src
 
 * SHELLS AND TERMINALS

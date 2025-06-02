@@ -1,13 +1,12 @@
-font-family = Iosevka Term
+font-family = JetBrainsMono Nerd Font Mono 
 font-size = 18.0
-adjust-cell-width = 5%
 
 theme = "nord"
 
 unfocused-split-opacity = 0.35
 unfocused-split-fill = 3A3B3C
 
-window-padding-x = 10
-window-padding-y = 10
+window-padding-x = 5
+window-padding-y = 5
 
 mouse-hide-while-typing = true

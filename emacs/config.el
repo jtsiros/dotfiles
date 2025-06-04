@@ -1,4 +1,4 @@
-(add-to-list 'load-path "~/.config/emacs/scripts/")
+(add-to-list 'load-path "~/.emacs.d/scripts/")
 
 (require 'elpaca-setup)  ;; The Elpaca Package Manager
 (require 'buffer-move)   ;; Buffer-move for better window management
@@ -12,7 +12,6 @@
 (elpaca flymake)
 (elpaca jsonrpc)
 
-;; Maximize the Emacs frame on startup (works on macOS)
 (add-hook 'window-setup-hook #'toggle-frame-maximized)
 
 (use-package exec-path-from-shell
@@ -95,6 +94,22 @@
 
 (add-hook 'ediff-mode-hook 'jt-ediff-hook)
 
+(defun my/ellama-build-project-context ()
+  "Summarize the current project into Ellama context using Ollama."
+  (interactive)
+  (let* ((project-root (project-root (project-current t)))
+         (all-files (directory-files-recursively project-root "\\.\\(rs\\|py\\|ts\\|el\\|js\\|tsx\\|jsx\\)$"))
+         (file-list (seq-take all-files 20)))
+    (message "Summarizing project context...")
+    (dolist (file file-list)
+      (ellama-prompt-on-file file "Summarize this file for project context"))))
+
+(defun my/ellama-ask-project (question)
+  "Ask Ellama a question with full project context."
+  (interactive "sAsk about project: ")
+  (let ((ctx (ellama--get-project-context)))
+    (ellama-chat question ctx)))
+
 (use-package ellama
   :init
   (setopt ellama-keymap-prefix "C-c e")  ;; keymap for all ellama functions
@@ -125,7 +140,7 @@
 				       :chat-model "mixtral"
 				       :embedding-model "nomic-embed-text"))
   :config
-  (setq ellama-sessions-directory "~/.config/emacs/ellama-sessions/"
+  (setq ellama-sessions-directory "~/.emacs.d/ellama-sessions/"
         ellama-sessions-auto-save t))
 
 ;; Expands to: (elpaca evil (use-package evil :demand t))
@@ -270,15 +285,15 @@
   (jt/leader-keys
     "f" '(:ignore t :wk "Files")    
     "f c" '((lambda () (interactive)
-              (find-file "~/.config/emacs/config.org")) 
+              (find-file "~/.emacs.d/config.org")) 
             :wk "Open emacs config.org")
     "f e" '((lambda () (interactive)
-              (dired "~/.config/emacs/")) 
+              (dired "~/.emacs.d/")) 
             :wk "Open user-emacs-directory in dired")
     "f d" '(find-grep-dired :wk "Search for string in files in DIR")
     "f g" '(counsel-grep-or-swiper :wk "Search for string current file")
     "f i" '((lambda () (interactive)
-              (find-file "~/.config/emacs/init.el")) 
+              (find-file "~/.emacs.d/init.el")) 
             :wk "Open emacs init.el")
     "f j" '(counsel-file-jump :wk "Jump to a file below current directory")
     "f f" '(counsel-fzf :wk "FZF find file")
@@ -336,7 +351,7 @@
     "h m" '(describe-mode :wk "Describe mode")
     "h r" '(:ignore t :wk "Reload")
     "h r r" '((lambda () (interactive)
-                (load-file "~/.config/emacs/init.el")
+                (load-file "~/.emacs.d/init.el")
                 (ignore (elpaca-process-queues)))
               :wk "Reload emacs config")
     "h t" '(load-theme :wk "Load theme")
@@ -576,7 +591,7 @@
   (persp-mode)
   :config
   ;; Sets a file to write to when we save states
-  (setq persp-state-default-file "~/.config/emacs/sessions"))
+  (setq persp-state-default-file "~/.emacs.d/sessions"))
 
 ;; This will group buffers by persp-name in ibuffer.
 (add-hook 'ibuffer-hook
@@ -642,7 +657,7 @@
 
 (use-package sudo-edit)
 
-(add-to-list 'custom-theme-load-path "~/.config/emacs/themes/")
+(add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
 
 (use-package doom-themes
   :config

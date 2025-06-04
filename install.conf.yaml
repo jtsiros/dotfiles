@@ -20,7 +20,6 @@
 - tap:
     - FelixKratz/formulae
     - nikitabobko/tap
-    - railwaycat/emacsmacport
 
 # Install command-line tools
 - brew:
@@ -38,7 +37,7 @@
     - zellij
     - zsh-autosuggestions
     - zsh-syntax-highlighting
-    - emacs-mac --with-modules
+
 # Install cask apps
 - cask:
     - ghostty
@@ -46,6 +45,7 @@
     - font-meslo-lg-nerd-font
     - font-sf-pro
     - font-hack-nerd-font
+    - emacs
 
 - link:
     ~/.editorconfig: editorconfig
@@ -62,13 +62,4 @@
     ~/.zprofile: zsh/zprofile
     ~/.zshenv: zsh/zshenv
     ~/.config/htop/htoprc: htop/htoprc
-
-- shell:
-    - description: "Link Emacs Mac port to Applications"
-      command: |
-        ln -sf /usr/local/opt/emacs-mac/Emacs.app /Applications/Emacs.app
-
-    - description: "Install Doom Emacs"
-      command: |
-        git clone --depth 1 https://github.com/doomemacs/doomemacs ~/.config/emacs
-        ~/.config/emacs/bin/doom install
+    ~/.emacs.d: emacs

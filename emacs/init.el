@@ -8,7 +8,9 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
-   '("13096a9a6e75c7330c1bc500f30a8f4407bd618431c94aeab55c9855731a95e1"
+   '("9b9d7a851a8e26f294e778e02c8df25c8a3b15170e6f9fd6965ac5f2544ef2a9"
+     "b5fd9c7429d52190235f2383e47d340d7ff769f141cd8f9e7a4629a81abc6b19"
+     "13096a9a6e75c7330c1bc500f30a8f4407bd618431c94aeab55c9855731a95e1"
      "4d5d11bfef87416d85673947e3ca3d3d5d985ad57b02a7bb2e32beaf785a100e"
      "7ec8fd456c0c117c99e3a3b16aaf09ed3fb91879f6601b1ea0eeaee9c6def5d9"
      "4990532659bb6a285fee01ede3dfa1b1bdf302c5c3c8de9fad9b6bc63a9252f7"
@@ -18,7 +20,7 @@
      "636b135e4b7c86ac41375da39ade929e2bd6439de8901f53f88fde7dd5ac3561"
      "1f669e8abe4dc2855268c9a607b5e350e2811b3c5afd09af5939ff0c01a89c5a"
      default))
- '(org-agenda-files '("/Users/jtsiros/Org/agenda.org"))
+ '(org-agenda-files '("~/org/agenda.org"))
  '(package-selected-packages '(lsp-mode eglot)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

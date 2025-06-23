@@ -1,4 +1,4 @@
 require("jtsiros.core")
 require("jtsiros.lazy")
 
-vim.cmd("colorscheme nord")
+vim.cmd("colorscheme melange")

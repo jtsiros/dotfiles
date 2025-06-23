@@ -47,9 +47,17 @@ return {
     end,
   },
   {
-    "shaunsingh/nord.nvim",
+    "savq/melange-nvim",
   },
   {
-    "RRethy/base16-nvim",
+    "baliestri/aura-theme",
+    lazy = false,
+    priority = 1000,
+    config = function(plugin)
+      vim.opt.rtp:append(plugin.dir .. "/packages/neovim")
+    end,
+  },
+  {
+    "rebelot/kanagawa.nvim",
   },
 }

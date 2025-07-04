@@ -147,8 +147,9 @@ _fzf_comprun() {
 # asdf setup (if available)
 if [[ -f "$HOME/.asdf/asdf.sh" ]]; then
   source "$HOME/.asdf/asdf.sh"
-  # Load asdf completions
-  [[ -f "$HOME/.asdf/completions/asdf.bash" ]] && source "$HOME/.asdf/completions/asdf.bash"
+  # Load asdf completions for zsh
+  fpath=(${ASDF_DIR}/completions $fpath)
+  autoload -Uz compinit && compinit
 fi
 
 

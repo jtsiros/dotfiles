@@ -8,3 +8,6 @@
 [submodule "dotbot-brew"]
 	path = dotbot-brew
 	url = https://github.com/mariovagomarzal/dotbot-brew.git
+[submodule "dotbot-if"]
+	path = dotbot-if
+	url = https://github.com/wonderbeyond/dotbot-if.git

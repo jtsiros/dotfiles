@@ -1,0 +1,19 @@
+emacs/
+README.md
+CROSS_PLATFORM_SETUP.md
+scripts/
+.git/
+.gitignore
+
+{{- if ne .chezmoi.os "darwin" }}
+# macOS-specific files and directories (ignore on non-macOS systems)
+karabiner/
+sketchybar/
+sublime/
+aerospace/
+{{- end }}
+
+{{- if ne .chezmoi.os "linux" }}
+# Linux-specific files and directories (ignore on non-Linux systems)
+# Add any Linux-specific exclusions here if needed
+{{- end }}

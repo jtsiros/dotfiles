@@ -1,0 +1,1 @@
+/home/jtsiros/.emacs.d/elpaca/repos/ellama/ellama-blueprint.el

@@ -1,0 +1,1 @@
+/home/jtsiros/.emacs.d/elpaca/repos/themes/themes/doom-old-hope-theme.el

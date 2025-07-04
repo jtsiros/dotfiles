@@ -1,0 +1,1 @@
+/home/jtsiros/.emacs.d/elpaca/repos/doom-modeline/doom-modeline-core.el

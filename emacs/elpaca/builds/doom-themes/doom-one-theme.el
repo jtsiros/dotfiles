@@ -1,0 +1,1 @@
+/home/jtsiros/.emacs.d/elpaca/repos/themes/themes/doom-one-theme.el

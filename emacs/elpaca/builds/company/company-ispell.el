@@ -1,0 +1,1 @@
+/home/jtsiros/.emacs.d/elpaca/repos/company-mode/company-ispell.el

@@ -45,7 +45,7 @@
   :hook (company-mode . company-box-mode))
 
 (use-package dashboard
-  :ensure t 
+  :ensure t
   :init
   (setq initial-buffer-choice 'dashboard-open)
   (setq dashboard-set-heading-icons t)
@@ -58,7 +58,7 @@
                           (agenda . 5 )
                           (bookmarks . 3)
                           (projects . 3)))
-  :custom 
+  :custom
   (dashboard-modify-heading-icons '((recents . "file-text")
 				      (bookmarks . "book")))
   :config
@@ -157,15 +157,15 @@
   :after evil
   :config
   ;; Do not uncomment this unless you want to specify each and every mode
-  ;; that evil-collection should works with.  The following line is here 
-  ;; for documentation purposes in case you need it.  
+  ;; that evil-collection should works with.  The following line is here
+  ;; for documentation purposes in case you need it.
   ;; (setq evil-collection-mode-list '(calendar dashboard dired ediff info magit ibuffer))
   (add-to-list 'evil-collection-mode-list 'help) ;; evilify help mode
   (evil-collection-init))
 
 (use-package evil-tutor)
 
-;; Using RETURN to follow links in Org/Evil 
+;; Using RETURN to follow links in Org/Evil
 ;; Unmap keys in 'evil-maps if not done, (setq org-return-follows-link t) will not work
 (with-eval-after-load 'evil-maps
   (define-key evil-motion-state-map (kbd "SPC") nil)
@@ -182,15 +182,15 @@
 
 (set-face-attribute 'default nil
   :font "JetBrainsMono Nerd Font Mono"
-  :height 180
+  :height 140
   :weight 'light)
 (set-face-attribute 'variable-pitch nil
-  :font "Monaspace Neon Var"
+  :font "Ubuntu"
   :height 180
   :weight 'light)
 (set-face-attribute 'fixed-pitch nil
   :font "JetBrainsMono Nerd Font Mono"
-  :height 180
+  :height 140
   :weight 'light)
 ;; Makes commented text and keywords italics.
 ;; This is working in emacsclient but not emacs.
@@ -268,7 +268,7 @@
     "d w" '(wdired-change-to-wdired-mode :wk "Writable dired"))
 
   (jt/leader-keys
-    "e" '(:ignore t :wk "Ediff/Eshell/Eval/EWW")    
+    "e" '(:ignore t :wk "Ediff/Eshell/Eval/EWW")
     "e b" '(eval-buffer :wk "Evaluate elisp in buffer")
     "e d" '(eval-defun :wk "Evaluate defun containing or after point")
     "e e" '(eval-expression :wk "Evaluate and elisp expression")
@@ -283,17 +283,17 @@
     "e w" '(eww :which-key "EWW emacs web wowser"))
 
   (jt/leader-keys
-    "f" '(:ignore t :wk "Files")    
+    "f" '(:ignore t :wk "Files")
     "f c" '((lambda () (interactive)
-              (find-file "~/.emacs.d/config.org")) 
+              (find-file "~/.emacs.d/config.org"))
             :wk "Open emacs config.org")
     "f e" '((lambda () (interactive)
-              (dired "~/.emacs.d/")) 
+              (dired "~/.emacs.d/"))
             :wk "Open user-emacs-directory in dired")
     "f d" '(find-grep-dired :wk "Search for string in files in DIR")
     "f g" '(counsel-grep-or-swiper :wk "Search for string current file")
     "f i" '((lambda () (interactive)
-              (find-file "~/.emacs.d/init.el")) 
+              (find-file "~/.emacs.d/init.el"))
             :wk "Open emacs init.el")
     "f j" '(counsel-file-jump :wk "Jump to a file below current directory")
     "f f" '(counsel-fzf :wk "FZF find file")
@@ -302,16 +302,16 @@
     "f U" '(sudo-edit :wk "Sudo edit file"))
 
   (jt/leader-keys
-    "g" '(:ignore t :wk "Git")    
+    "g" '(:ignore t :wk "Git")
     "g /" '(magit-displatch :wk "Magit dispatch")
     "g ." '(magit-file-displatch :wk "Magit file dispatch")
     "g b" '(magit-branch-checkout :wk "Switch branch")
-    "g c" '(:ignore t :wk "Create") 
+    "g c" '(:ignore t :wk "Create")
     "g c b" '(magit-branch-and-checkout :wk "Create branch and checkout")
     "g c c" '(magit-commit-create :wk "Create commit")
     "g c f" '(magit-commit-fixup :wk "Create fixup commit")
     "g C" '(magit-clone :wk "Clone repo")
-    "g f" '(:ignore t :wk "Find") 
+    "g f" '(:ignore t :wk "Find")
     "g f c" '(magit-show-commit :wk "Show commit")
     "g f f" '(magit-find-file :wk "Magit find file")
     "g f g" '(magit-find-git-config-file :wk "Find gitconfig file")
@@ -381,7 +381,7 @@
     "o f" '(make-frame :wk "Open buffer in new frame")
     "o F" '(select-frame-by-name :wk "Select frame by name"))
 
-  ;; projectile-command-map already has a ton of bindings 
+  ;; projectile-command-map already has a ton of bindings
   ;; set for us, so no need to specify each individually.
   (jt/leader-keys
     "p" '(projectile-command-map :wk "Projectile"))
@@ -458,7 +458,7 @@
 (use-package counsel
   :after ivy
   :diminish
-  :config 
+  :config
     (counsel-mode)
     (setq ivy-initial-inputs-alist nil)) ;; removes starting ^ regex in M-x
 
@@ -550,7 +550,7 @@
         neo-window-width 55
         neo-window-fixed-size nil
         inhibit-compacting-font-caches t
-        projectile-switch-project-action 'neotree-projectile-action) 
+        projectile-switch-project-action 'neotree-projectile-action)
         ;; truncate long file names in neotree
         (add-hook 'neo-after-create-hook
            #'(lambda (_)
@@ -587,7 +587,7 @@
   ;; I'm only setting the additional binding because setting it
   ;; helps suppress an annoying warning message.
   (persp-mode-prefix-key (kbd "C-c M-p"))
-  :init 
+  :init
   (persp-mode)
   :config
   ;; Sets a file to write to when we save states
@@ -619,7 +619,7 @@
 (global-auto-revert-mode t)  ;; Automatically show changes if the file has changed
 (global-display-line-numbers-mode 1) ;; Display line numbers
 (global-visual-line-mode t)  ;; Enable truncated lines
-(menu-bar-mode -1)           ;; Disable the menu bar 
+(menu-bar-mode -1)           ;; Disable the menu bar
 (scroll-bar-mode -1)         ;; Disable the scroll bar
 (tool-bar-mode -1)           ;; Disable the tool bar
 (setq org-edit-src-content-indentation 0) ;; Set src block automatic indent to 0 instead of 2.
@@ -663,7 +663,7 @@
   :config
   (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
         doom-themes-enable-italic t) ; if nil, italics is universally disabled
-  ;; Sets the default theme to load!!! 
+  ;; Sets the default theme to load!!!
   (load-theme 'doom-challenger-deep t)
   ;; Enable custom neotree theme (all-the-icons must be installed!)
   (doom-themes-neotree-config)

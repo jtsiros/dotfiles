@@ -1,0 +1,1 @@
+/home/jtsiros/.emacs.d/elpaca/repos/all-the-icons/all-the-icons.el

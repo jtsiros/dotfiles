@@ -26,18 +26,38 @@ fi
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 
-# history setup
-HISTFILE=$HOME/.zhistory
-SAVEHIST=1000
-HISTSIZE=999
-setopt share_history
-setopt hist_expire_dups_first
-setopt hist_ignore_dups
-setopt hist_verify
+# History configuration
+HISTFILE="${XDG_DATA_HOME:-$HOME/.local/share}/zsh/history"
+HISTSIZE=10000
+SAVEHIST=10000
 
-# completion using arrow keys (based on history)
+# History options
+setopt EXTENDED_HISTORY          # Write the history file in the ':start:elapsed;command' format
+setopt SHARE_HISTORY             # Share history between all sessions
+setopt HIST_EXPIRE_DUPS_FIRST    # Expire duplicate entries first when trimming history
+setopt HIST_IGNORE_DUPS          # Don't record an entry that was just recorded again
+setopt HIST_IGNORE_ALL_DUPS      # Delete old recorded entry if new entry is a duplicate
+setopt HIST_FIND_NO_DUPS         # Don't display a line previously found
+setopt HIST_IGNORE_SPACE         # Don't record an entry starting with a space
+setopt HIST_SAVE_NO_DUPS         # Don't write duplicate entries in the history file
+setopt HIST_REDUCE_BLANKS        # Remove superfluous blanks before recording entry
+setopt HIST_VERIFY               # Don't execute immediately upon history expansion
+
+# Zsh options
+setopt AUTO_CD              # Change directory just by typing directory name
+setopt GLOB_DOTS            # Let globs match dotfiles
+setopt CORRECT              # Auto correct mistakes
+setopt PROMPT_SUBST         # Enable prompt substitution
+
+# Initialize completion system
+autoload -Uz compinit
+compinit
+
+# Key bindings
 bindkey '^[[A' history-search-backward
 bindkey '^[[B' history-search-forward
+bindkey '^[w' kill-region                            # [Esc-w] - Kill from the cursor to the mark
+bindkey '^r' history-incremental-search-backward     # [Ctrl-r] - Search backward incrementally
 
 # Load zsh plugins
 {{- if eq .chezmoi.os "darwin" }}
@@ -101,7 +121,8 @@ _fzf_compgen_dir() {
   fd --type=d --hidden --exclude .git . "$1"
 }
 
-source ~/lib/fzf-git.sh
+# Load fzf-git if available
+[[ -f ~/lib/fzf-git.sh ]] && source ~/lib/fzf-git.sh
 
 show_file_or_dir_preview="if [ -d {} ]; then eza --tree --color=always {} | head -200; else bat -n --color=always --line-range :500 {}; fi"
 
@@ -124,8 +145,10 @@ _fzf_comprun() {
 }
 
 # asdf setup (if available)
-if [[ -f $HOME/.asdf/asdf.sh ]]; then
-  . $HOME/.asdf/asdf.sh
+if [[ -f "$HOME/.asdf/asdf.sh" ]]; then
+  source "$HOME/.asdf/asdf.sh"
+  # Load asdf completions
+  [[ -f "$HOME/.asdf/completions/asdf.bash" ]] && source "$HOME/.asdf/completions/asdf.bash"
 fi
 
 
@@ -204,9 +227,12 @@ alias edit-zsh="nvim ~/.zshrc"
 
 # thefuck alias (if available)
 if command -v thefuck &> /dev/null; then
-  eval $(thefuck --alias)
-  eval $(thefuck --alias fk)
+  eval "$(thefuck --alias)"
+  eval "$(thefuck --alias fk)"
 fi
 
-# Load fzf if available
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# Ensure history directory exists
+[[ ! -d "${HISTFILE:h}" ]] && mkdir -p "${HISTFILE:h}"
+
+# Load local zsh customizations if they exist
+[[ -f ~/.zshrc.local ]] && source ~/.zshrc.local

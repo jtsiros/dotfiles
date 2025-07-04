@@ -1,0 +1,1 @@
+/home/jtsiros/.emacs.d/elpaca/repos/llm/llm-gpt4all.el

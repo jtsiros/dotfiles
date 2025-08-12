@@ -44,6 +44,11 @@ return {
           -- type = "#dcaed7",
         },
       })
+      
+      -- Simple tabline styling
+      vim.api.nvim_set_hl(0, "TabLine", { bg = "#1e1e1e", fg = "#8d8d8d" })      -- inactive tabs
+      vim.api.nvim_set_hl(0, "TabLineSel", { bg = "#2d2d30", fg = "#ffffff", bold = true }) -- active tab
+      vim.api.nvim_set_hl(0, "TabLineFill", { bg = "#18181b" })                 -- fill area
     end,
   },
   {

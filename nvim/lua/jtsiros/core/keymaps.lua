@@ -108,3 +108,35 @@ map("n", "<S-h>", "<cmd>bprevious<CR>", opts)
 
 -- Close buffers
 map("n", "<leader>bx", "<cmd>bd<CR>", vim.tbl_extend("force", opts, { desc = "Close current buffer" }))
+
+-- =============================================================================
+-- Neovide-specific Mappings
+-- =============================================================================
+
+if vim.g.neovide then
+  -- Zoom in/out
+  map("n", "<C-=>", function()
+    vim.g.neovide_scale_factor = vim.g.neovide_scale_factor * 1.1
+  end, vim.tbl_extend("force", opts, { desc = "Zoom in" }))
+  
+  map("n", "<C-->", function()
+    vim.g.neovide_scale_factor = vim.g.neovide_scale_factor / 1.1
+  end, vim.tbl_extend("force", opts, { desc = "Zoom out" }))
+  
+  map("n", "<C-0>", function()
+    vim.g.neovide_scale_factor = 1.0
+  end, vim.tbl_extend("force", opts, { desc = "Reset zoom" }))
+  
+  -- Alternative mappings with Cmd key for macOS
+  map("n", "<D-=>", function()
+    vim.g.neovide_scale_factor = vim.g.neovide_scale_factor * 1.1
+  end, vim.tbl_extend("force", opts, { desc = "Zoom in" }))
+  
+  map("n", "<D-->", function()
+    vim.g.neovide_scale_factor = vim.g.neovide_scale_factor / 1.1
+  end, vim.tbl_extend("force", opts, { desc = "Zoom out" }))
+  
+  map("n", "<D-0>", function()
+    vim.g.neovide_scale_factor = 1.0
+  end, vim.tbl_extend("force", opts, { desc = "Reset zoom" }))
+end

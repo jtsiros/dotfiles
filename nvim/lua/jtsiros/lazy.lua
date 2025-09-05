@@ -19,4 +19,7 @@ require("lazy").setup({ { import = "jtsiros.plugins" }, { import = "jtsiros.plug
   change_detection = {
     notify = false,
   },
+  rocks = {
+    enabled = false, -- Disable luarocks support to avoid warnings
+  },
 })

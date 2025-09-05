@@ -11,6 +11,16 @@ return {
       typescriptreact = { "eslint_d" },
       svelte = { "eslint_d" },
       python = { "pylint" },
+      sh = { "shellcheck" },
+      bash = { "shellcheck" },
+      zsh = { "shellcheck" },
+    }
+
+    -- Configure shellcheck to follow external sources
+    lint.linters.shellcheck.args = {
+      "--format=json",
+      "--external-sources", -- equivalent to -x flag
+      "-",
     }
 
     local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })

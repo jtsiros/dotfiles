@@ -13,9 +13,35 @@ return {
     local mason_lspconfig = require("mason-lspconfig")
     local cmp_nvim_lsp = require("cmp_nvim_lsp")
 
-    mason_lspconfig.setup()
+    -- Don't call mason_lspconfig.setup() here - it's done in mason.lua
 
     local capabilities = cmp_nvim_lsp.default_capabilities()
+    
+    -- Fix position encoding warnings for Neovim 0.11+
+    if vim.fn.has('nvim-0.11') == 1 then
+      capabilities.general = capabilities.general or {}
+      capabilities.general.positionEncodings = { "utf-16", "utf-8" }
+      
+      -- Suppress specific position encoding warning messages
+      local original_notify = vim.notify
+      vim.notify = function(msg, level, opts)
+        if type(msg) == "string" and msg:match("position_encoding.*required.*Defaulting") then
+          return
+        end
+        return original_notify(msg, level, opts)
+      end
+    end
+    
+    -- Configure diagnostics
+    vim.diagnostic.config({
+      virtual_text = {
+        prefix = "●",
+      },
+      signs = true,
+      underline = true,
+      update_in_insert = false,
+      severity_sort = true,
+    })
 
     -- Set diagnostic symbols
     local signs = { Error = "", Warn = "", Hint = "󰠠", Info = "" }
@@ -23,6 +49,19 @@ return {
       local hl = "DiagnosticSign" .. type
       vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
     end
+
+    -- Configure LSP handlers to suppress warnings
+    vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
+      vim.lsp.handlers.hover, {
+        border = "rounded",
+      }
+    )
+    
+    vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
+      vim.lsp.handlers.signature_help, {
+        border = "rounded",
+      }
+    )
 
     -- Attach keymaps on LSP attach
     vim.api.nvim_create_autocmd("LspAttach", {
@@ -76,28 +115,32 @@ return {
           },
         })
       end,
+      bashls = function()
+        lspconfig.bashls.setup({
+          capabilities = capabilities,
+          filetypes = { "sh", "bash", "zsh" },
+          settings = {
+            bashIde = {
+              globPattern = "**/*@(.sh|.inc|.bash|.command|.zsh)",
+            },
+          },
+        })
+      end,
     }
 
-    -- Use setup_handlers if available (newer mason-lspconfig versions)
-    if mason_lspconfig.setup_handlers then
-      mason_lspconfig.setup_handlers(vim.tbl_extend("force", {
-        function(server_name)
-          if server_configs[server_name] then
-            server_configs[server_name]()
-          else
-            lspconfig[server_name].setup({ capabilities = capabilities })
-          end
-        end,
-      }, server_configs))
-    else
-      -- Fallback for older mason-lspconfig
-      for _, server_name in ipairs(mason_lspconfig.get_installed_servers()) do
-        if server_configs[server_name] then
-          server_configs[server_name]()
-        else
-          lspconfig[server_name].setup({ capabilities = capabilities })
-        end
-      end
+    -- Set up all LSP servers explicitly
+    -- This ensures they are always configured properly
+    
+    -- Configure servers with custom settings
+    server_configs.graphql()
+    server_configs.lua_ls()
+    server_configs.bashls()
+    
+    -- Configure remaining servers with default settings
+    local default_servers = { "gopls", "rust_analyzer", "zls", "prismals", "pyright" }
+    
+    for _, server_name in ipairs(default_servers) do
+      lspconfig[server_name].setup({ capabilities = capabilities })
     end
   end,
 }

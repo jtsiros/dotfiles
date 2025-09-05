@@ -4,6 +4,12 @@
 -- Performance: Enable faster loading
 local uv = vim.uv or vim.loop
 
+-- Disable unused providers to avoid warnings
+vim.g.loaded_python3_provider = 0
+vim.g.loaded_node_provider = 0
+vim.g.loaded_ruby_provider = 0
+vim.g.loaded_perl_provider = 0
+
 -- Core configuration (options, keymaps, autocommands)
 local ok, _ = pcall(require, "jtsiros.core")
 if not ok then

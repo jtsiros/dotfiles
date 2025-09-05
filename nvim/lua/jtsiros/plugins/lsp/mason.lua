@@ -34,6 +34,7 @@ return {
         "graphql",
         "prismals",
         "pyright",
+        "bashls", -- bash language server
       },
     })
 
@@ -45,6 +46,7 @@ return {
         "black", -- python formatter
         "pylint",
         "eslint_d",
+        "shfmt", -- shell script formatter
       },
     })
   end,

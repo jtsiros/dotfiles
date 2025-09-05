@@ -19,8 +19,10 @@ return {
         graphql = { "prettier" },
         liquid = { "prettier" },
         lua = { "stylua" },
-        odin = { "odinfmt" },
         python = { "isort", "black" },
+        sh = { "shfmt" },
+        bash = { "shfmt" },
+        zsh = { "shfmt" },
       },
       format_on_save = {
         lsp_fallback = true,

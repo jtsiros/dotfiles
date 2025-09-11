@@ -94,51 +94,45 @@
 
 (add-hook 'ediff-mode-hook 'jt-ediff-hook)
 
-(defun my/ellama-build-project-context ()
-  "Summarize the current project into Ellama context using Ollama."
-  (interactive)
-  (let* ((project-root (project-root (project-current t)))
-         (all-files (directory-files-recursively project-root "\\.\\(rs\\|py\\|ts\\|el\\|js\\|tsx\\|jsx\\)$"))
-         (file-list (seq-take all-files 20)))
-    (message "Summarizing project context...")
-    (dolist (file file-list)
-      (ellama-prompt-on-file file "Summarize this file for project context"))))
-
-(defun my/ellama-ask-project (question)
-  "Ask Ellama a question with full project context."
-  (interactive "sAsk about project: ")
-  (let ((ctx (ellama--get-project-context)))
-    (ellama-chat question ctx)))
-
 (use-package ellama
   :init
   (setopt ellama-keymap-prefix "C-c e")  ;; keymap for all ellama functions
   (setopt ellama-language "English")     ;; language ellama should translate to
   (require 'llm-ollama)
-  (setopt ellama-provider
-	  (make-llm-ollama
-	   ;; this model should be pulled to use it
-	   ;; value should be the same as you print in terminal during pull
-	   :chat-model "llama3.1"
-	   :embedding-model "nomic-embed-text"
-	   :default-chat-non-standard-params '(("num_ctx" . 8192))))
-  ;; Predefined llm providers for interactive switching.
-  (setopt ellama-providers
-		    '(("zephyr" . (make-llm-ollama
-				   :chat-model "zephyr"
-				   :embedding-model "zephyr"))
 
-		      ("llama3.1" . (make-llm-ollama
-				   :chat-model "llama3.1"
-				   :embedding-model "llama3.1"))
-		      ("mixtral" . (make-llm-ollama
-				    :chat-model "mixtral"
-				    :embedding-model "mixtral"))))
+  ;; Primary provider: CodeLlama for code tasks
+  (setopt ellama-provider
+          (make-llm-ollama
+           :chat-model "codellama"
+           :embedding-model "nomic-embed-text"
+           :default-chat-non-standard-params '(("num_ctx" . 8192))))
+
+  ;; Additional providers for switching
+  (setopt ellama-providers
+         '(("codellama" . (make-llm-ollama
+                           :chat-model "codellama"
+                           :embedding-model "nomic-embed-text"))
+
+           ("llama3.1" . (make-llm-ollama
+                          :chat-model "llama3.1"
+                          :embedding-model "llama3.1"))
+
+           ("zephyr" . (make-llm-ollama
+                        :chat-model "zephyr"
+                        :embedding-model "zephyr"))
+
+           ("mixtral" . (make-llm-ollama
+                         :chat-model "mixtral"
+                         :embedding-model "nomic-embed-text"))))
+
+  ;; Use Mixtral for translation (wide context and general-purpose)
+  (setopt ellama-translation-provider
+          (make-llm-ollama
+           :chat-model "mixtral"
+           :embedding-model "nomic-embed-text"))
+
   (setopt ellama-naming-scheme 'ellama-generate-name-by-llm)
-  ;; Translation llm provider
-  (setopt ellama-translation-provider (make-llm-ollama
-				       :chat-model "mixtral"
-				       :embedding-model "nomic-embed-text"))
+
   :config
   (setq ellama-sessions-directory "~/.emacs.d/ellama-sessions/"
         ellama-sessions-auto-save t))

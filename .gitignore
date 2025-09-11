@@ -3,3 +3,6 @@ config/configstore/update-notifier-npm.json
 config/filezilla
 config/direnv
 nvim/plugin
+
+# Emacs Elpaca build artifacts
+emacs/elpaca/builds/*/build/

@@ -52,6 +52,16 @@ else
 fi
 {{- end }}
 
+# Install Python development tools
+echo "Installing Python development tools..."
+if ! command -v uv &> /dev/null; then
+    echo "Installing uv (Python package manager)..."
+    curl -LsSf https://astral.sh/uv/install.sh | sh
+fi
+
+echo "Installing Python type checkers and formatters..."
+npm install -g basedpyright
+
 # Download additional tools
 echo "Downloading additional tools..."
 mkdir -p "$HOME/lib"

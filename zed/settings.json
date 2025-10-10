@@ -4,33 +4,32 @@
       "source": "custom",
       "enabled": true,
       "command": "npx",
-      "args": [
-        "-y",
-        "@modelcontextprotocol/server-brave-search"
-      ],
+      "args": ["-y", "@modelcontextprotocol/server-brave-search"],
       "env": {}
     },
     "memory": {
       "source": "custom",
       "enabled": true,
       "command": "npx",
-      "args": [
-        "-y",
-        "@modelcontextprotocol/server-memory"
-      ],
+      "args": ["-y", "@modelcontextprotocol/server-memory"],
       "env": {}
     }
   },
   "icon_theme": "JetBrains New UI Icons (Dark)",
+  "lsp": {
+    "basedpyright": {
+      "settings": {
+        "python.pythonPath": ".venv/bin/python",
+        "python.venvPath": "."
+      }
+    }
+  },
   "languages": {
     "Rust": {
       "show_edit_predictions": true
     },
     "Python": {
-      "language_servers": [
-        "basedpyright",
-        "..."
-      ]
+      "language_servers": ["basedpyright", "ruff"]
     }
   },
   "features": {

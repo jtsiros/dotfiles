@@ -152,6 +152,34 @@ if [[ -f "$HOME/.asdf/asdf.sh" ]]; then
 fi
 
 
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+{{- if eq .chezmoi.os "darwin" }}
+# macOS conda paths
+__conda_setup="$('/opt/homebrew/Caskroom/miniconda/base/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/opt/homebrew/Caskroom/miniconda/base/etc/profile.d/conda.sh" ]; then
+        . "/opt/homebrew/Caskroom/miniconda/base/etc/profile.d/conda.sh"
+    else
+        export PATH="/opt/homebrew/Caskroom/miniconda/base/bin:$PATH"
+    fi
+fi
+{{- else }}
+# Linux conda paths
+if [ -f "$HOME/miniconda3/etc/profile.d/conda.sh" ]; then
+    . "$HOME/miniconda3/etc/profile.d/conda.sh"
+elif [ -f "$HOME/anaconda3/etc/profile.d/conda.sh" ]; then
+    . "$HOME/anaconda3/etc/profile.d/conda.sh"
+elif [ -f "/opt/miniconda3/etc/profile.d/conda.sh" ]; then
+    . "/opt/miniconda3/etc/profile.d/conda.sh"
+elif [ -f "/opt/anaconda3/etc/profile.d/conda.sh" ]; then
+    . "/opt/anaconda3/etc/profile.d/conda.sh"
+fi
+{{- end }}
+unset __conda_setup
+# <<< conda initialize <<<
 
 # Load Cargo environment if available
 [[ -f "$HOME/.cargo/env" ]] && source "$HOME/.cargo/env"

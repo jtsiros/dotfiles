@@ -1,15 +1,36 @@
-// Zed settings
-//
-// For information on how to configure Zed, see the Zed
-// documentation: https://zed.dev/docs/configuring-zed
-//
-// To see all of Zed's default settings without changing your
-// custom settings, run the `open default settings` command
-// from the command palette or from `Zed` application menu.
 {
+  "context_servers": {
+    "brave-search": {
+      "source": "custom",
+      "enabled": true,
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-brave-search"
+      ],
+      "env": {}
+    },
+    "memory": {
+      "source": "custom",
+      "enabled": true,
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-memory"
+      ],
+      "env": {}
+    }
+  },
+  "icon_theme": "JetBrains New UI Icons (Dark)",
   "languages": {
     "Rust": {
       "show_edit_predictions": true
+    },
+    "Python": {
+      "language_servers": [
+        "basedpyright",
+        "..."
+      ]
     }
   },
   "features": {
@@ -22,9 +43,9 @@
     }
   },
   "project_panel": {
-    "dock": "right"
+    "dock": "left"
   },
-  "theme": "Naysayer",
+  "theme": "Fleet Dark",
   "base_keymap": "VSCode",
   "telemetry": {
     "metrics": false,
@@ -49,9 +70,9 @@
     "ss09": true,
     "liga": true
   },
-  "buffer_font_size": 18.0,
+  "buffer_font_size": 14.0,
   "relative_line_numbers": true,
   "preferred_line_length": 80,
   "show_completions_on_input": false,
-  "show_edit_predictions": false
+  "show_edit_predictions": true
 }

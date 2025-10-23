@@ -1,1 +1,0 @@
-/home/jtsiros/.emacs.d/elpaca/repos/plz-media-type/makem.sh

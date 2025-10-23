@@ -1,1 +1,0 @@
-/home/jtsiros/.emacs.d/elpaca/repos/org-bullets/org-bullets.el

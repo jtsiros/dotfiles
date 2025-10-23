@@ -1,1 +1,0 @@
-/home/jtsiros/.emacs.d/elpaca/repos/ellama/ellama-manual.el

@@ -1,1 +1,0 @@
-("~/lib/dotfiles/" "~/dev/platform-canary-terraform-example/")

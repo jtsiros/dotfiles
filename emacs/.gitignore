@@ -1,13 +1,25 @@
-# Ignore everything in emacs/
-*
+# Elpaca package manager - generated per-machine
+elpaca/
 
-# But track these config files
-!.gitignore
-!init.el
-!early-init.el
-!config.org
-!config.el
-!scripts/
-!scripts/**
-!themes/
-!themes/**
+# Emacs native compilation cache - platform-specific
+eln-cache/
+
+# Session and state files - machine-specific
+auto-save-list/
+sessions
+recentf
+tramp
+projectile-bookmarks.eld
+session.*
+
+# Ellama AI sessions - optional
+ellama-sessions/
+
+# Eshell history - machine-specific
+eshell/
+
+# Transient state - generated
+transient/
+
+# Images - optional
+images/

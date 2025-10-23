@@ -1,1 +1,0 @@
-/home/jtsiros/.emacs.d/elpaca/repos/nerd-icons/nerd-icons-data.el

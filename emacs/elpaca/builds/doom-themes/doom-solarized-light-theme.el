@@ -1,1 +1,0 @@
-/home/jtsiros/.emacs.d/elpaca/repos/themes/themes/doom-solarized-light-theme.el

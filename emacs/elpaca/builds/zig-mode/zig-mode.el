@@ -1,1 +1,0 @@
-/home/jtsiros/.emacs.d/elpaca/repos/zig-mode/zig-mode.el

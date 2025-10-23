@@ -1,0 +1,13 @@
+# Ignore everything in emacs/
+*
+
+# But track these config files
+!.gitignore
+!init.el
+!early-init.el
+!config.org
+!config.el
+!scripts/
+!scripts/**
+!themes/
+!themes/**

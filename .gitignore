@@ -6,3 +6,6 @@ nvim/plugin
 
 # Emacs Elpaca build artifacts
 emacs/elpaca/builds/*/build/
+
+# Emacs auto-generated config
+emacs/config.el

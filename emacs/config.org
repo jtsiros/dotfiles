@@ -399,7 +399,12 @@ You can use the bindings CTRL plus =/- for zooming in/out.  You can also use CTR
 
   (jt/leader-keys
     "c" '(:ignore t :wk "Compile")
-    "c c" '(compile :wk "Compile"))
+    "c c" '(compile :wk "Run compile command")
+    "c r" '(recompile :wk "Rerun last compile")
+    "c k" '(kill-compilation :wk "Stop compilation")
+    "c n" '(next-error :wk "Jump to next error")
+    "c p" '(previous-error :wk "Jump to previous error")
+    "c f" '(first-error :wk "Jump to first error"))
 
   (jt/leader-keys
     "d" '(:ignore t :wk "Dired")

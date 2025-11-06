@@ -16,3 +16,26 @@ aerospace/
 # Linux-specific files and directories (ignore on non-Linux systems)
 # Add any Linux-specific exclusions here if needed
 {{- end }}
+
+{{- if eq .chezmoi.os "windows" }}
+# Unix/Linux-specific files and directories (ignore on Windows)
+tmux.conf
+symlink_dot_tmux.conf
+zellij/
+nvim/
+helix/
+symlink_dot_config_helix
+htop/
+bin/
+.Xresources
+.zprofile.tmpl
+.zshenv
+.zshrc.tmpl
+dot_zprofile.tmpl
+dot_zshenv
+dot_zshrc.tmpl
+run_once_install-packages.sh.tmpl
+ghostty/
+symlink_dot_config_ghostty
+dot_odin/
+{{- end }}

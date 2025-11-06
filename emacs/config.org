@@ -292,18 +292,36 @@ This package implements hiding or abbreviation of the modeline displays (lighter
 
 * FONTS
 #+begin_src emacs-lisp
-(set-face-attribute 'default nil
-  :font "JetBrainsMono Nerd Font Mono"
-  :height 150
-  :weight 'normal)
-(set-face-attribute 'variable-pitch nil
-  :font "Ubuntu"
-  :height 180
-  :weight 'light)
-(set-face-attribute 'fixed-pitch nil
-  :font "JetBrainsMono Nerd Font Mono"
-  :height 150
-  :weight 'normal)
+;; Platform-specific fonts
+(cond
+ ((eq system-type 'windows-nt)
+  ;; Windows fonts
+  (set-face-attribute 'default nil
+    :font "JetBrainsMono NF"
+    :height 150
+    :weight 'normal)
+  (set-face-attribute 'variable-pitch nil
+    :font "Segoe UI"
+    :height 180
+    :weight 'light)
+  (set-face-attribute 'fixed-pitch nil
+    :font "JetBrainsMono NF"
+    :height 150
+    :weight 'normal))
+ ((or (eq system-type 'darwin) (eq system-type 'gnu/linux))
+  ;; macOS/Linux fonts
+  (set-face-attribute 'default nil
+    :font "JetBrainsMono Nerd Font Mono"
+    :height 150
+    :weight 'normal)
+  (set-face-attribute 'variable-pitch nil
+    :font "Ubuntu"
+    :height 180
+    :weight 'light)
+  (set-face-attribute 'fixed-pitch nil
+    :font "JetBrainsMono Nerd Font Mono"
+    :height 150
+    :weight 'normal)))
 ;; Makes commented text and keywords italics.
 ;; This is working in emacsclient but not emacs.
 ;; Your font must have an italic face available.
@@ -837,20 +855,21 @@ Allows us to create a Table of Contents in our Org docs.
 
 * SHELLS AND TERMINALS
 ** Vterm
+Vterm only works on Unix-like systems (macOS and Linux), not Windows.
 
 #+begin_src emacs-lisp
-(use-package vterm
-:config
-(setq shell-file-name "/bin/zsh"
-      vterm-max-scrollback 5000))
-#+end_src
+;; vterm only works on Unix-like systems
+(unless (eq system-type 'windows-nt)
+  (use-package vterm
+    :config
+    (setq shell-file-name "/bin/zsh"
+          vterm-max-scrollback 5000))
 
 ** Vterm-Toggle
 [[https://github.com/jixiuf/vterm-toggle][vterm-toggle]] toggles between the vterm buffer and whatever buffer you are editing.
 
-#+begin_src emacs-lisp
-(use-package vterm-toggle
-  :after vterm
+  (use-package vterm-toggle
+    :after vterm
   :config
   ;; When running programs in Vterm and in 'normal' mode, make sure that ESC
   ;; kills the program as it would in most standard terminal programs.
@@ -869,7 +888,7 @@ Allows us to create a Table of Contents in our Org docs.
                   ;;(direction . bottom)
                   ;;(dedicated . t) ;dedicated is supported in emacs27
                   (reusable-frames . visible)
-                  (window-height . 0.4))))
+                  (window-height . 0.4)))))
 
 #+end_src
 

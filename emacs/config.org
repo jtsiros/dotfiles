@@ -666,7 +666,11 @@ Adding highlights to TODO and related words.
     :diminish
     :config
       (counsel-mode)
-      (setq ivy-initial-inputs-alist nil)) ;; removes starting ^ regex in M-x
+      (setq ivy-initial-inputs-alist nil) ;; removes starting ^ regex in M-x
+      ;; Configure fzf for WSL to use Windows executable
+      (when (and (eq system-type 'gnu/linux)
+                 (string-match-p "microsoft" (shell-command-to-string "uname -r")))
+        (setq counsel-fzf-cmd "fzf.exe -f \"%s\"")))
 
   (use-package ivy
     :bind

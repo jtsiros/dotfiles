@@ -971,6 +971,12 @@ Provides the ability to have a custom theme and also installs Doom Themes. There
 (use-package fleetish-theme
   :ensure (:host github :repo "nylar/fleetish-emacs-theme"))
 
+(use-package catppuccin-theme
+  :ensure t
+  :config
+  ;; Available flavors: 'latte, 'frappe, 'macchiato, 'mocha
+  (setq catppuccin-flavor 'mocha))
+
 (use-package doom-themes
   :config
   (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
@@ -980,8 +986,11 @@ Provides the ability to have a custom theme and also installs Doom Themes. There
   ;; Corrects (and improves) org-mode's native fontification.
   (doom-themes-org-config))
 
-;; Load Fleet theme
-(load-theme 'fleet-ghostty t)
+;; Load Catppuccin Mocha theme
+;; Other options: 'catppuccin (mocha), 'catppuccin-latte, 'catppuccin-frappe, 'catppuccin-macchiato
+(load-theme 'catppuccin t)
+
+;; To switch back to Fleet theme, use: (load-theme 'fleet-ghostty t)
 #+end_src
 
 * WHICH-KEY

@@ -441,7 +441,8 @@ You can use the bindings CTRL plus =/- for zooming in/out.  You can also use CTR
 
   (jt/leader-keys
     "f" '(:ignore t :wk "Files")
-    "f f" '(counsel-fzf :wk "Find file")
+    "f f" '(find-file :wk "Find file")
+    "f F" '(counsel-file-jump :wk "Find file (recursive)")
     "f r" '(counsel-recentf :wk "Recent files")
     "f s" '(save-buffer :wk "Save")
     "f S" '(write-file :wk "Save as...")
@@ -556,7 +557,7 @@ You can use the bindings CTRL plus =/- for zooming in/out.  You can also use CTR
     "s b" '(counsel-grep-or-swiper :wk "search Buffer")
     "s p" '(counsel-git-grep :wk "search Project")
     "s d" '(find-grep-dired :wk "search Directory (grep)")
-    "s f" '(counsel-fzf :wk "search Filename")
+    "s f" '(counsel-file-jump :wk "search Filename (recursive)")
     "s r" '(counsel-recentf :wk "search Recent files")
     ;; Documentation searches
     "s ?" '(dictionary-search :wk "Dictionary")

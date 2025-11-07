@@ -979,9 +979,11 @@ Provides the ability to have a custom theme and also installs Doom Themes. There
 
 (use-package catppuccin-theme
   :ensure t
-  :config
+  :init
   ;; Available flavors: 'latte, 'frappe, 'macchiato, 'mocha
-  (setq catppuccin-flavor 'mocha))
+  (setq catppuccin-flavor 'mocha)
+  :config
+  (load-theme 'catppuccin t))
 
 (use-package doom-themes
   :config
@@ -992,11 +994,7 @@ Provides the ability to have a custom theme and also installs Doom Themes. There
   ;; Corrects (and improves) org-mode's native fontification.
   (doom-themes-org-config))
 
-;; Load Catppuccin Mocha theme
-;; Other options: 'catppuccin (mocha), 'catppuccin-latte, 'catppuccin-frappe, 'catppuccin-macchiato
-(load-theme 'catppuccin t)
-
-;; To switch back to Fleet theme, use: (load-theme 'fleet-ghostty t)
+;; To switch back to Fleet theme, uncomment: (load-theme 'fleet-ghostty t)
 #+end_src
 
 * WHICH-KEY

@@ -15,6 +15,7 @@
 - [[#company][COMPANY]]
 - [[#dashboard][DASHBOARD]]
 - [[#diminish][DIMINISH]]
+- [[#editorconfig][EDITORCONFIG]]
 - [[#dired][DIRED]]
 - [[#ediff][EDIFF]]
 - [[#ellama][ELLAMA]]
@@ -167,6 +168,17 @@ This package implements hiding or abbreviation of the modeline displays (lighter
 #+begin_src emacs-lisp
 (use-package diminish)
 
+#+end_src
+
+* EDITORCONFIG
+EditorConfig helps maintain consistent coding styles across different editors and IDEs.
+
+#+begin_src emacs-lisp
+(use-package editorconfig
+  :ensure t
+  :diminish editorconfig-mode
+  :config
+  (editorconfig-mode 1))
 #+end_src
 
 * DIRED

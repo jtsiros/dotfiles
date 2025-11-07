@@ -1,5 +1,124 @@
-{{ if eq .chezmoi.os "windows" -}}
-# Windows package installer temporarily disabled due to template rendering issue
-# Packages are already installed
-Write-Host "Package installation check skipped" -ForegroundColor Green
-{{ end -}}
+{{- if eq .chezmoi.os "windows" -}}
+# Windows package installer for dotfiles dependencies
+
+# Colors for output
+function Write-Status {
+    param([string]$Message)
+    Write-Host "[INFO] $Message" -ForegroundColor Cyan
+}
+
+function Write-Success {
+    param([string]$Message)
+    Write-Host "[SUCCESS] $Message" -ForegroundColor Green
+}
+
+function Write-Warning {
+    param([string]$Message)
+    Write-Host "[WARNING] $Message" -ForegroundColor Yellow
+}
+
+function Write-Error {
+    param([string]$Message)
+    Write-Host "[ERROR] $Message" -ForegroundColor Red
+}
+
+# Check if winget is available
+if (!(Get-Command winget -ErrorAction SilentlyContinue)) {
+    Write-Error "winget is not installed. Please install App Installer from the Microsoft Store."
+    exit 1
+}
+
+Write-Status "Using winget package manager"
+
+# List of packages to install
+$packages = @{
+    "fzf" = "junegunn.fzf"
+    "fd" = "sharkdp.fd"
+    "bat" = "sharkdp.bat"
+    "eza" = "eza-community.eza"
+    "git-delta" = "dandavison.delta"
+    "ripgrep" = "BurntSushi.ripgrep.MSVC"
+    "zoxide" = "ajeetdsouza.zoxide"
+    "oh-my-posh" = "JanDeDobbeleer.OhMyPosh"
+    "glazewm" = "glzr-io.glazewm"
+    "yasb" = "AmN.yasb"
+    "windhawk" = "RamenSoftware.Windhawk"
+    "flow-launcher" = "Flow-Launcher.Flow-Launcher"
+    "cava" = "karlstav.cava"
+    "fastfetch" = "Fastfetch-cli.Fastfetch"
+}
+
+Write-Status "Installing packages..."
+
+foreach ($package in $packages.GetEnumerator()) {
+    $name = $package.Key
+    $id = $package.Value
+
+    Write-Status "Checking $name..."
+
+    # Check if package is already installed
+    $installed = winget list --id $id --exact 2>$null
+    if ($LASTEXITCODE -eq 0 -and $installed -match $id) {
+        Write-Success "$name is already installed"
+        continue
+    }
+
+    Write-Status "Installing $name ($id)..."
+
+    try {
+        winget install --id $id --exact --silent --accept-package-agreements --accept-source-agreements
+        if ($LASTEXITCODE -eq 0) {
+            Write-Success "Successfully installed $name"
+        } else {
+            Write-Warning "Failed to install $name, you may need to install it manually"
+        }
+    } catch {
+        Write-Warning "Failed to install ${name}: $($_.Exception.Message)"
+    }
+}
+
+# Install PSReadLine if not present
+Write-Status "Checking PSReadLine..."
+if (!(Get-Module -ListAvailable -Name PSReadLine)) {
+    Write-Status "Installing PSReadLine..."
+    try {
+        Install-Module -Name PSReadLine -Force -SkipPublisherCheck -Scope CurrentUser
+        Write-Success "PSReadLine installed"
+    } catch {
+        Write-Warning "Failed to install PSReadLine: $($_.Exception.Message)"
+    }
+} else {
+    Write-Success "PSReadLine is already installed"
+}
+
+# Install posh-git if not present
+Write-Status "Checking posh-git..."
+if (!(Get-Module -ListAvailable -Name posh-git)) {
+    Write-Status "Installing posh-git..."
+    try {
+        Install-Module -Name posh-git -Force -Scope CurrentUser
+        Write-Success "posh-git installed"
+    } catch {
+        Write-Warning "Failed to install posh-git: $($_.Exception.Message)"
+    }
+} else {
+    Write-Success "posh-git is already installed"
+}
+
+# Install Terminal-Icons if not present
+Write-Status "Checking Terminal-Icons..."
+if (!(Get-Module -ListAvailable -Name Terminal-Icons)) {
+    Write-Status "Installing Terminal-Icons..."
+    try {
+        Install-Module -Name Terminal-Icons -Force -Scope CurrentUser
+        Write-Success "Terminal-Icons installed"
+    } catch {
+        Write-Warning "Failed to install Terminal-Icons: $($_.Exception.Message)"
+    }
+} else {
+    Write-Success "Terminal-Icons is already installed"
+}
+
+Write-Success "Package installation complete!"
+Write-Status "You may need to restart your shell to apply changes."
+{{- end -}}

@@ -4,33 +4,34 @@
 root = true
 
 # Unix-style newlines with a newline ending every file
+# Default: tabs with width 4 for all files
 [*]
 end_of_line = lf
 insert_final_newline = true
-indent_style = space
+indent_style = tab
 indent_size = 4
+tab_width = 4
 
 # Matches multiple files with brace expansion notation
 # Set default charset
 [*.{js,py}]
 charset = utf-8
 
-# 4 space indentation
+# Linux kernel coding style for C files
+[*.{c,h}]
+indent_style = tab
+indent_size = 8
+tab_width = 8
+max_line_length = 80
+
+# Go uses tabs (gofmt standard)
 [*.go]
-indent_style = space 
+indent_style = tab
 indent_size = 4
+tab_width = 4
 
-# Tab indentation (no size specified)
+# Makefiles require tabs (standard)
 [Makefile]
-indent_style = space 
+indent_style = tab
 indent_size = 4
-
-# Indentation override for all JS under lib directory
-[lib/**.js]
-indent_style = space
-indent_size = 4
-
-# Matches the exact files either package.json or .travis.yml
-[{package.json,.travis.yml}]
-indent_style = space
-indent_size = 4
+tab_width = 4

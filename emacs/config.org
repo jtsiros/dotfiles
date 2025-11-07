@@ -731,6 +731,12 @@ Adding highlights to TODO and related words.
   (setq rustic-lsp-client 'eglot)
   :custom
   (rustic-cargo-use-last-stored-arguments t))
+
+(use-package powershell
+  :defer t
+  :mode (("\\.ps1\\'" . powershell-mode)
+         ("\\.psm1\\'" . powershell-mode)
+         ("\\.psd1\\'" . powershell-mode)))
 #+end_src
 
 * MINIBUFFER ESCAPE

@@ -1,5 +1,13 @@
 (setq package-enable-at-startup nil)
 
+;; Set UTF-8 as default encoding
+(set-language-environment "UTF-8")
+(prefer-coding-system 'utf-8)
+(set-default-coding-systems 'utf-8)
+(set-terminal-coding-system 'utf-8)
+(set-keyboard-coding-system 'utf-8)
+(setq-default buffer-file-coding-system 'utf-8-unix)
+
 ;; Native compilation settings (Emacs 28+)
 (when (featurep 'native-compile)
   ;; Silence compiler warnings
@@ -7,13 +15,3 @@
   ;; Set native-comp directory
   (setq native-comp-eln-load-path
         (list (expand-file-name "eln-cache/" user-emacs-directory))))
-
-;; Optimize garbage collection during startup
-(setq gc-cons-threshold most-positive-fixnum
-      gc-cons-percentage 0.6)
-
-;; Reset GC after startup
-(add-hook 'emacs-startup-hook
-          (lambda ()
-            (setq gc-cons-threshold (* 16 1024 1024)
-                  gc-cons-percentage 0.1)))

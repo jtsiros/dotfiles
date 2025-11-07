@@ -115,7 +115,7 @@
    `(doom-modeline-evil-operator-state  ((t (:foreground ,cyan :weight bold))))
    `(doom-modeline-evil-motion-state    ((t (:foreground ,magenta :weight bold))))
    `(doom-modeline-evil-emacs-state     ((t (:foreground ,yellow :weight bold))))
-   `(doom-modeline-persp-name           ((t (:inherit doom-modeline :foreground ,blue))))
+   `(doom-modeline-persp-name           ((t (:foreground ,line-numbers))))
    `(doom-modeline-vcs-icon             ((t (:foreground ,line-numbers))))
    `(doom-modeline-repl                 ((t (:foreground ,line-numbers))))
    `(doom-modeline-persp-buffer-not-in-persp ((t (:foreground ,line-numbers))))
@@ -164,7 +164,10 @@
    ;; window-divider
    `(window-divider             ((t (:foreground ,border))))
    `(window-divider-first-pixel ((t (:foreground ,border))))
-   `(window-divider-last-pixel  ((t (:foreground ,border))))))
+   `(window-divider-last-pixel  ((t (:foreground ,border))))
+
+   ;; perspective / persp-mode
+   `(persp-selected-face ((t (:foreground ,line-numbers :weight bold))))))
 
 ;;;###autoload
 (when load-file-name

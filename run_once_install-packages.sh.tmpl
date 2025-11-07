@@ -1,5 +1,5 @@
 {{- if ne .chezmoi.os "windows" -}}
-#!/bin/bash
+#!/bin/zsh
 
 # Cross-platform package installer for dotfiles dependencies
 # This script detects the Linux distribution and installs packages accordingly
@@ -31,7 +31,9 @@ print_error() {
 }
 
 # Detect the distribution
-if [ -f /etc/os-release ]; then
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    DISTRO="macos"
+elif [ -f /etc/os-release ]; then
     . /etc/os-release
     DISTRO=$ID
 elif [ -f /etc/redhat-release ]; then
@@ -45,7 +47,7 @@ fi
 print_status "Detected distribution: $DISTRO"
 
 # Package lists for different distributions
-declare -A PACKAGES
+typeset -A PACKAGES
 
 # Common packages that most distributions have
 COMMON_PACKAGES="fzf fd-find bat git tmux tree-sitter curl wget"
@@ -100,6 +102,20 @@ case $DISTRO in
         PACKAGE_MANAGER="pacman"
         INSTALL_CMD="sudo pacman -S --noconfirm"
         ;;
+    "macos")
+        PACKAGES=(
+            ["fzf"]="fzf"
+            ["fd"]="fd"
+            ["bat"]="bat"
+            ["eza"]="eza"
+            ["git-delta"]="git-delta"
+            ["tldr"]="tlrc"
+            ["tmux"]="tmux"
+            ["zoxide"]="zoxide"
+        )
+        PACKAGE_MANAGER="brew"
+        INSTALL_CMD="brew install"
+        ;;
     *)
         print_error "Unsupported distribution: $DISTRO"
         print_status "Please install the following packages manually:"
@@ -118,7 +134,7 @@ fi
 # Install packages
 print_status "Installing packages..."
 
-for package in "${!PACKAGES[@]}"; do
+for package in ${(k)PACKAGES}; do
     package_name="${PACKAGES[$package]}"
     print_status "Installing $package ($package_name)..."
 

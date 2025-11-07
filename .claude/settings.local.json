@@ -1,0 +1,38 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git fetch:*)",
+      "Bash(git reset:*)",
+      "Bash(chezmoi apply:*)",
+      "WebSearch",
+      "WebFetch(domain:github.com)",
+      "Bash(emacs:*)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "Bash(if [ -f ~/.emacs.d/config.el ])",
+      "Bash(then grep \"load-theme\" ~/.emacs.d/config.el)",
+      "Bash(else echo \"config.el does not exist\")",
+      "Bash(fi)",
+      "Bash(go version:*)",
+      "Bash(go install:*)",
+      "Bash(staticcheck -version:*)",
+      "Bash(git -C ~/.local/share/chezmoi ls-files:*)",
+      "Bash(git -C ~/.local/share/chezmoi rm:*)",
+      "Bash(git -C ~/.local/share/chezmoi status --short)",
+      "Bash(git -C ~/.local/share/chezmoi add emacs/themes/fleet-ghostty-theme.el)",
+      "Bash(git -C ~/.local/share/chezmoi add .gitignore emacs/config.org emacs/themes/fleet-ghostty-theme.el)",
+      "Bash(git -C ~/.local/share/chezmoi commit -m \"$(cat <<''EOF''\nAdd Fleet theme for Emacs and improve configuration management\n\n- Create custom fleet-ghostty-theme.el using official Zed Fleet Dark colors\n- Update Emacs font to JetBrainsMono 15pt with normal weight and comfortable line spacing\n- Configure doom-modeline colors to match Fleet aesthetic\n- Remove auto-generated config.el from git tracking (added to .gitignore)\n- Update config.org to use Fleet theme by default\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")",
+      "Bash(git -C ~/.local/share/chezmoi status)",
+      "Bash(git -C ~/.local/share/chezmoi commit -m \"$(cat <<''EOF''\nUpdate Fleet theme modeline to use subtle gray colors\n\n- Change all status indicators on right side to gray (errors, warnings, info)\n- Update major mode and Go version display to gray\n- Make VCS icons gray for more subtle appearance\n- Keep Evil mode states colored for visibility\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")",
+      "Bash(git -C ~/.local/share/chezmoi push)",
+      "Bash(git -C ~/.local/share/chezmoi fetch origin)",
+      "Bash(git -C ~/.local/share/chezmoi reset:*)",
+      "Bash(git -C ~/.local/share/chezmoi log --oneline -5)",
+      "Bash(git -C ~/.local/share/chezmoi log --oneline -3)",
+      "Bash(find:*)",
+      "Bash(git add:*)",
+      "Bash(git -C ~/.local/share/chezmoi add -A)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

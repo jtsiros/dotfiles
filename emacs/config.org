@@ -67,6 +67,13 @@
 (elpaca transient)
 (elpaca flymake)
 (elpaca jsonrpc)
+
+;; Helper function to byte-compile config
+(defun jt/byte-compile-config ()
+  "Byte-compile the config.org file."
+  (interactive)
+  (byte-compile-file (expand-file-name "config.el" user-emacs-directory))
+  (message "Config byte-compiled successfully!"))
 #+end_src
 
 ** Set initial frame to maximized on startup

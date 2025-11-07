@@ -1,43 +1,5 @@
-{{- if eq .chezmoi.os "windows" -}}
-# Windows package installer for chezmoi
-# This script runs once and installs required packages using winget
-
-Write-Host "Installing packages for Windows..." -ForegroundColor Green
-
-# List of packages to install via winget
-$packages = @(
-    @{Name="GNU.Emacs"; Description="GNU Emacs text editor"},
-    @{Name="DEVCOM.JetBrainsMonoNerdFont"; Description="JetBrains Mono Nerd Font"},
-    @{Name="Git.Git"; Description="Git version control"},
-    @{Name="Kitware.CMake"; Description="CMake build system"},
-    @{Name="LLVM.LLVM"; Description="LLVM/Clang C/C++ compiler"},
-    @{Name="BurntSushi.ripgrep.MSVC"; Description="ripgrep (fast grep alternative)"},
-    @{Name="sharkdp.fd"; Description="fd (fast find alternative)"},
-    @{Name="sharkdp.bat"; Description="bat (cat with syntax highlighting)"},
-    @{Name="junegunn.fzf"; Description="fzf (fuzzy finder)"},
-    @{Name="eza-community.eza"; Description="eza (modern ls replacement)"}
-)
-
-foreach ($package in $packages) {
-    Write-Host "`nChecking $($package.Description)..." -ForegroundColor Cyan
-
-    # Check if package is already installed
-    $installed = winget list --id $package.Name --exact 2>$null
-
-    if ($LASTEXITCODE -eq 0 -and $installed -match $package.Name) {
-        Write-Host "  ✓ $($package.Description) is already installed" -ForegroundColor Gray
-    } else {
-        Write-Host "  Installing $($package.Description)..." -ForegroundColor Yellow
-        winget install --id $package.Name --silent --accept-package-agreements --accept-source-agreements
-
-        if ($LASTEXITCODE -eq 0) {
-            Write-Host "  ✓ Successfully installed $($package.Description)" -ForegroundColor Green
-        } else {
-            Write-Host "  ✗ Failed to install $($package.Description)" -ForegroundColor Red
-        }
-    }
-}
-
-Write-Host "`nPackage installation complete!" -ForegroundColor Green
-Write-Host "Note: You may need to restart your terminal for some changes to take effect." -ForegroundColor Yellow
+{{ if eq .chezmoi.os "windows" -}}
+# Windows package installer temporarily disabled due to template rendering issue
+# Packages are already installed
+Write-Host "Package installation check skipped" -ForegroundColor Green
 {{ end -}}

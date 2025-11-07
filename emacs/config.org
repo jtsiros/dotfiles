@@ -70,8 +70,9 @@
 #+end_src
 
 ** Set initial frame to maximized on startup
+;; Disabled for tiling window managers - let the WM control window size
 #+begin_src emacs-lisp
-(add-hook 'window-setup-hook #'toggle-frame-maximized)
+;; (add-hook 'window-setup-hook #'toggle-frame-maximized)
 #+end_src
 
 * PATH
@@ -130,8 +131,10 @@ Emacs Dashboard is an extensible startup screen showing you recent files, bookma
 #+begin_src emacs-lisp
 (use-package dashboard
   :ensure t
+  :defer t
   :init
-  (setq initial-buffer-choice 'dashboard-open)
+  ;; Open dired on startup instead of dashboard for faster startup
+  (setq initial-buffer-choice (lambda () (dired "~")))
   (setq dashboard-set-heading-icons t)
   (setq dashboard-set-file-icons t)
   (setq dashboard-banner-logo-title "E M Λ C S")
@@ -201,9 +204,15 @@ This package implements hiding or abbreviation of the modeline displays (lighter
 #+begin_src emacs-lisp
 
 (use-package ellama
+  :defer t
+  :commands (ellama-ask-about ellama-chat ellama-provider-select
+             ellama-summarize ellama-translate ellama-improve-grammar
+             ellama-improve-wording)
   :init
   (setopt ellama-keymap-prefix "C-c e")  ;; keymap for all ellama functions
   (setopt ellama-language "English")     ;; language ellama should translate to
+
+  :config
   (require 'llm-ollama)
 
   ;; Primary provider: CodeLlama for code tasks
@@ -238,8 +247,6 @@ This package implements hiding or abbreviation of the modeline displays (lighter
            :embedding-model "nomic-embed-text"))
 
   (setopt ellama-naming-scheme 'ellama-generate-name-by-llm)
-
-  :config
   (setq ellama-sessions-directory "~/.emacs.d/ellama-sessions/"
         ellama-sessions-auto-save t))
 
@@ -298,7 +305,7 @@ This package implements hiding or abbreviation of the modeline displays (lighter
   ;; Windows fonts
   (set-face-attribute 'default nil
     :font "JetBrainsMono NF"
-    :height 150
+    :height 120
     :weight 'normal)
   (set-face-attribute 'variable-pitch nil
     :font "Segoe UI"
@@ -306,13 +313,13 @@ This package implements hiding or abbreviation of the modeline displays (lighter
     :weight 'light)
   (set-face-attribute 'fixed-pitch nil
     :font "JetBrainsMono NF"
-    :height 150
+    :height 120
     :weight 'normal))
  ((or (eq system-type 'darwin) (eq system-type 'gnu/linux))
   ;; macOS/Linux fonts
   (set-face-attribute 'default nil
     :font "JetBrainsMono Nerd Font Mono"
-    :height 150
+    :height 120
     :weight 'normal)
   (set-face-attribute 'variable-pitch nil
     :font "Ubuntu"
@@ -320,7 +327,7 @@ This package implements hiding or abbreviation of the modeline displays (lighter
     :weight 'light)
   (set-face-attribute 'fixed-pitch nil
     :font "JetBrainsMono Nerd Font Mono"
-    :height 150
+    :height 120
     :weight 'normal)))
 ;; Makes commented text and keywords italics.
 ;; This is working in emacsclient but not emacs.
@@ -589,8 +596,9 @@ You can use the bindings CTRL plus =/- for zooming in/out.  You can also use CTR
 
 #+begin_src emacs-lisp
 (use-package git-timemachine
-  :after git-timemachine
-  :hook (evil-normalize-keymaps . git-timemachine-hook)
+  :defer t
+  :commands (git-timemachine git-timemachine-toggle)
+  :hook (git-timemachine-mode . evil-normalize-keymaps)
   :config
     (evil-define-key 'normal git-timemachine-mode-map (kbd "C-j") 'git-timemachine-show-previous-revision)
     (evil-define-key 'normal git-timemachine-mode-map (kbd "C-k") 'git-timemachine-show-next-revision)
@@ -601,7 +609,13 @@ You can use the bindings CTRL plus =/- for zooming in/out.  You can also use CTR
 [[https://magit.vc/manual/][Magit]] is a full-featured git client for Emacs.
 
 #+begin_src emacs-lisp
-(use-package magit)
+(use-package magit
+  :defer t
+  :commands (magit-status magit-dispatch magit-file-dispatch magit-branch-checkout
+             magit-branch-and-checkout magit-commit-create magit-commit-fixup
+             magit-clone magit-show-commit magit-find-file magit-find-git-config-file
+             magit-fetch magit-init magit-log-buffer-file magit-stage-file
+             magit-unstage-file))
 
 #+end_src
 
@@ -674,8 +688,9 @@ Adding highlights to TODO and related words.
 * LANGUAGE SUPPORT
 #+begin_src emacs-lisp
 (use-package eglot
+  :defer t
   :hook
-  ((c-mode python-mode go-mode rust-mode) . eglot-ensure)
+  ((c-mode python-mode go-mode rust-mode odin-mode) . eglot-ensure)
   :config
   ;; Correct spelling + cleaner quoting
   (setq eglot-ignored-server-capabilities
@@ -683,27 +698,34 @@ Adding highlights to TODO and related words.
           :hoverProvider
           :inlayHintProvider)))
 
+(use-package odin-mode
+  :defer t
+  :mode "\\.odin\\'"
+  :ensure (:host github :repo "mattt-b/odin-mode"))
+
 (use-package zig-mode
-  :ensure t
+  :defer t
+  :mode "\\.zig\\'"
   :config
   (setq zig-format-on-save nil))  ;; Disables format on save globally
 
 (use-package go-mode
-  :ensure t)
-
-;; Auto-format Go code on save using Eglot (LSP)
-(add-hook 'go-mode-hook
-          (lambda ()
-            (add-hook 'before-save-hook #'eglot-format-buffer nil t)))
+  :defer t
+  :mode "\\.go\\'"
+  :hook (go-mode . (lambda ()
+                     (add-hook 'before-save-hook #'eglot-format-buffer nil t))))
 
 (use-package yaml-mode
-  :ensure t)
+  :defer t
+  :mode "\\.ya?ml\\'")
 
 (use-package terraform-mode
-  :ensure t)
+  :defer t
+  :mode "\\.tf\\'")
 
 (use-package rustic
-  :ensure t
+  :defer t
+  :mode "\\.rs\\'"
   :config
   (setq rustic-format-on-save nil)
   (setq rustic-lsp-client 'eglot)
@@ -743,6 +765,8 @@ The modeline is the bottom status bar that appears in Emacs windows.  While you 
 
 #+BEGIN_SRC emacs-lisp
 (use-package neotree
+  :defer t
+  :commands (neotree-toggle neotree-dir neotree-projectile-action)
   :config
   (setq neo-smart-open t
         neo-show-hidden-files t
@@ -933,7 +957,9 @@ Configure compilation to display output at the bottom of the window without swit
 [[https://github.com/nflath/sudo-edit][sudo-edit]] gives us the ability to open files with sudo privileges or switch over to editing with sudo privileges if we initially opened the file without such privileges.
 
 #+begin_src emacs-lisp
-(use-package sudo-edit)
+(use-package sudo-edit
+  :defer t
+  :commands (sudo-edit sudo-edit-find-file))
 #+end_src
 
 * THEME

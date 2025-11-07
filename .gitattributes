@@ -1,0 +1,14 @@
+# Ensure consistent line endings across platforms
+* text=auto
+
+# Force LF for Emacs configuration files (Org mode and Emacs Lisp)
+emacs/config.org text eol=lf
+emacs/**/*.el text eol=lf
+
+# Force LF for shell scripts
+*.sh text eol=lf
+
+# Force LF for common config files
+.editorconfig text eol=lf
+.gitignore text eol=lf
+.gitattributes text eol=lf

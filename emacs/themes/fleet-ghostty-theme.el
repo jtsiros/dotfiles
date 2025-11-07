@@ -49,7 +49,7 @@
    `(warning           ((t (:foreground ,yellow-warning))))
    `(error             ((t (:foreground ,red-error))))
    `(success           ((t (:foreground ,green-success))))
-   `(fringe            ((t (:background ,bg))))
+   `(fringe            ((t (:foreground ,line-numbers :background ,bg))))
    `(link              ((t (:underline t :foreground ,blue))))
    `(vertical-border   ((t (:foreground ,border))))
    `(minibuffer-prompt ((t (:foreground ,orange))))

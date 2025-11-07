@@ -430,6 +430,7 @@ You can use the bindings CTRL plus =/- for zooming in/out.  You can also use CTR
     "c r" '(recompile :wk "Rerun last compile")
     "c k" '(kill-compilation :wk "Stop compilation")
     "c q" '(jt/close-compilation-buffer :wk "Close compilation buffer")
+    "c m" '(jt/maximize-compilation-buffer :wk "Maximize compilation buffer")
     "c n" '(next-error :wk "Jump to next error")
     "c p" '(previous-error :wk "Jump to previous error")
     "c f" '(first-error :wk "Jump to first error"))
@@ -990,6 +991,14 @@ Configure compilation to display output at the bottom of the window without swit
   (interactive)
   (when-let ((window (get-buffer-window "*compilation*")))
     (delete-window window)))
+
+;; Function to maximize compilation buffer
+(defun jt/maximize-compilation-buffer ()
+  "Switch to compilation buffer and maximize it."
+  (interactive)
+  (when-let ((window (get-buffer-window "*compilation*")))
+    (select-window window)
+    (delete-other-windows)))
 #+end_src
 
 * SUDO EDIT

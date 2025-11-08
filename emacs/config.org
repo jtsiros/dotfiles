@@ -726,6 +726,9 @@ Adding highlights to TODO and related words.
   :hook
   ((c-mode python-mode go-mode rust-mode odin-mode) . eglot-ensure)
   :config
+  ;; Configure zls for Zig (cross-platform)
+  (add-to-list 'eglot-server-programs
+               '(zig-mode . ("zls")))
   ;; Correct spelling + cleaner quoting
   (setq eglot-ignored-server-capabilities
         '(:documentHighlightProvider
@@ -740,6 +743,7 @@ Adding highlights to TODO and related words.
 (use-package zig-mode
   :defer t
   :mode "\\.zig\\'"
+  :hook (zig-mode . eglot-ensure)
   :config
   (setq zig-format-on-save nil))  ;; Disables format on save globally
 

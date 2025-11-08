@@ -1,3 +1,8 @@
+;; On Windows, set HOME correctly BEFORE loading config
+(when (eq system-type 'windows-nt)
+  (setenv "HOME" "C:/Users/jon")
+  (setenv "USERPROFILE" "C:/Users/jon"))
+
 (org-babel-load-file
  (expand-file-name
   "config.org"

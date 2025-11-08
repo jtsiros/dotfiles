@@ -50,6 +50,18 @@
 - [[#which-key][WHICH-KEY]]
 
 * SCRIPTS/CONFIG SETUP
+** Set HOME directory on Windows
+#+begin_src emacs-lisp
+;; On Windows, ensure HOME is set correctly (must be first!)
+(when (eq system-type 'windows-nt)
+  (setenv "HOME" "C:/Users/jon")
+  (setenv "USERPROFILE" "C:/Users/jon")
+  (setq user-emacs-directory "C:/Users/jon/.emacs.d/")
+  (setq default-directory "C:/Users/jon/")
+  ;; Update abbreviated home directory
+  (setq abbreviated-home-dir nil))
+#+end_src
+
 ** Adding the scripts directory to path
 #+begin_src emacs-lisp
 (add-to-list 'load-path "~/.emacs.d/scripts/")
@@ -143,7 +155,7 @@ Emacs Dashboard is an extensible startup screen showing you recent files, bookma
   :defer t
   :init
   ;; Open dired on startup instead of dashboard for faster startup
-  (setq initial-buffer-choice (lambda () (dired "~")))
+  (setq initial-buffer-choice (lambda () (dired default-directory)))
   (setq dashboard-set-heading-icons t)
   (setq dashboard-set-file-icons t)
   (setq dashboard-banner-logo-title "E M Λ C S")
@@ -929,6 +941,13 @@ Allows us to create a Table of Contents in our Org docs.
 (setq use-dialog-box nil)    ;; No dialog box
 (setq pop-up-windows nil)    ;; No popup windows
 (setq ring-bell-function 'ignore) ;; disable sounds
+
+;; Set default directory to ~/projects (works across all operating systems)
+(let ((projects-dir (expand-file-name "~/projects/")))
+  (unless (file-exists-p projects-dir)
+    (make-directory projects-dir t))
+  (setq default-directory projects-dir)
+  (cd projects-dir))
 #+end_src
 
 * SHELLS AND TERMINALS

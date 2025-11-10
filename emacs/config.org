@@ -994,15 +994,16 @@ Configure compilation to display output at the bottom of the window without swit
 
 #+begin_src emacs-lisp
 ;; Compilation configuration
-(setq compilation-window-height 10)
+(setq compilation-window-height 15)
 (setq compilation-scroll-output t)
+(setq compilation-read-command t)  ;; Always prompt with last command
 
 ;; Display compilation buffer at bottom without switching to it
 (add-to-list 'display-buffer-alist
              '("\\*compilation\\*"
                (display-buffer-reuse-window display-buffer-at-bottom)
                (reusable-frames . visible)
-               (window-height . 0.3)
+               (window-height . 0.4)
                (dedicated . t)))
 
 ;; Don't switch to compilation buffer when compiling

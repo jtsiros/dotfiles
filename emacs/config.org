@@ -998,6 +998,17 @@ Configure compilation to display output at the bottom of the window without swit
 (setq compilation-scroll-output t)
 (setq compilation-read-command t)  ;; Always prompt with last command
 
+;; Run compilation from project root or current buffer directory
+(defun jt/compilation-start-in-project-root (orig-fun &rest args)
+  "Run compilation from project root if in a project, otherwise from buffer directory."
+  (let ((default-directory
+         (or (and (fboundp 'projectile-project-root)
+                  (projectile-project-root))
+             (file-name-directory (or (buffer-file-name) default-directory)))))
+    (apply orig-fun args)))
+
+(advice-add 'compile :around #'jt/compilation-start-in-project-root)
+
 ;; Display compilation buffer at bottom without switching to it
 (add-to-list 'display-buffer-alist
              '("\\*compilation\\*"

@@ -30,7 +30,17 @@
       "Bash(git -C ~/.local/share/chezmoi log --oneline -3)",
       "Bash(find:*)",
       "Bash(git add:*)",
-      "Bash(git -C ~/.local/share/chezmoi add -A)"
+      "Bash(git -C ~/.local/share/chezmoi add -A)",
+      "Bash(chezmoi managed:*)",
+      "Bash(chezmoi verify:*)",
+      "Bash(chezmoi target-path:*)",
+      "Bash(chezmoi cat:*)",
+      "Bash(readlink:*)",
+      "Bash(cat:*)",
+      "Bash(git mv:*)",
+      "Bash(git rm:*)",
+      "Bash(git -C ~/.local/share/chezmoi mv:*)",
+      "Bash(git -C ~/.local/share/chezmoi commit -m \"$(cat <<''EOF''\nFix ghostty config to use proper dot_config directory structure\n\n- Move ghostty/ to dot_config/ghostty/ for correct ~/.config/ghostty path\n- Remove symlink_dot_config_ghostty (was creating ~/.config_ghostty incorrectly)\n- Ghostty config now properly managed at ~/.config/ghostty\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")"
     ],
     "deny": [],
     "ask": []

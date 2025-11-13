@@ -28,7 +28,6 @@ brew install \
     zellij \
     zsh-autosuggestions \
     zsh-syntax-highlighting \
-    powerlevel10k \
     zoxide
 
 echo "Installing GUI applications via cask..."

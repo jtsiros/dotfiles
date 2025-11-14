@@ -40,7 +40,9 @@
       "Bash(git mv:*)",
       "Bash(git rm:*)",
       "Bash(git -C ~/.local/share/chezmoi mv:*)",
-      "Bash(git -C ~/.local/share/chezmoi commit -m \"$(cat <<''EOF''\nFix ghostty config to use proper dot_config directory structure\n\n- Move ghostty/ to dot_config/ghostty/ for correct ~/.config/ghostty path\n- Remove symlink_dot_config_ghostty (was creating ~/.config_ghostty incorrectly)\n- Ghostty config now properly managed at ~/.config/ghostty\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")"
+      "Bash(git -C ~/.local/share/chezmoi commit -m \"$(cat <<''EOF''\nFix ghostty config to use proper dot_config directory structure\n\n- Move ghostty/ to dot_config/ghostty/ for correct ~/.config/ghostty path\n- Remove symlink_dot_config_ghostty (was creating ~/.config_ghostty incorrectly)\n- Ghostty config now properly managed at ~/.config/ghostty\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")",
+      "Bash(git -C ~/.local/share/chezmoi pull)",
+      "Bash(git -C ~/.local/share/chezmoi diff --name-only)"
     ],
     "deny": [],
     "ask": []

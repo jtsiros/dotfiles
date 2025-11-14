@@ -1,12 +1,8 @@
-font-family = JetBrainsMono Nerd Font Mono 
-font-size = 16.0
-
-theme = "JetBrains Fleet"
-
-unfocused-split-opacity = 0.35
-unfocused-split-fill = 3A3B3C
-
-window-padding-x = 5
-window-padding-y = 5
-
+font-family = JetBrainsMono Nerd Font Mono
+font-size = 19
+background-blur-radius = 20
+macos-titlebar-style = hidden
+window-padding-x = 10
+window-padding-y = 10
+macos-option-as-alt = true
 mouse-hide-while-typing = true

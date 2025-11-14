@@ -15,3 +15,13 @@
   ;; Set native-comp directory
   (setq native-comp-eln-load-path
         (list (expand-file-name "eln-cache/" user-emacs-directory))))
+
+;; Clean titlebar on macOS with rounded corners (like Ghostty)
+(when (eq system-type 'darwin)
+  (setq frame-resize-pixelwise t)
+  ;; Transparent titlebar that blends with the theme
+  (push '(ns-transparent-titlebar . t) default-frame-alist)
+  (push '(ns-appearance . dark) default-frame-alist)
+  ;; Hide proxy icon and frame title for clean look
+  (setq ns-use-proxy-icon nil)
+  (setq frame-title-format nil))

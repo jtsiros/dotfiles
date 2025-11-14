@@ -3,6 +3,7 @@
 #+DESCRIPTION: JT's personal Emacs config.
 #+STARTUP: showeverything
 #+OPTIONS: toc:2
+#+PROPERTY: header-args :tangle config.el
 
 * TABLE OF CONTENTS :toc:
 - [[#scriptsconfig-setup][SCRIPTS/CONFIG SETUP]]
@@ -355,7 +356,7 @@ EditorConfig helps maintain consistent coding styles across different editors an
   ;; macOS/Linux fonts
   (set-face-attribute 'default nil
     :font "JetBrainsMono Nerd Font Mono"
-    :height 150
+    :height 190
     :weight 'normal)
   (set-face-attribute 'variable-pitch nil
     :font "Ubuntu"
@@ -363,7 +364,7 @@ EditorConfig helps maintain consistent coding styles across different editors an
     :weight 'light)
   (set-face-attribute 'fixed-pitch nil
     :font "JetBrainsMono Nerd Font Mono"
-    :height 150
+    :height 190
     :weight 'normal)))
 ;; Makes commented text and keywords italics.
 ;; This is working in emacsclient but not emacs.
@@ -1062,7 +1063,10 @@ Provides the ability to have a custom theme and also installs Doom Themes. There
   :ensure t
   :init
   ;; Available flavors: 'latte, 'frappe, 'macchiato, 'mocha
-  (setq catppuccin-flavor 'mocha))
+  (setq catppuccin-flavor 'mocha)
+  :config
+  ;; Load theme after package is installed
+  (load-theme 'catppuccin t))
 
 (use-package doom-themes
   :config
@@ -1072,9 +1076,6 @@ Provides the ability to have a custom theme and also installs Doom Themes. There
   (doom-themes-neotree-config)
   ;; Corrects (and improves) org-mode's native fontification.
   (doom-themes-org-config))
-
-;; Load Fleet theme
-(load-theme 'fleet-ghostty t)
 #+end_src
 
 * WHICH-KEY

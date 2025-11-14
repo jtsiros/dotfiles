@@ -27,7 +27,7 @@ chezmoi init --apply jtsiros/dotfiles  # or YOUR_USERNAME/dotfiles
 
 ### 🐚 Shell Environment
 - **zsh** with custom configuration
-- Modern command-line tools (fzf, fd, bat, eza, zoxide)
+- Modern command-line tools (fzf, fd, bat, eza)
 - Cross-platform package management
 
 ### ⚡ Development Tools

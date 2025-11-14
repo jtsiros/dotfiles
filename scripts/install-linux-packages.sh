@@ -60,7 +60,7 @@ case $DISTRO in
             ["git-delta"]="git-delta"
             ["tldr"]="tldr"
             ["tmux"]="tmux"
-            ["zoxide"]="zoxide"
+            ["starship"]="starship"
             ["zsh-autosuggestions"]="zsh-autosuggestions"
             ["zsh-syntax-highlighting"]="zsh-syntax-highlighting"
         )
@@ -76,7 +76,7 @@ case $DISTRO in
             ["git-delta"]="git-delta"
             ["tldr"]="tldr"
             ["tmux"]="tmux"
-            ["zoxide"]="zoxide"
+            ["starship"]="starship"
             ["zsh-autosuggestions"]="zsh-autosuggestions"
             ["zsh-syntax-highlighting"]="zsh-syntax-highlighting"
         )
@@ -92,7 +92,7 @@ case $DISTRO in
             ["git-delta"]="git-delta"
             ["tldr"]="tldr"
             ["tmux"]="tmux"
-            ["zoxide"]="zoxide"
+            ["starship"]="starship"
             ["zsh-autosuggestions"]="zsh-autosuggestions"
             ["zsh-syntax-highlighting"]="zsh-syntax-highlighting"
         )
@@ -102,7 +102,7 @@ case $DISTRO in
     *)
         print_error "Unsupported distribution: $DISTRO"
         print_status "Please install the following packages manually:"
-        echo "fzf, fd-find/fd, bat, eza, git-delta, tldr, tmux, zoxide, zsh-autosuggestions, zsh-syntax-highlighting"
+        echo "fzf, fd-find/fd, bat, eza, git-delta, tldr, tmux, starship, zsh-autosuggestions, zsh-syntax-highlighting"
         exit 1
         ;;
 esac

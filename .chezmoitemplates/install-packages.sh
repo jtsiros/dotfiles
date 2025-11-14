@@ -26,9 +26,9 @@ brew install \
     tmux \
     tree-sitter \
     zellij \
+    starship \
     zsh-autosuggestions \
-    zsh-syntax-highlighting \
-    zoxide
+    zsh-syntax-highlighting
 
 echo "Installing GUI applications via cask..."
 brew install --cask \
@@ -47,7 +47,7 @@ if [ -f "{{ .chezmoi.sourceDir }}/scripts/install-linux-packages.sh" ]; then
     "{{ .chezmoi.sourceDir }}/scripts/install-linux-packages.sh"
 else
     echo "Linux package installer not found. Please install packages manually:"
-    echo "fzf, fd-find/fd, bat, eza, git-delta, tldr, thefuck, tmux, helix, zellij, zsh-autosuggestions, zsh-syntax-highlighting, powerlevel10k, zoxide"
+    echo "fzf, fd-find/fd, bat, eza, git-delta, tldr, thefuck, tmux, helix, zellij, zsh-autosuggestions, zsh-syntax-highlighting, powerlevel10k"
 fi
 {{- end }}
 

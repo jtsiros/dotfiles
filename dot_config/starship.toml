@@ -1,0 +1,46 @@
+# Starship configuration
+# Minimal one-line prompt with Fleet theme colors
+
+# Get editor completions based on the config schema
+"$schema" = 'https://starship.rs/config-schema.json'
+
+# Timeout for commands
+command_timeout = 500
+
+# Simple one-line format
+format = """$directory$git_branch$git_status$character"""
+
+# Wait 10 milliseconds for starship to check files
+scan_timeout = 10
+
+# Add blank line before prompt
+add_newline = true
+
+[character]
+success_symbol = "[❯](bold #06BCE4)"
+error_symbol = "[❯](bold red)"
+
+[directory]
+style = "bold #CBE0F0"
+truncation_length = 3
+truncate_to_repo = true
+format = "[$path]($style) "
+
+[git_branch]
+symbol = ""
+style = "#B388FF"
+format = "[$symbol $branch]($style) "
+
+[git_status]
+style = "#F97583"
+format = "([$all_status$ahead_behind]($style))"
+conflicted = "="
+ahead = "⇡"
+behind = "⇣"
+diverged = "⇕"
+untracked = "?"
+stashed = "≡"
+modified = "!"
+staged = "+"
+renamed = "»"
+deleted = "✘"

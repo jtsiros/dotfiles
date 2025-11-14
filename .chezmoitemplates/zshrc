@@ -143,11 +143,6 @@ fi
 # Common PATH additions
 export PATH="$HOME/.config/emacs/bin:$PATH"
 
-# ---- Zoxide (better cd) ----
-if command -v zoxide &> /dev/null; then
-  eval "$(zoxide init zsh)"
-fi
-
 # Aliases
 alias ze='zellij edit'
 alias untar='tar -zxvf' # Unpack .tar file
@@ -162,10 +157,6 @@ if command -v eza &> /dev/null; then
   alias ls="eza --icons=always"
 fi
 
-if command -v zoxide &> /dev/null; then
-  alias cd="z"
-fi
-
 alias reload-zsh="source ~/.zshrc"
 alias edit-zsh="nvim ~/.zshrc"
 
@@ -177,6 +168,11 @@ fi
 
 # Ensure history directory exists
 [[ ! -d "${HISTFILE:h}" ]] && mkdir -p "${HISTFILE:h}"
+
+# Initialize Starship prompt
+if command -v starship &> /dev/null; then
+  eval "$(starship init zsh)"
+fi
 
 # Load local zsh customizations if they exist
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local

@@ -195,6 +195,10 @@ EditorConfig helps maintain consistent coding styles across different editors an
 
 * DIRED
 #+begin_src emacs-lisp
+;; On macOS, disable ls-dired since BSD ls doesn't support --dired flag
+(when (eq system-type 'darwin)
+  (setq dired-use-ls-dired nil))
+
 (use-package dired-open
   :config
   (setq dired-open-extensions '(("gif" . "sxiv")

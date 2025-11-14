@@ -9,3 +9,6 @@ emacs/elpaca/builds/*/build/
 
 # Emacs auto-generated config
 emacs/config.el
+
+# Claude local settings
+.claude/settings.local.json

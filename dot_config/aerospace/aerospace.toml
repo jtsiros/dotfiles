@@ -87,6 +87,14 @@ run = 'layout floating'
 if.app-name-regex-substring = 'discord'
 run = 'layout floating'
 
+[[on-window-detected]]
+if.app-id = 'net.battle.app'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-id = 'com.blizzard.worldofwarcraft'
+run = 'layout floating'
+
 # Possible values: (qwerty|dvorak)
 # See https://nikitabobko.github.io/AeroSpace/guide#key-mapping
 [key-mapping]

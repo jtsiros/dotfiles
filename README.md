@@ -102,3 +102,33 @@ chezmoi edit ~/.zshrc
 # Add a new file to be managed
 chezmoi add ~/.config/new-tool/config
 ```
+
+## Quick Reference
+
+### tmux Pane Management
+
+Prefix: `Ctrl+A`
+
+**Creating/Splitting Panes**
+- `Ctrl+A |` - Split window vertically
+- `Ctrl+A s` - Split horizontally (current path)
+- `Ctrl+A v` - Split vertically (current path)
+
+**Navigating Between Panes**
+- `Ctrl+A h` - Select left pane
+- `Ctrl+A j` - Select pane below
+- `Ctrl+A k` - Select pane above
+- `Ctrl+A l` - Select right pane
+
+**Resizing Panes** (repeatable - press prefix once, then keep pressing resize key)
+- `Ctrl+A ,` - Resize left by 20
+- `Ctrl+A .` - Resize right by 20
+- `Ctrl+A -` - Resize down by 7
+- `Ctrl+A =` - Resize up by 7
+
+**Other Pane Actions**
+- `Ctrl+A z` - Toggle pane zoom (maximize/restore)
+- `Ctrl+A c` - Kill current pane
+- `Ctrl+A x` - Swap pane down
+- `Ctrl+A *` - Synchronize panes (type in all at once)
+- `Ctrl+A P` - Set pane border status

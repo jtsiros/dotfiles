@@ -174,5 +174,12 @@ if command -v starship &> /dev/null; then
   eval "$(starship init zsh)"
 fi
 
+# Initialize zoxide
+if command -v zoxide &> /dev/null; then
+  eval "$(zoxide init zsh)"
+  # Convenient aliases
+  alias cd="z"
+fi
+
 # Load local zsh customizations if they exist
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local

@@ -71,6 +71,9 @@ packages:
 
   # Cross-platform tools installed via curl/pip
   universal:
+    - name: neovim
+      check: nvim
+      install: curl -sLo ~/.local/bin/nvim https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.appimage && chmod u+x ~/.local/bin/nvim
     - name: starship
       check: starship
       install: curl -sS https://starship.rs/install.sh | sh -s -- -y -b ~/.local/bin
@@ -80,3 +83,12 @@ packages:
     - name: thefuck
       check: thefuck
       install: pipx install thefuck || pip3 install --user thefuck
+    - name: go
+      check: go
+      install: curl -sL https://go.dev/dl/go1.25.4.linux-amd64.tar.gz | tar -C ~/.local -xzf - && ln -sf ~/.local/go/bin/go ~/.local/bin/go && ln -sf ~/.local/go/bin/gofmt ~/.local/bin/gofmt
+    - name: black
+      check: black
+      install: pipx install black
+    - name: isort
+      check: isort
+      install: pipx install isort

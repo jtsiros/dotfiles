@@ -31,6 +31,9 @@ bindkey '^[[B' history-search-forward
 bindkey '^[w' kill-region                            # [Esc-w] - Kill from the cursor to the mark
 bindkey '^r' history-incremental-search-backward     # [Ctrl-r] - Search backward incrementally
 
+# Common PATH additions (set early so tools like fzf use the right version)
+export PATH="$HOME/.local/bin:$HOME/.config/emacs/bin:$HOME/.fzf/bin:$PATH"
+
 # Load zsh plugins
 {{- if eq .chezmoi.os "darwin" }}
 # macOS with Homebrew
@@ -139,9 +142,6 @@ if command -v brew &> /dev/null; then
   export OPENSSL_DIR=$(brew --prefix openssl)
 fi
 {{- end }}
-
-# Common PATH additions
-export PATH="$HOME/.config/emacs/bin:$PATH"
 
 # Aliases
 alias ze='zellij edit'

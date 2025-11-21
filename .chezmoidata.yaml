@@ -1,0 +1,82 @@
+# Package definitions for chezmoi
+# Used by run_onchange_before_install-packages-*.sh.tmpl scripts
+
+packages:
+  # macOS packages installed via Homebrew
+  darwin:
+    brews:
+      - fzf
+      - fd
+      - bat
+      - git-delta
+      - eza
+      - tlrc  # tldr client
+      - thefuck
+      - tmux
+      - tree-sitter
+      - zellij
+      - starship
+      - zoxide
+      - zsh-autosuggestions
+      - zsh-syntax-highlighting
+    casks:
+      - ghostty
+      - sf-symbols
+      - font-meslo-lg-nerd-font
+      - font-sf-pro
+      - font-hack-nerd-font
+    taps:
+      - nikitabobko/tap/aerospace
+
+  # Linux packages by distribution family
+  linux:
+    # Debian/Ubuntu family
+    apt:
+      - fzf
+      - fd-find
+      - bat
+      - eza
+      - git-delta
+      - tldr
+      - tmux
+      - zoxide
+      - zsh-autosuggestions
+      - zsh-syntax-highlighting
+
+    # Fedora/RHEL family
+    dnf:
+      - fzf
+      - fd-find
+      - bat
+      - eza
+      - git-delta
+      - tldr
+      - tmux
+      - zoxide
+      - zsh-autosuggestions
+      - zsh-syntax-highlighting
+
+    # Arch family
+    pacman:
+      - fzf
+      - fd
+      - bat
+      - eza
+      - git-delta
+      - tldr
+      - tmux
+      - zoxide
+      - zsh-autosuggestions
+      - zsh-syntax-highlighting
+
+  # Cross-platform tools installed via curl/pip
+  universal:
+    - name: starship
+      check: starship
+      install: curl -sS https://starship.rs/install.sh | sh -s -- -y -b ~/.local/bin
+    - name: uv
+      check: uv
+      install: curl -LsSf https://astral.sh/uv/install.sh | sh
+    - name: thefuck
+      check: thefuck
+      install: pipx install thefuck || pip3 install --user thefuck

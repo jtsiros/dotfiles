@@ -1,0 +1,68 @@
+{{- if eq .chezmoi.os "linux" -}}
+#!/bin/bash
+# chezmoi:template:hash: {{ include ".chezmoidata.yaml" | sha256sum }}
+
+# Linux package installer
+# Re-runs automatically when .chezmoidata.yaml changes
+
+set -e
+
+DISTRO="{{ .chezmoi.osRelease.id }}"
+echo "Installing packages for Linux ($DISTRO)..."
+
+# Determine package manager and install packages
+case "$DISTRO" in
+    ubuntu|debian|pop|linuxmint)
+        echo "Using apt..."
+        sudo apt update
+        sudo apt install -y \
+{{- range .packages.linux.apt }}
+            {{ . }} \
+{{- end }}
+            || true
+        ;;
+    fedora|rhel|centos|rocky|alma)
+        echo "Using dnf..."
+        sudo dnf install -y \
+{{- range .packages.linux.dnf }}
+            {{ . }} \
+{{- end }}
+            || true
+        ;;
+    arch|manjaro|endeavouros)
+        echo "Using pacman..."
+        sudo pacman -Syu --noconfirm \
+{{- range .packages.linux.pacman }}
+            {{ . }} \
+{{- end }}
+            || true
+        ;;
+    *)
+        echo "Unsupported distribution: $DISTRO"
+        echo "Please install packages manually."
+        exit 0
+        ;;
+esac
+
+# Ensure ~/.local/bin exists and is in PATH
+mkdir -p "$HOME/.local/bin"
+
+# Install universal tools not available in repos
+echo "Installing universal tools..."
+
+{{- range .packages.universal }}
+if ! command -v {{ .check }} &> /dev/null; then
+    echo "Installing {{ .name }}..."
+    {{ .install }} || echo "Warning: Failed to install {{ .name }}"
+fi
+{{- end }}
+
+# Download fzf-git.sh
+echo "Downloading fzf-git.sh..."
+mkdir -p "$HOME/lib"
+curl -fsSL -o "$HOME/lib/fzf-git.sh" https://raw.githubusercontent.com/junegunn/fzf-git.sh/main/fzf-git.sh || true
+chmod +x "$HOME/lib/fzf-git.sh" 2>/dev/null || true
+
+echo "Linux package installation complete!"
+echo "You may need to restart your shell or run 'source ~/.zshrc' to apply changes."
+{{- end -}}

@@ -1,0 +1,54 @@
+{{- if eq .chezmoi.os "darwin" -}}
+#!/bin/bash
+# chezmoi:template:hash: {{ include ".chezmoidata.yaml" | sha256sum }}
+
+# macOS package installer via Homebrew
+# Re-runs automatically when .chezmoidata.yaml changes
+
+set -e
+
+echo "Installing packages for macOS..."
+
+# Install Homebrew if not present
+if ! command -v brew &> /dev/null; then
+    echo "Installing Homebrew..."
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+fi
+
+echo "Installing Homebrew packages..."
+brew install \
+{{- range .packages.darwin.brews }}
+    {{ . }} \
+{{- end }}
+    || true
+
+echo "Installing Homebrew taps..."
+{{- range .packages.darwin.taps }}
+brew install {{ . }} || true
+{{- end }}
+
+echo "Installing Homebrew casks..."
+brew install --cask \
+{{- range .packages.darwin.casks }}
+    {{ . }} \
+{{- end }}
+    || true
+
+# Install universal tools
+echo "Installing universal tools..."
+
+{{- range .packages.universal }}
+if ! command -v {{ .check }} &> /dev/null; then
+    echo "Installing {{ .name }}..."
+    {{ .install }} || echo "Warning: Failed to install {{ .name }}"
+fi
+{{- end }}
+
+# Download fzf-git.sh
+echo "Downloading fzf-git.sh..."
+mkdir -p "$HOME/lib"
+curl -fsSL -o "$HOME/lib/fzf-git.sh" https://raw.githubusercontent.com/junegunn/fzf-git.sh/main/fzf-git.sh || true
+chmod +x "$HOME/lib/fzf-git.sh" 2>/dev/null || true
+
+echo "macOS package installation complete!"
+{{- end -}}

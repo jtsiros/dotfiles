@@ -1,6 +1,5 @@
 README.md
 CROSS_PLATFORM_SETUP.md
-scripts/
 .git/
 .gitignore
 
@@ -34,7 +33,8 @@ bin/
 dot_zprofile.tmpl
 dot_zshenv
 dot_zshrc.tmpl
-run_once_install-packages.sh.tmpl
+run_onchange_before_install-packages-linux.sh.tmpl
+run_onchange_before_install-packages-darwin.sh.tmpl
 ghostty/
 symlink_dot_config_ghostty
 dot_odin/

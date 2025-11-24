@@ -112,24 +112,12 @@ return {
         desc = "Open current buffer in new tab",
       },
       {
-        "<leader>e",
-        group = "Explorer",
+        "<leader>g",
+        group = "Git",
       },
       {
-        "<leader>ee",
-        desc = "Toggle file explorer",
-      },
-      {
-        "<leader>ef",
-        desc = "Toggle file explorer on current file",
-      },
-      {
-        "<leader>ec",
-        desc = "Collapse file explorer",
-      },
-      {
-        "<leader>er",
-        desc = "Refresh file explorer",
+        "<leader>gg",
+        desc = "Open lazy git",
       },
       {
         "<leader>f",
@@ -252,6 +240,26 @@ return {
         desc = "Format file or range (in visual mode)",
       },
       {
+        "<leader>o",
+        group = "Org",
+      },
+      {
+        "<leader>oa",
+        desc = "Org agenda",
+      },
+      {
+        "<leader>oc",
+        desc = "Org capture",
+      },
+      {
+        "<leader>of",
+        desc = "Find org files",
+      },
+      {
+        "<leader>og",
+        desc = "Grep in org files",
+      },
+      {
         "<leader>l",
         desc = "Trigger linting for current file",
       },
@@ -292,13 +300,24 @@ return {
         desc = "Restart LSP",
       },
       {
-        "<leader>D",
-        desc = "Buffer diagnostics",
+        "<leader>d",
+        group = "Directory",
       },
       {
-        "<leader>d",
-        desc = "Show line diagnostics",
-        mode = "n",
+        "<leader>dd",
+        desc = "Open parent directory",
+      },
+      {
+        "<leader>df",
+        desc = "Open directory of current file",
+      },
+      {
+        "<leader>dc",
+        desc = "Open parent directory in floating window",
+      },
+      {
+        "<leader>dh",
+        desc = "Toggle hidden files",
       },
       {
         "<leader>b",
@@ -310,7 +329,11 @@ return {
       },
       {
         "<leader>x",
-        group = "Trouble",
+        group = "Trouble/Diagnostics",
+      },
+      {
+        "<leader>x.",
+        desc = "Show line diagnostics",
       },
       {
         "<leader>xw",

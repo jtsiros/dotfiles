@@ -19,7 +19,7 @@ return {
       ensure_installed = {
         "gopls",
         "rust_analyzer",
-        "zls",
+        -- "zls", -- Using custom zls built from source for zig master compatibility
         "lua_ls",
         "graphql",
         "prismals",

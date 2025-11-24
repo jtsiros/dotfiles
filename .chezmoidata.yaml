@@ -10,7 +10,7 @@ packages:
       - bat
       - git-delta
       - eza
-      - tlrc  # tldr client
+      - tlrc # tldr client
       - thefuck
       - tmux
       - tree-sitter
@@ -27,6 +27,7 @@ packages:
       - font-hack-nerd-font
     taps:
       - nikitabobko/tap/aerospace
+      - FelixKratz/formulae/borders
 
   # Linux packages by distribution family
   linux:

@@ -6,27 +6,11 @@ return {
     "williamboman/mason.nvim",
     "williamboman/mason-lspconfig.nvim",
     { "antosha417/nvim-lsp-file-operations", config = true },
-    { "folke/neodev.nvim", opts = {} },
+    { "folke/lazydev.nvim", ft = "lua", opts = {} },
   },
   config = function()
-    local lspconfig = require("lspconfig")
     local capabilities = require("cmp_nvim_lsp").default_capabilities()
-    
-    -- Fix position encoding for Neovim 0.11+
-    if vim.fn.has('nvim-0.11') == 1 then
-      capabilities.general = capabilities.general or {}
-      capabilities.general.positionEncodings = { "utf-16", "utf-8" }
-      
-      -- Suppress position encoding warnings
-      local original_notify = vim.notify
-      vim.notify = function(msg, level, opts)
-        if type(msg) == "string" and msg:match("position_encoding.*required.*Defaulting") then
-          return
-        end
-        return original_notify(msg, level, opts)
-      end
-    end
-    
+
     -- Configure diagnostics
     vim.diagnostic.config({
       virtual_text = {
@@ -44,19 +28,6 @@ return {
       update_in_insert = false,
       severity_sort = true,
     })
-
-    -- Configure LSP handlers to suppress warnings
-    vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
-      vim.lsp.handlers.hover, {
-        border = "rounded",
-      }
-    )
-    
-    vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
-      vim.lsp.handlers.signature_help, {
-        border = "rounded",
-      }
-    )
 
     -- LSP keymaps on attach
     vim.api.nvim_create_autocmd("LspAttach", {
@@ -81,37 +52,47 @@ return {
       end,
     })
 
-    -- Server configurations
-    local servers = {
-      graphql = {
-        filetypes = { "graphql", "gql", "svelte", "typescriptreact", "javascriptreact" },
-      },
-      lua_ls = {
-        settings = {
-          Lua = {
-            diagnostics = { globals = { "vim" } },
-            completion = { callSnippet = "Replace" },
-          },
-        },
-      },
-      bashls = {
-        filetypes = { "sh", "bash", "zsh" },
-        settings = {
-          bashIde = {
-            globPattern = "**/*@(.sh|.inc|.bash|.command|.zsh)",
-          },
-        },
-      },
-    }
+    -- Server configurations using vim.lsp.config (Neovim 0.11+)
+    vim.lsp.config("*", {
+      capabilities = capabilities,
+    })
 
-    -- Setup servers
-    for server, config in pairs(servers) do
-      lspconfig[server].setup(vim.tbl_extend("force", { capabilities = capabilities }, config))
-    end
-    
-    -- Default servers
-    for _, server in ipairs({ "gopls", "rust_analyzer", "zls", "prismals", "pyright" }) do
-      lspconfig[server].setup({ capabilities = capabilities })
-    end
+    vim.lsp.config("graphql", {
+      filetypes = { "graphql", "gql", "svelte", "typescriptreact", "javascriptreact" },
+    })
+
+    vim.lsp.config("lua_ls", {
+      settings = {
+        Lua = {
+          diagnostics = { globals = { "vim" } },
+          completion = { callSnippet = "Replace" },
+        },
+      },
+    })
+
+    vim.lsp.config("bashls", {
+      filetypes = { "sh", "bash", "zsh" },
+      settings = {
+        bashIde = {
+          globPattern = "**/*@(.sh|.inc|.bash|.command|.zsh)",
+        },
+      },
+    })
+
+    vim.lsp.config("zls", {
+      cmd = { vim.fn.expand("~/.local/bin/zls") },
+    })
+
+    -- Enable all servers
+    vim.lsp.enable({
+      "gopls",
+      "rust_analyzer",
+      "zls",
+      "lua_ls",
+      "graphql",
+      "prismals",
+      "pyright",
+      "bashls",
+    })
   end,
 }

@@ -1,0 +1,44 @@
+{{- if eq .chezmoi.os "darwin" -}}
+#!/bin/bash
+# Build zls from source to match zig master
+# Re-runs when this script changes
+
+set -e
+
+ZIG_MASTER="$HOME/.asdf/installs/zig/master/zig"
+ZLS_REPO="$HOME/projects/code/zig/zls-master"
+ZLS_BIN="$HOME/.local/bin/zls"
+
+# Check if zig master is installed via asdf
+if [[ ! -x "$ZIG_MASTER" ]]; then
+    echo "Zig master not found at $ZIG_MASTER, skipping zls build"
+    exit 0
+fi
+
+ZIG_VERSION=$("$ZIG_MASTER" version)
+echo "Found zig master: $ZIG_VERSION"
+
+# Clone or update zls repo
+mkdir -p "$(dirname "$ZLS_REPO")"
+if [[ -d "$ZLS_REPO" ]]; then
+    echo "Updating zls repository..."
+    git -C "$ZLS_REPO" fetch origin
+    git -C "$ZLS_REPO" reset --hard origin/master
+else
+    echo "Cloning zls repository..."
+    git clone https://github.com/zigtools/zls.git "$ZLS_REPO"
+fi
+
+# Build zls
+echo "Building zls with zig master..."
+cd "$ZLS_REPO"
+"$ZIG_MASTER" build -Doptimize=ReleaseSafe
+
+# Install to ~/.local/bin
+mkdir -p "$(dirname "$ZLS_BIN")"
+cp "$ZLS_REPO/zig-out/bin/zls" "$ZLS_BIN"
+chmod +x "$ZLS_BIN"
+
+ZLS_VERSION=$("$ZLS_BIN" --version)
+echo "Installed zls $ZLS_VERSION to $ZLS_BIN"
+{{- end -}}
